@@ -4,11 +4,15 @@ export const styles = StyleSheet.create({
   input: {
     height: 40,
     borderColor: "gray",
-    fontSize: 16,
+    borderRadius: 12,
     borderWidth: 1,
-    color: "#333",
     margin: 10,
     paddingHorizontal: 10,
-    borderRadius: 5,
+    fontSize: 16,
+    color: "#ececec",
+  },
+  focused: {
+    borderColor: "#c7a315",
+    borderWidth: 2,
   },
 });
