@@ -8,18 +8,18 @@ import {
   Image,
 } from "react-native";
 import { styles } from "./styles";
-
+ 
 import { FontAwesome, AntDesign } from "@expo/vector-icons";
-
+ 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+ 
   const handleLogin = () => {
     // Logic for login
     console.log("Login with:", email, password);
   };
-
+ 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.card}>
@@ -48,9 +48,9 @@ const Login = () => {
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Log in</Text>
         </TouchableOpacity>
-
+ 
         <Text style={styles.linkText}>Forgot password?</Text>
-
+ 
         <TouchableOpacity style={styles.socialButton}>
           <FontAwesome name="facebook" size={32} color="#1877F2" />
         </TouchableOpacity>
@@ -64,5 +64,5 @@ const Login = () => {
     </SafeAreaView>
   );
 };
-
+ 
 export default Login;
