@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  AppRegistry,
   View,
   Text,
   StyleSheet,
@@ -8,9 +9,12 @@ import {
   TouchableOpacity,
   StatusBar,
   SafeAreaView,
+  Image,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import HeaderMain from "../components/header-main";
+
+import Swiper from "react-native-swiper";
 
 const HomeScreen = () => {
   return (
@@ -46,7 +50,7 @@ const HomeScreen = () => {
         </View>
 
         {/* Banner Principal */}
-        <View style={styles.bannerContainer}>
+        {/* <View style={styles.bannerContainer}>
           <View style={styles.banner}>
             <View style={styles.bannerContent}>
               <Text style={styles.bannerDiscount}>30% Off em Instrumentos</Text>
@@ -65,6 +69,72 @@ const HomeScreen = () => {
               </TouchableOpacity>
             </View>
           </View>
+        </View> */}
+
+        {/* Carousel */}
+        <View style={styles.carousel}>
+          <Swiper
+            autoplay={true}
+            autoplayTimeout={8}
+            loop
+            height={124}
+            style={styles.wrapper}
+            showsButtons={false}
+            dot={
+              <View
+                style={{
+                  backgroundColor: "rgba(0,0,0,.2)",
+                  width: 5,
+                  height: 5,
+                  borderRadius: 4,
+                  marginLeft: 3,
+                  marginRight: 3,
+                  marginTop: 3,
+                  marginBottom: 3,
+                }}
+              />
+            }
+            activeDot={
+              <View
+                style={{
+                  backgroundColor: "#1a1a1a",
+                  width: 8,
+                  height: 8,
+                  borderRadius: 4,
+                  marginLeft: 3,
+                  marginRight: 3,
+                  marginTop: 3,
+                  marginBottom: 3,
+                }}
+              />
+            }
+            paginationStyle={{
+              bottom: 5,
+            }}
+          >
+            {/* 
+             Tamanho banners
+Kabum:
+height: 196
+width: 425
+
+mercado livre: 358 x 163
+
+magazine: 374 x 192 */}
+            <View style={styles.slide1}>
+              <Image
+                style={styles.image}
+                resizeMode="contain"
+                source={require("@/assets/images/banners/promo-banner.png")}
+              />
+            </View>
+            <View style={styles.slide2}>
+              <Text style={styles.text}>Beautiful</Text>
+            </View>
+            <View style={styles.slide3}>
+              <Text style={styles.text}>And simple</Text>
+            </View>
+          </Swiper>
         </View>
 
         {/* Categorias Principais */}
@@ -128,10 +198,11 @@ const HomeScreen = () => {
   );
 };
 
+// AppRegistry.registerComponent("myproject", () => SwiperComponent);
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#1a1a1a",
+    marginTop: 20,
   },
   header: {
     flexDirection: "row",
@@ -335,7 +406,7 @@ const styles = StyleSheet.create({
   footerInfo: {
     paddingHorizontal: 20,
     paddingVertical: 30,
-    backgroundColor: "#f5c842",
+    backgroundColor: "#ffbf00",
     margin: 20,
     borderRadius: 12,
     alignItems: "center",
@@ -349,6 +420,38 @@ const styles = StyleSheet.create({
   footerSubtitle: {
     color: "#1a1a1a",
     fontSize: 14,
+  },
+  wrapper: {},
+  carousel: {
+    marginVertical: 20,
+    borderRadius: 80,
+  },
+  slide1: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#2d2d2d",
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#97CAE5",
+  },
+  slide3: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#92BBD9",
+  },
+  image: {
+    width: "100%",
+    flex: 1,
+  },
+
+  text: {
+    color: "#fff",
+    fontSize: 30,
+    fontWeight: "bold",
   },
 });
 
