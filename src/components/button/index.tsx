@@ -1,24 +1,41 @@
-import { View, Text, Pressable } from "react-native";
+// components/botao/index.tsx
+import { View, Text, Pressable, StyleProp, ViewStyle } from "react-native";
 import React from "react";
 import { styles } from "./style";
 import { router } from "expo-router";
 
-export default function Botao(props: { rota?: string, estilo?: object }) {
+interface BotaoProps {
+  rota?: string; // Rota para navegar
+  estilo?: StyleProp<ViewStyle>; // Estilo adicional para o botão
+  texto?: string; // Texto que aparece no botão
+  mensagem?: string; // Mensagem opcional do alerta
+}
+
+export default function Botao({ 
+  rota , 
+  estilo, 
+  texto , 
+  mensagem 
+}: BotaoProps) {
+  
   const handleNext = () => {
-    alert("Formulário enviado com sucesso!");
-    router.navigate(props.rota);
+    if (mensagem) {
+      alert(mensagem);
+    }
+    router.navigate(rota);
   };
+
   return (
     <View>
       <Pressable
         onPress={handleNext}
         style={({ pressed }) => [
           styles.button,
-          props.estilo,
+          estilo,
           pressed ? styles.pressed : null,
         ]}
       >
-        <Text style={styles.text}>Enviar</Text>
+        <Text style={styles.text}>{texto}</Text>
       </Pressable>
     </View>
   );
