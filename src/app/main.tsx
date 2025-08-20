@@ -17,6 +17,12 @@ import HeaderMain from "../components/header-main";
 import Swiper from "react-native-swiper";
 
 const HomeScreen = () => {
+  const banners = [
+    require("@/assets/images/banners/banner1.jpeg"),
+    require("@/assets/images/banners/banner2.jpeg"),
+    require("@/assets/images/banners/banner3.jpeg"),
+    require("@/assets/images/banners/banner4.jpeg"),
+  ];
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#1a1a1a" />
@@ -72,12 +78,12 @@ const HomeScreen = () => {
         </View> */}
 
         {/* Carousel */}
-        <View style={styles.carousel}>
+        <View style={[styles.carousel]}>
           <Swiper
             autoplay={true}
             autoplayTimeout={8}
             loop
-            height={124}
+            height={192}
             style={styles.wrapper}
             showsButtons={false}
             dot={
@@ -111,29 +117,20 @@ const HomeScreen = () => {
             paginationStyle={{
               bottom: 5,
             }}
+            scrollEnabled={true}
+            autoplayDirection={true}
           >
-            {/* 
-             Tamanho banners
-Kabum:
-height: 196
-width: 425
-
-mercado livre: 358 x 163
-
-magazine: 374 x 192 */}
-            <View style={styles.slide1}>
-              <Image
-                style={styles.image}
-                resizeMode="contain"
-                source={require("@/assets/images/banners/promo-banner.png")}
-              />
-            </View>
-            <View style={styles.slide2}>
-              <Text style={styles.text}>Beautiful</Text>
-            </View>
-            <View style={styles.slide3}>
-              <Text style={styles.text}>And simple</Text>
-            </View>
+            {banners.map((img, index) => (
+              <View key={index} style={styles.slide}>
+                <Image
+                  style={styles.image}
+                  source={img}
+                  resizeMode="cover"
+                  // Para suavizar a transição da imagem, pode-se usar fadeDuration (Android)
+                  fadeDuration={400}
+                />
+              </View>
+            ))}
           </Swiper>
         </View>
 
@@ -423,26 +420,18 @@ const styles = StyleSheet.create({
   },
   wrapper: {},
   carousel: {
+    marginHorizontal: 10,
     marginVertical: 20,
-    borderRadius: 80,
   },
-  slide1: {
+  slide: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#2d2d2d",
+    borderRadius: 16,
+    overflow: "hidden",
+    paddingHorizontal: 3,
   },
-  slide2: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#97CAE5",
-  },
-  slide3: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#92BBD9",
-  },
+
   image: {
     width: "100%",
     flex: 1,
