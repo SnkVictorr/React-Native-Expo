@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -11,18 +11,34 @@ import {
   Alert,
   Image,
   ImageBackground,
+  ScrollView,
 } from 'react-native';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import Input from '../components/input';
 
-export default function Login() {
+export default function Cadastro() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = async () => {
-    if (!email || !password) {
+  useEffect(() => {
+  if (!confirmPassword) return; // se o campo estiver vazio, não faz nada
+
+  const timer = setTimeout(() =>
+{
+    if(password !== confirmPassword) {
+      Alert.alert('Erro', 'As senhas não coincidem');
+    }
+  }, 1000); //esperar até que o usuário termine de digitar
+
+  return () => clearTimeout(timer);
+}, [password, confirmPassword]); // só roda quando password OU confirmPassword mudarem
+
+  const handleCadastro = async () => {
+    if (!name ||!email || !password || !confirmPassword) {
       Alert.alert('Erro', 'Por favor, preencha todos os campos');
       return;
     }
@@ -32,7 +48,8 @@ export default function Login() {
     // Simular chamada de API
     setTimeout(() => {
       setIsLoading(false);
-      Alert.alert('Sucesso', 'Login realizado com sucesso!');
+      Alert.alert('Sucesso', 'Cadastro realizado com sucesso!');
+      router.push("/login");
     }, 2000);
   };
 
@@ -49,35 +66,44 @@ export default function Login() {
   };
 
   return (
+    <ScrollView>
     <SafeAreaView style={styles.container}>
       <ImageBackground
-        source={require('@/assets/images/fundologin.jpeg')}
-        style={styles.fundologin}
+        source={require('@/assets/images/fundocadastro.jpeg')}
+        style={styles.fundocadastrese}
         resizeMode="cover"
       >
         {/* Overlay para escurecer a imagem e melhorar contraste */}
         <View style={styles.overlay} />
 
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          style={styles.keyboardView}
-        >
+        
           <View style={styles.content}>
             {/* Header com botão voltar */}
             <View style={styles.headerContainer}>
               <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
                 <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
               </TouchableOpacity>
-            </View>
-
             <Image
               source={require('../../assets/images/logo-gold.png')}
               style={styles.imagem}
-            />
+              />
+              </View>
 
             {/* Form */}
             <View style={styles.form}>
-              {/* Campo Email */}
+              {/* Campo Nome */}
+              <View style={styles.inputContainer}>
+                <Text style={styles.label}>Nome</Text>
+                <Input
+                  placeholder="Nome"
+                  value={name}
+                  onChangeText={setName}
+                  keyboardType="default"
+                  autoCapitalize="words"
+                  autoCorrect={false}
+                />
+            {/* Campo Email */}
+              </View>
               <View style={styles.inputContainer}>
                 <Text style={styles.label}>Email</Text>
                 <Input
@@ -102,15 +128,26 @@ export default function Login() {
                 />
 
               </View>
+              {/* Campo confirmar Password */}
+              <View style={styles.inputContainer}>
+                <Text style={styles.label}>Confirmar Password</Text>
+                <Input
+                  placeholder="Password"
+                  value={confirmPassword}
+                  onChangeText={setConfirmPassword}
+                  secureTextEntry
+                />
+
+              </View>
 
               {/* Botão Sign In */}
               <TouchableOpacity
                 style={[styles.signInButton, isLoading && styles.buttonDisabled]}
-                onPress={handleLogin}
+                onPress={handleCadastro}
                 disabled={isLoading}
               >
                 <Text style={styles.signInButtonText}>
-                  {isLoading ? 'Carregando...' : 'Sign In'}
+                  {isLoading ? 'Carregando...' : 'Sign Up'}
                 </Text>
               </TouchableOpacity>
 
@@ -133,9 +170,9 @@ export default function Login() {
               </View>
             </View>
           </View>
-        </KeyboardAvoidingView>
       </ImageBackground>
     </SafeAreaView>
+    </ScrollView>
   );
 }
 
@@ -171,9 +208,9 @@ const styles = StyleSheet.create({
     width: 90,
     height: 90,
     alignSelf: 'center',
-    marginBottom: 50,
+
   },
-  fundologin: {
+  fundocadastrese: {
     flex: 1,
   },
   titleContainer: {
@@ -233,7 +270,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: 30,
   },
   socialContainer: {
     flexDirection: 'row',
@@ -246,6 +283,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: 30,
   },
   googleIcon: {
     width: 50,
@@ -254,22 +292,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 100,
+    paddingBottom: 20
   },
   googleImage: {
     width: 50,
     height: 50,
+  
   },
   facebookIcon: {
     width: 50,
     height: 50,
-    backgroundColor: '#1877F2',
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 100,
+    paddingBottom: 20
   },
   facebookImage: {
     width: 50,
-    height: 50 ,
+    height: 50,
   },
 });

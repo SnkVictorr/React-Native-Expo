@@ -2,17 +2,18 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   input: {
-    height: 40,
-    borderColor: "gray",
-    borderRadius: 12,
-    borderWidth: 1,
-    margin: 10,
-    paddingHorizontal: 10,
+    backgroundColor: "rgba(255,255,255,0.85)", // fundo translúcido
+    borderRadius: 25,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
     fontSize: 16,
-    color: "#ececec",
+    color: "#333",
+    marginBottom: 15,
+    borderWidth: 1,
+    borderColor: "transparent",
   },
   focused: {
-    borderColor: "#c7a315",
+    borderColor: "#c7a315", // dourado quando focado
     borderWidth: 2,
   },
 });
