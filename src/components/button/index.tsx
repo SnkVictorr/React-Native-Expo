@@ -5,14 +5,14 @@ import { styles } from "./style";
 import { router } from "expo-router";
 
 interface BotaoProps {
-  rota?: string; // Rota para navegar
+  rota: string; // Rota para navegar
   estilo?: StyleProp<ViewStyle>; // Estilo adicional para o botão
   texto?: string; // Texto que aparece no botão
   mensagem?: string; // Mensagem opcional do alerta
 }
 
 export default function Botao({ 
-  rota , 
+  rota,
   estilo, 
   texto , 
   mensagem 
