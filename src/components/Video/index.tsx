@@ -9,7 +9,6 @@ const VideoComponent = () => {
       <Video
         source={require("../../../assets/videos/Video.mp4")}
         style={styles.video}
-        resizeMode="cover"
         isLooping
         shouldPlay
         isMuted

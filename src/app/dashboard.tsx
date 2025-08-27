@@ -2,6 +2,8 @@ import { View, Image, StyleSheet } from "react-native";
 import React from "react";
 import Texto from "../components/texto";
 import Botao from "../components/button";
+import VideoComponent from "../components/Video";
+
 
 export default function Dashboard() {
   return (
@@ -10,11 +12,11 @@ export default function Dashboard() {
         <Image
           source={require("../../assets/images/logo-gold.png")}
           style={styles.imagem}
-        />
+          />
         <Texto conteudo="HarmoniX" />
         <View style={styles.botaoContainer}>
           <Botao texto="Sign In" estilo={styles.botao} rota="/login"/>
-          <Botao texto="Sign Up" estilo={styles.botao} />
+          <Botao texto="Sign Up" estilo={styles.botao} rota="/cadastreSe"/>
         </View>
       </View>
     </View>
@@ -52,12 +54,11 @@ const styles = StyleSheet.create({
     color: "#d4a017", // tom dourado
     marginBottom: 25,
   },
- botaoContainer: {
+  botaoContainer: {
   flexDirection: "row",
   justifyContent: "center",
   gap: 12,
 },
-
 botao: {
   backgroundColor: "#d4a017",
   paddingHorizontal: 18,
@@ -66,6 +67,4 @@ botao: {
   minWidth: 90, // tamanho mínimo
   alignItems: "center",
 },
-
-
 });
