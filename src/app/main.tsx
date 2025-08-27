@@ -15,6 +15,7 @@ import { Ionicons } from "@expo/vector-icons";
 import HeaderMain from "../components/header-main";
 
 import Swiper from "react-native-swiper";
+import ProductList1 from "../components/main/ProductList1";
 
 const HomeScreen = () => {
   const banners = [
@@ -54,7 +55,6 @@ const HomeScreen = () => {
             <Text style={styles.pillText}>Novidades</Text>
           </TouchableOpacity>
         </View>
-
         {/* Banner Principal */}
         {/* <View style={styles.bannerContainer}>
           <View style={styles.banner}>
@@ -76,7 +76,6 @@ const HomeScreen = () => {
             </View>
           </View>
         </View> */}
-
         {/* Carousel */}
         <View style={[styles.carousel]}>
           <Swiper
@@ -134,6 +133,9 @@ const HomeScreen = () => {
           </Swiper>
         </View>
 
+        {/* Lista de produtos 1 */}
+        <ProductList1 />
+
         {/* Categorias Principais */}
         <View style={styles.categoriesSection}>
           <Text style={styles.sectionTitle}>Categorias Principais</Text>
@@ -161,7 +163,6 @@ const HomeScreen = () => {
             </TouchableOpacity>
           </View>
         </View>
-
         {/* Seção de Destaques */}
         <View style={styles.featuresSection}>
           <Text style={styles.sectionTitle}>Destaques</Text>
@@ -184,7 +185,6 @@ const HomeScreen = () => {
             </TouchableOpacity>
           </View>
         </View>
-
         {/* Footer Info */}
         <View style={styles.footerInfo}>
           <Text style={styles.footerTitle}>Loja Virtual</Text>
