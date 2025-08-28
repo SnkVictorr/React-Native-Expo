@@ -17,6 +17,7 @@ import HeaderMain from "../components/header-main";
 import Swiper from "react-native-swiper";
 import ProductList1 from "../components/main/ProductList1";
 import MarcasList from "../components/main/MarcasList";
+import CategoryList from "../components/main/categoryList";
 
 const HomeScreen = () => {
   const banners = [
@@ -117,6 +118,7 @@ const HomeScreen = () => {
         {/* Lista de produtos 1 */}
         <ProductList1 />
 
+        <CategoryList />
         {/* Categorias Principais */}
         <View style={styles.categoriesSection}>
           <Text style={styles.sectionTitle}>Categorias Principais</Text>
@@ -180,7 +182,6 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#1a1a1a",
-    marginTop: 20,
   },
   header: {
     flexDirection: "row",
