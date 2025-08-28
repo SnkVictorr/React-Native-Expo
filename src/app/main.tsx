@@ -16,6 +16,7 @@ import HeaderMain from "../components/header-main";
 
 import Swiper from "react-native-swiper";
 import ProductList1 from "../components/main/ProductList1";
+import MarcasList from "../components/main/MarcasList";
 
 const HomeScreen = () => {
   const banners = [
@@ -55,27 +56,7 @@ const HomeScreen = () => {
             <Text style={styles.pillText}>Novidades</Text>
           </TouchableOpacity>
         </View>
-        {/* Banner Principal */}
-        {/* <View style={styles.bannerContainer}>
-          <View style={styles.banner}>
-            <View style={styles.bannerContent}>
-              <Text style={styles.bannerDiscount}>30% Off em Instrumentos</Text>
-              <View style={styles.bannerImage}>
-                <Text style={styles.trumpetEmoji}>🎺</Text>
-                <View style={styles.speakerLeft}>
-                  <View style={styles.speaker} />
-                </View>
-                <View style={styles.speakerRight}>
-                  <View style={styles.speaker} />
-                </View>
-              </View>
-              <TouchableOpacity style={styles.seeOffersButton}>
-                <Text style={styles.seeOffersText}>Ver ofertas</Text>
-                <Ionicons name="arrow-forward" size={16} color="#fff" />
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View> */}
+
         {/* Carousel */}
         <View style={[styles.carousel]}>
           <Swiper
@@ -132,7 +113,7 @@ const HomeScreen = () => {
             ))}
           </Swiper>
         </View>
-
+        <MarcasList />
         {/* Lista de produtos 1 */}
         <ProductList1 />
 

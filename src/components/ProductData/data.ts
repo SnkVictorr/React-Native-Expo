@@ -18,7 +18,7 @@ export const produtos: Produto[] = [
     idProduto: 1,
     idCategoria: 1,
     idMarca: 1,
-    produto: "Violão Clássico Casio VC-200",
+    produto: "Violã",
     especificacoes:
       "Tampo: Spruce | Laterais e fundo: Nato | Braço: Okoume | Trastes: 19",
     descricao:

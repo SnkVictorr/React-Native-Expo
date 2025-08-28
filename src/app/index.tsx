@@ -8,7 +8,8 @@ export default class index extends Component {
   render() {
     return (
       <>
-        <Dashboard />
+        {/* <Dashboard /> */}
+        <HomeScreen />
       </>
     );
   }

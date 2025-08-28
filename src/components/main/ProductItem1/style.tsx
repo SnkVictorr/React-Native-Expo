@@ -7,10 +7,10 @@ export const styles = StyleSheet.create({
   },
   ProductItem: {
     padding: 12,
-    width: 200,
-    height: 280, // altura fixa garante igualdade
+    width: 160,
+    height: 235, // altura fixa garante igualdade
     backgroundColor: colors.white,
-    borderRadius: 12,
+    borderRadius: 9,
     marginRight: 12,
     flexDirection: "column",
   },
@@ -20,33 +20,29 @@ export const styles = StyleSheet.create({
   },
   image: {
     alignSelf: "center",
-    width: 150,
-    height: 150,
+    width: 120,
+    height: 120,
     borderRadius: 12,
   },
   title: {
-    marginTop: 5,
-    maxWidth: 200,
-    fontSize: 16,
+    marginTop: 10,
+    maxWidth: 180,
+    fontSize: 14,
     lineHeight: 20, // padroniza altura de linha
     fontWeight: "bold",
     color: colors.gray[800],
   },
   infoContainer: {
     marginTop: "auto", // empurra até o fundo do CARD
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingTop: 4,
   },
   price: {
-    fontSize: 12,
+    fontSize: 10,
     // fontWeight: "500",        // evite "medium" no Android
     color: colors.gray[500],
     textDecorationLine: "line-through",
   },
   precoComDesconto: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: "bold",
     color: colors.principal,
   },

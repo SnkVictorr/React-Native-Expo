@@ -5,9 +5,8 @@ import CategoryItem from ".";
 export const styles = StyleSheet.create({
   title: {
     padding: 20,
-    textAlign: "left",
 
-    fontSize: 24,
+    fontSize: 20,
     color: "white",
   },
   list: {
