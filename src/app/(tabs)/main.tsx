@@ -12,12 +12,12 @@ import {
   Image,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import HeaderMain from "../components/header-main";
+import HeaderMain from "../../components/header-main";
 
 import Swiper from "react-native-swiper";
-import ProductList1 from "../components/main/ProductList1";
-import MarcasList from "../components/main/MarcasList";
-import CategoryList from "../components/main/categoryList";
+import ProductList1 from "../../components/main/ProductList1";
+import MarcasList from "../../components/main/MarcasList";
+import CategoryList from "../../components/main/categoryList";
 
 const HomeScreen = () => {
   const banners = [

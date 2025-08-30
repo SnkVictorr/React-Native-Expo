@@ -1,66 +1,88 @@
 import { Tabs } from "expo-router";
-
-import Feather from "@expo/vector-icons/Feather";
+import { View, Image, Text, StyleSheet } from "react-native";
 import colors from "@/src/app/styles/colors";
-import { Image } from "react-native";
+
+function TabIcon({
+  src,
+  label,
+  focused,
+  color,
+  size,
+}: {
+  src: any;
+  label: string;
+  focused: boolean;
+  color: string;
+  size: number;
+}) {
+  return (
+    <View style={styles.item}>
+      <Image
+        source={src}
+        style={{ width: size, height: size, tintColor: color }}
+      />
+      <Text style={[styles.label, { color }]}>{label}</Text>
+      {focused && <View style={styles.underline} />}
+    </View>
+  );
+}
 
 export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
-        headerShown: false, //Esconde o cabeçalho padrão
-        tabBarActiveTintColor: colors.principal, //cor de icone ativo
-        tabBarShowLabel: false, // esconde rótulo do icone
-
-        tabBarInactiveTintColor: colors.gray[400], // cor de icone inativo
-
+        headerShown: false,
+        tabBarShowLabel: false, // usamos nosso label custom
+        tabBarActiveTintColor: colors.principal,
+        tabBarInactiveTintColor: colors.gray[400],
         tabBarStyle: {
-          // estilo da barra de navegação
-          backgroundColor: colors.gray[700], // cor de fundo
-          borderTopColor: colors.principal, // cor da borda superior
-          paddingTop: 10, // espaçamento superior
-          height: 80,
+          backgroundColor: colors.gray[700],
+          borderTopColor: colors.principal,
+          paddingTop: 15,
+          height: 90, // um pouquinho mais alto p/ caber o underline
         },
       }}
     >
-      {/* Define a ordem da tela */}
       <Tabs.Screen
         name="index"
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <Image
-              source={require("@/assets/images/icones/icone-casa.png")}
-              style={{ width: size, height: size, tintColor: color }}
+          tabBarIcon: ({ color, size, focused }) => (
+            <TabIcon
+              src={require("@/assets/images/icones/icone-casa.png")}
+              label="Início"
+              color={color}
+              size={24}
+              focused={focused}
             />
           ),
         }}
       />
+
       <Tabs.Screen
         name="favoritos"
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <Image
-              source={require("@/assets/images/icones/icone-favorito.png")}
-              style={{ width: size, height: size, tintColor: color }}
+          tabBarIcon: ({ color, size, focused }) => (
+            <TabIcon
+              src={require("@/assets/images/icones/icone-favorito.png")}
+              label="Favoritos"
+              color={color}
+              size={24}
+              focused={focused}
             />
           ),
         }}
       />
-      {/* <Tabs.Screen
-        name="cart"
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Feather name="shopping-bag" color={color} size={size} />
-          ),
-        }}
-      /> */}
+
       <Tabs.Screen
         name="perfil"
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <Image
-              source={require("@/assets/images/icones/icone-perfil.png")}
-              style={{ width: size, height: size, tintColor: color }}
+          tabBarIcon: ({ color, size, focused }) => (
+            <TabIcon
+              src={require("@/assets/images/icones/icone-perfil.png")}
+              label="Perfil"
+              color={color}
+              size={24}
+              focused={focused}
             />
           ),
         }}
@@ -68,3 +90,24 @@ export default function TabsLayout() {
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  item: {
+    alignItems: "center",
+    justifyContent: "center",
+    // largura fixa para o underline não “pular”
+    width: 70,
+    paddingBottom: 6, // espaço pro underline
+  },
+  label: {
+    marginTop: 1,
+    fontSize: 12,
+  },
+  underline: {
+    marginTop: 6,
+    height: 3,
+    width: "30%", // ocupa toda a largura do item
+    borderRadius: 2,
+    backgroundColor: colors.principal,
+  },
+});

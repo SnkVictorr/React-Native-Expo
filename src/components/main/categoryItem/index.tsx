@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 // import { Card } from "@/components/ui/card"; // seu componente Card já no RN
 import { LucideIcon } from "lucide-react-native";
+import { Card } from "../../ui/card";
 
 interface CategoryCardProps {
   name: string;
@@ -20,26 +21,22 @@ export const CategoryItem = ({
   onPress,
 }) => {
   return (
-    <View style={styles.card}>
+    <Card style={styles.card}>
       <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
         <View style={styles.imageContainer}>
           {/* Background Image */}
           <Image source={image} style={styles.image} />
 
-          {/* Gradient Overlay */}
           <LinearGradient
-            colors={[
-              "rgba(100,100,200,0.9)",
-              "rgba(100,100,200,0.4)",
-              "transparent",
-            ]}
-            style={StyleSheet.absoluteFill}
+            colors={["rgba(0, 0, 0, 0.9)", "rgba(0, 0, 0, 0.4)", "transparent"]}
+            start={{ x: 0.5, y: 1 }} // começa embaixo
+            end={{ x: 0.5, y: 0 }} // termina em cima
+            style={StyleSheet.absoluteFillObject}
           />
-
           {/* Content */}
           <View style={styles.content}>
             <View style={styles.iconWrapper}>
-              <Icon size={20} color="#00f" />
+              <Icon size={20} color="rgba(238, 189, 43, 0.9)" />
             </View>
             <View>
               <Text style={styles.title}>{name}</Text>
@@ -48,12 +45,13 @@ export const CategoryItem = ({
           </View>
         </View>
       </TouchableOpacity>
-    </View>
+    </Card>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
+    width: 300,
     borderRadius: 12,
     overflow: "hidden",
     backgroundColor: "#222", // ajuste conforme seu tema
@@ -86,7 +84,7 @@ const styles = StyleSheet.create({
   iconWrapper: {
     padding: 6,
     borderRadius: 8,
-    backgroundColor: "rgba(0,0,255,0.2)",
+    backgroundColor: "rgba(238, 189, 43, 0.116)",
   },
   title: {
     fontSize: 16,

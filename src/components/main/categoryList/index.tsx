@@ -9,6 +9,8 @@ import {
   Headphones,
   Music2,
 } from "lucide-react-native";
+import Title from "../title";
+import colors from "@/src/app/styles/colors";
 
 export default function CategoryList() {
   const categories = [
@@ -40,7 +42,20 @@ export default function CategoryList() {
     // },
   ];
   return (
-    <>
+    <View>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        {" "}
+        <Title conteudo="Categorias"></Title>
+        <Text style={{ color: colors.principal, padding: 20, marginTop: 4 }}>
+          Ver todas
+        </Text>
+      </View>
+
       <FlatList
         data={categories}
         keyExtractor={(item) => item.name}
@@ -52,18 +67,18 @@ export default function CategoryList() {
             productCount={item.productCount}
           />
         )}
-        numColumns={2} // equivalente a grid-cols-2
-        columnWrapperStyle={styles.row} // para espaçamento entre colunas
-        contentContainerStyle={styles.container}
+        horizontal
+        // numColumns={3} // equivalente a grid-cols-2
+        // columnWrapperStyle={styles.row} // para espaçamento entre colunas
+        // contentContainerStyle={styles.container}
+        style={{ marginRight: 16, marginLeft: 16 }}
       />
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 8,
-  },
+  container: {},
   row: {
     justifyContent: "space-between",
     marginBottom: 8, // espaçamento entre linhas
