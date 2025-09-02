@@ -1,5 +1,6 @@
 import { Tabs } from "expo-router";
-import { View, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text, StyleSheet, Animated } from "react-native";
+import { useEffect, useRef } from "react";
 import colors from "@/src/app/styles/colors";
 
 function TabIcon({
@@ -15,14 +16,57 @@ function TabIcon({
   color: string;
   size: number;
 }) {
+  // Animated value para o underline
+  const underlineAnim = useRef(new Animated.Value(0)).current;
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.timing(underlineAnim, {
+      toValue: focused ? 1 : 0,
+      duration: 250,
+      useNativeDriver: true,
+    }).start();
+
+    Animated.timing(fadeAnim, {
+      toValue: focused ? 1 : 0, // aparece quando selecionado
+      duration: 250,
+      useNativeDriver: true,
+    }).start();
+  }, [focused]);
+
   return (
     <View style={styles.item}>
+      <Animated.View
+        style={[
+          styles.itemFocused, // fundo arredondado no selecionado
+          {
+            opacity: fadeAnim,
+          },
+        ]}
+      />
       <Image
         source={src}
         style={{ width: size, height: size, tintColor: color }}
       />
       <Text style={[styles.label, { color }]}>{label}</Text>
-      {focused && <View style={styles.underline} />}
+
+      {/* Underline animado */}
+      <Animated.View
+        style={[
+          styles.underline,
+          {
+            opacity: underlineAnim, // fade
+            transform: [
+              {
+                scaleX: underlineAnim.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [0.5, 1], // anima o "crescimento" lateral
+                }),
+              },
+            ],
+          },
+        ]}
+      />
     </View>
   );
 }
@@ -32,14 +76,14 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarShowLabel: false, // usamos nosso label custom
+        tabBarShowLabel: false,
         tabBarActiveTintColor: colors.principal,
         tabBarInactiveTintColor: colors.gray[400],
         tabBarStyle: {
-          backgroundColor: colors.gray[700],
+          backgroundColor: "#1a1a1a",
           borderTopColor: colors.principal,
-          paddingTop: 15,
-          height: 90, // um pouquinho mais alto p/ caber o underline
+          paddingTop: 25,
+          height: 95,
         },
       }}
     >
@@ -72,7 +116,20 @@ export default function TabsLayout() {
           ),
         }}
       />
-
+      <Tabs.Screen
+        name="pedidos"
+        options={{
+          tabBarIcon: ({ color, size, focused }) => (
+            <TabIcon
+              src={require("@/assets/images/icones/carrinho.png")}
+              label="Pedidos"
+              color={color}
+              size={24}
+              focused={focused}
+            />
+          ),
+        }}
+      />
       <Tabs.Screen
         name="perfil"
         options={{
@@ -93,20 +150,26 @@ export default function TabsLayout() {
 
 const styles = StyleSheet.create({
   item: {
+    marginTop: -20,
     alignItems: "center",
     justifyContent: "center",
-    // largura fixa para o underline não “pular”
     width: 70,
-    paddingBottom: 6, // espaço pro underline
+    paddingVertical: 8,
+    position: "relative",
+  },
+  itemFocused: {
+    ...StyleSheet.absoluteFillObject, // ocupa todo espaço do container
+    backgroundColor: "#c7a3151f", // cor de fundo no selecionado
+    borderRadius: 17, // mais arredondado
   },
   label: {
-    marginTop: 1,
     fontSize: 12,
   },
   underline: {
-    marginTop: 6,
+    position: "absolute",
+    bottom: 0,
     height: 3,
-    width: "30%", // ocupa toda a largura do item
+    width: "35%",
     borderRadius: 2,
     backgroundColor: colors.principal,
   },

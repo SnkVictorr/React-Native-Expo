@@ -12,12 +12,12 @@ import {
   Image,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import HeaderMain from "../../components/header-main";
+import HeaderMain from "../components/header-main";
 
 import Swiper from "react-native-swiper";
-import ProductList1 from "../../components/main/ProductList1";
-import MarcasList from "../../components/main/MarcasList";
-import CategoryList from "../../components/main/categoryList";
+import ProductList1 from "../components/main/ProductList1";
+import MarcasList from "../components/main/MarcasList";
+import CategoryList from "../components/main/categoryList";
 
 const HomeScreen = () => {
   const banners = [
@@ -120,7 +120,7 @@ const HomeScreen = () => {
 
         <CategoryList />
         {/* Categorias Principais */}
-        <View style={styles.categoriesSection}>
+        {/* <View style={styles.categoriesSection}>
           <Text style={styles.sectionTitle}>Categorias Principais</Text>
           <View style={styles.categoriesGrid}>
             <TouchableOpacity style={styles.categoryCard}>
@@ -145,9 +145,9 @@ const HomeScreen = () => {
               </Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </View> */}
         {/* Seção de Destaques */}
-        <View style={styles.featuresSection}>
+        {/* <View style={styles.featuresSection}>
           <Text style={styles.sectionTitle}>Destaques</Text>
           <View style={styles.featuresGrid}>
             <TouchableOpacity style={styles.featureCard}>
@@ -167,12 +167,12 @@ const HomeScreen = () => {
               <Text style={styles.featureTitle}>Microfones</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </View> */}
         {/* Footer Info */}
-        <View style={styles.footerInfo}>
+        {/* <View style={styles.footerInfo}>
           <Text style={styles.footerTitle}>Loja Virtual</Text>
           <Text style={styles.footerSubtitle}>Telefones:</Text>
-        </View>
+        </View> */}
       </ScrollView>
     </SafeAreaView>
   );
@@ -183,38 +183,41 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#1a1a1a",
   },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    backgroundColor: "#1a1a1a",
-  },
-  menuButton: {
-    padding: 5,
-  },
-  logoContainer: {
-    flex: 1,
-    alignItems: "center",
-  },
-  logo: {
-    width: 40,
-    height: 40,
-    backgroundColor: "#f5c842",
-    borderRadius: 8,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  logoText: {
-    fontSize: 20,
-  },
-  cartButton: {
-    padding: 5,
-  },
+  // header: {
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   justifyContent: "space-between",
+  //   paddingHorizontal: 20,
+  //   paddingVertical: 15,
+  //   backgroundColor: "#1a1a1a",
+  // },
+  // menuButton: {
+  //   padding: 5,
+  // },
+  // logoContainer: {
+  //   flex: 1,
+  //   alignItems: "center",
+  // },
+  // logo: {
+  //   width: 40,
+  //   height: 40,
+  //   backgroundColor: "#f5c842",
+  //   borderRadius: 8,
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  // },
+  // logoText: {
+  //   fontSize: 20,
+  // },
+  // cartButton: {
+  //   padding: 5,
+  // },
   searchContainer: {
     paddingHorizontal: 25,
     paddingBottom: 15,
+    borderBottomColor: "#c7a31516",
+    borderBottomWidth: 1,
+    marginBottom: 7,
   },
   searchBar: {
     flexDirection: "row",
@@ -254,79 +257,79 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "600",
   },
-  bannerContainer: {
-    paddingHorizontal: 20,
-    marginBottom: 30,
-  },
-  banner: {
-    backgroundColor: "#2d2d2d",
-    borderRadius: 12,
-    overflow: "hidden",
-    minHeight: 180,
-  },
-  bannerContent: {
-    padding: 20,
-    alignItems: "center",
-    position: "relative",
-  },
-  bannerDiscount: {
-    color: "#f5c842",
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 15,
-  },
-  bannerImage: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginVertical: 20,
-    position: "relative",
-    width: "100%",
-  },
-  trumpetEmoji: {
-    fontSize: 40,
-    marginHorizontal: 20,
-  },
-  speakerLeft: {
-    position: "absolute",
-    left: 20,
-  },
-  speakerRight: {
-    position: "absolute",
-    right: 20,
-  },
-  speaker: {
-    width: 30,
-    height: 40,
-    backgroundColor: "#444",
-    borderRadius: 4,
-  },
-  seeOffersButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#f5c842",
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 8,
-    gap: 5,
-  },
-  seeOffersText: {
-    color: "#1a1a1a",
-    fontWeight: "600",
-  },
-  categoriesSection: {
-    paddingHorizontal: 20,
-    marginBottom: 30,
-  },
-  sectionTitle: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 15,
-  },
-  categoriesGrid: {
-    gap: 15,
-  },
+  // bannerContainer: {
+  //   paddingHorizontal: 20,
+  //   marginBottom: 30,
+  // },
+  // banner: {
+  //   backgroundColor: "#2d2d2d",
+  //   borderRadius: 12,
+  //   overflow: "hidden",
+  //   minHeight: 180,
+  // },
+  // bannerContent: {
+  //   padding: 20,
+  //   alignItems: "center",
+  //   position: "relative",
+  // },
+  // bannerDiscount: {
+  //   color: "#f5c842",
+  //   fontSize: 20,
+  //   fontWeight: "bold",
+  //   marginBottom: 15,
+  // },
+  // bannerImage: {
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   marginVertical: 20,
+  //   position: "relative",
+  //   width: "100%",
+  // },
+  // trumpetEmoji: {
+  //   fontSize: 40,
+  //   marginHorizontal: 20,
+  // },
+  // speakerLeft: {
+  //   position: "absolute",
+  //   left: 20,
+  // },
+  // speakerRight: {
+  //   position: "absolute",
+  //   right: 20,
+  // },
+  // speaker: {
+  //   width: 30,
+  //   height: 40,
+  //   backgroundColor: "#444",
+  //   borderRadius: 4,
+  // },
+  // seeOffersButton: {
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   backgroundColor: "#f5c842",
+  //   paddingHorizontal: 20,
+  //   paddingVertical: 10,
+  //   borderRadius: 8,
+  //   gap: 5,
+  // },
+  // seeOffersText: {
+  //   color: "#1a1a1a",
+  //   fontWeight: "600",
+  // },
+  // categoriesSection: {
+  //   paddingHorizontal: 20,
+  //   marginBottom: 30,
+  // },
+  // sectionTitle: {
+  //   color: "#fff",
+  //   fontSize: 18,
+  //   fontWeight: "bold",
+  //   marginBottom: 15,
+  // },
+  // categoriesGrid: {
+  //   gap: 15,
+  // },
   categoryCard: {
     backgroundColor: "#2d2d2d",
     padding: 20,

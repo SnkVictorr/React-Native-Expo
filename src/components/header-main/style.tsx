@@ -10,8 +10,6 @@ export const styles = StyleSheet.create({
     paddingVertical: 15,
     backgroundColor: "#1a1a1a",
     marginBottom: 5,
-    borderBottomColor: "#c7a31516",
-    borderBottomWidth: 1,
   },
   menuButton: {
     padding: 5,
