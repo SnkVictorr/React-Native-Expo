@@ -1,0 +1,28 @@
+import { Stack } from "expo-router";
+import { useFonts } from "expo-font";
+import { View, ActivityIndicator, StyleSheet } from "react-native";
+
+export default function Layout() {
+  const [fontsLoaded] = useFonts({
+    Quiche: require("@/assets/fonts/quiche-sans.ttf"),
+    // "MinhaFonte-Bold": require("../assets/fonts/MinhaFonte-Bold.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
+  return <Stack screenOptions={{ headerShown: false }} />;
+}
+
+const styles = StyleSheet.create({
+  loader: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

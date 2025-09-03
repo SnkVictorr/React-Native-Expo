@@ -51,7 +51,14 @@ export default function CategoryList() {
       >
         {" "}
         <Title conteudo="Categorias"></Title>
-        <Text style={{ color: colors.principal, padding: 20, marginTop: 4 }}>
+        <Text
+          style={{
+            color: colors.principal,
+            padding: 20,
+            marginTop: 4,
+            fontFamily: "Quiche",
+          }}
+        >
           Ver todas
         </Text>
       </View>
