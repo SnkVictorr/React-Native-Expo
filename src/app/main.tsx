@@ -27,6 +27,7 @@ const HomeScreen = () => {
     require("@/assets/images/banners/banner4.jpeg"),
   ];
   return (
+    <ScrollView>
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#1a1a1a" />
 
@@ -161,7 +162,7 @@ const HomeScreen = () => {
             <TouchableOpacity style={styles.featureCard}>
               <Text style={styles.featureEmoji}>🎹</Text>
               <Text style={styles.featureTitle}>Teclados</Text>
-            </TouchableOpacity>
+            </TouchableOpacity>r
             <TouchableOpacity style={styles.featureCard}>
               <Text style={styles.featureEmoji}>🎤</Text>
               <Text style={styles.featureTitle}>Microfones</Text>
@@ -175,6 +176,7 @@ const HomeScreen = () => {
         </View> */}
       </ScrollView>
     </SafeAreaView>
+    </ScrollView>
   );
 };
 
