@@ -8,6 +8,7 @@ import {
   Mic,
   Headphones,
   Music2,
+  Music,
 } from "lucide-react-native";
 import Title from "../title";
 import colors from "@/src/app/styles/colors";
@@ -15,21 +16,21 @@ import colors from "@/src/app/styles/colors";
 export default function CategoryList() {
   const categories = [
     {
-      name: "Guitarras",
-      icon: Guitar,
-      image: require("@/assets/images/categorias/guitarra.jpg"),
+      name: "Cordas",
+      icon: require("@/assets/images/icones/icone-instrumento-corda.png"),
+      image: require("@/assets/images/categorias/cordas.jpg"),
       productCount: 120,
     },
     {
-      name: "Pianos",
-      icon: Piano,
-      image: require("@/assets/images/categorias/piano.jpg"),
+      name: "Sopro",
+      icon: require("@/assets/images/icones/icone-sopro.png"),
+      image: require("@/assets/images/categorias/sopro.jpg"),
       productCount: 85,
     },
     {
-      name: "Baterias",
-      icon: Drum,
-      image: require("@/assets/images/categorias/bateria.jpg"),
+      name: "Percussão",
+      icon: require("@/assets/images/icones/icone-instrumento-percussao.png"),
+      image: require("@/assets/images/categorias/percurssao.jpg"),
       productCount: 45,
     },
     // { name: "Microfones", icon: Mic, image: require("@/assets/images/categorias/microfone.png"), productCount: 67 },

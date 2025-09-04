@@ -4,6 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 // import { Card } from "@/components/ui/card"; // seu componente Card já no RN
 import { LucideIcon } from "lucide-react-native";
 import { Card } from "../../ui/card";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 interface CategoryCardProps {
   name: string;
@@ -13,13 +14,7 @@ interface CategoryCardProps {
   onPress?: () => void;
 }
 
-export const CategoryItem = ({
-  name,
-  icon: Icon,
-  image,
-  productCount,
-  onPress,
-}) => {
+export const CategoryItem = ({ name, icon, image, productCount, onPress }) => {
   return (
     <Card style={styles.card}>
       <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
@@ -36,7 +31,17 @@ export const CategoryItem = ({
           {/* Content */}
           <View style={styles.content}>
             <View style={styles.iconWrapper}>
-              <Icon size={20} color="rgba(238, 189, 43, 0.9)" />
+              <Image
+                source={icon}
+                style={{
+                  width: 20,
+                  height: 20,
+                  tintColor: "rgba(238, 189, 43, 0.9)", // muda a cor do PNG
+                }}
+                resizeMode="contain"
+              />
+
+              {/* <Icon size={20} color="rgba(238, 189, 43, 0.9)" /> */}
             </View>
             <View>
               <Text style={styles.title}>{name}</Text>

@@ -28,100 +28,100 @@ const HomeScreen = () => {
   ];
   return (
     <ScrollView>
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#1a1a1a" />
+      <SafeAreaView style={styles.container}>
+        <StatusBar barStyle="light-content" backgroundColor="#1a1a1a" />
 
-      <HeaderMain />
+        <HeaderMain />
 
-      {/* Search Bar */}
-      <View style={styles.searchContainer}>
-        <View style={styles.searchBar}>
-          <TextInput
-            placeholder="O que você está procurando?"
-            placeholderTextColor="#888"
-            style={styles.searchInput}
-          />
-          <Ionicons name="search" size={20} color="#888" />
-        </View>
-      </View>
-
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {/* Navigation Pills */}
-        <View style={styles.navPills}>
-          <TouchableOpacity style={[styles.pill, styles.activePill]}>
-            <Text style={styles.activePillText}>Home</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.pill}>
-            <Text style={styles.pillText}>Promoções</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.pill}>
-            <Text style={styles.pillText}>Novidades</Text>
-          </TouchableOpacity>
+        {/* Search Bar */}
+        <View style={styles.searchContainer}>
+          <View style={styles.searchBar}>
+            <TextInput
+              placeholder="O que você está procurando?"
+              placeholderTextColor="#888"
+              style={styles.searchInput}
+            />
+            <Ionicons name="search" size={20} color="#888" />
+          </View>
         </View>
 
-        {/* Carousel */}
-        <View style={[styles.carousel]}>
-          <Swiper
-            autoplay={true}
-            autoplayTimeout={8}
-            loop
-            height={192}
-            style={styles.wrapper}
-            showsButtons={false}
-            dot={
-              <View
-                style={{
-                  backgroundColor: "rgba(0,0,0,.2)",
-                  width: 5,
-                  height: 5,
-                  borderRadius: 4,
-                  marginLeft: 3,
-                  marginRight: 3,
-                  marginTop: 3,
-                  marginBottom: 3,
-                }}
-              />
-            }
-            activeDot={
-              <View
-                style={{
-                  backgroundColor: "#1a1a1a",
-                  width: 8,
-                  height: 8,
-                  borderRadius: 4,
-                  marginLeft: 3,
-                  marginRight: 3,
-                  marginTop: 3,
-                  marginBottom: 3,
-                }}
-              />
-            }
-            paginationStyle={{
-              bottom: 5,
-            }}
-            scrollEnabled={true}
-            autoplayDirection={true}
-          >
-            {banners.map((img, index) => (
-              <View key={index} style={styles.slide}>
-                <Image
-                  style={styles.image}
-                  source={img}
-                  resizeMode="cover"
-                  // Para suavizar a transição da imagem, pode-se usar fadeDuration (Android)
-                  fadeDuration={400}
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {/* Navigation Pills */}
+          <View style={styles.navPills}>
+            <TouchableOpacity style={[styles.pill, styles.activePill]}>
+              <Text style={styles.activePillText}>Home</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.pill}>
+              <Text style={styles.pillText}>Promoções</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.pill}>
+              <Text style={styles.pillText}>Novidades</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Carousel */}
+          <View style={[styles.carousel]}>
+            <Swiper
+              autoplay={true}
+              autoplayTimeout={8}
+              loop
+              height={192}
+              style={styles.wrapper}
+              showsButtons={false}
+              dot={
+                <View
+                  style={{
+                    backgroundColor: "rgba(0,0,0,.2)",
+                    width: 5,
+                    height: 5,
+                    borderRadius: 4,
+                    marginLeft: 3,
+                    marginRight: 3,
+                    marginTop: 3,
+                    marginBottom: 3,
+                  }}
                 />
-              </View>
-            ))}
-          </Swiper>
-        </View>
-        <MarcasList />
-        {/* Lista de produtos 1 */}
-        <ProductList1 />
+              }
+              activeDot={
+                <View
+                  style={{
+                    backgroundColor: "#1a1a1a",
+                    width: 8,
+                    height: 8,
+                    borderRadius: 4,
+                    marginLeft: 3,
+                    marginRight: 3,
+                    marginTop: 3,
+                    marginBottom: 3,
+                  }}
+                />
+              }
+              paginationStyle={{
+                bottom: 5,
+              }}
+              scrollEnabled={true}
+              autoplayDirection={true}
+            >
+              {banners.map((img, index) => (
+                <View key={index} style={styles.slide}>
+                  <Image
+                    style={styles.image}
+                    source={img}
+                    resizeMode="cover"
+                    // Para suavizar a transição da imagem, pode-se usar fadeDuration (Android)
+                    fadeDuration={400}
+                  />
+                </View>
+              ))}
+            </Swiper>
+          </View>
+          <MarcasList />
+          {/* Lista de produtos 1 */}
+          <ProductList1 />
 
-        <CategoryList />
-        {/* Categorias Principais */}
-        {/* <View style={styles.categoriesSection}>
+          <CategoryList />
+          {/* Categorias Principais */}
+          {/* <View style={styles.categoriesSection}>
           <Text style={styles.sectionTitle}>Categorias Principais</Text>
           <View style={styles.categoriesGrid}>
             <TouchableOpacity style={styles.categoryCard}>
@@ -147,8 +147,8 @@ const HomeScreen = () => {
             </TouchableOpacity>
           </View>
         </View> */}
-        {/* Seção de Destaques */}
-        {/* <View style={styles.featuresSection}>
+          {/* Seção de Destaques */}
+          {/* <View style={styles.featuresSection}>
           <Text style={styles.sectionTitle}>Destaques</Text>
           <View style={styles.featuresGrid}>
             <TouchableOpacity style={styles.featureCard}>
@@ -169,13 +169,13 @@ const HomeScreen = () => {
             </TouchableOpacity>
           </View>
         </View> */}
-        {/* Footer Info */}
-        {/* <View style={styles.footerInfo}>
+          {/* Footer Info */}
+          {/* <View style={styles.footerInfo}>
           <Text style={styles.footerTitle}>Loja Virtual</Text>
           <Text style={styles.footerSubtitle}>Telefones:</Text>
         </View> */}
-      </ScrollView>
-    </SafeAreaView>
+        </ScrollView>
+      </SafeAreaView>
     </ScrollView>
   );
 };
