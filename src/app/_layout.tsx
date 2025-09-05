@@ -1,11 +1,16 @@
 import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import { View, ActivityIndicator, StyleSheet } from "react-native";
-
+import {
+  PlayfairDisplay_400Regular,
+  PlayfairDisplay_700Bold,
+} from "@expo-google-fonts/playfair-display";
 export default function Layout() {
   const [fontsLoaded] = useFonts({
     Quiche: require("@/assets/fonts/quiche-sans.ttf"),
     // "MinhaFonte-Bold": require("../assets/fonts/MinhaFonte-Bold.ttf"),
+    PlayfairRegular: PlayfairDisplay_400Regular,
+    PlayfairBold: PlayfairDisplay_700Bold,
   });
 
   if (!fontsLoaded) {
