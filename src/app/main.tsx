@@ -12,7 +12,6 @@ import {
   Image,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import HeaderMain from "../components/header-main";
 
 import Swiper from "react-native-swiper";
 import ProductList1 from "../components/main/ProductList1";
@@ -30,7 +29,6 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#1a1a1a" />
 
-      <HeaderMain />
 
       {/* Search Bar */}
       <View style={styles.searchContainer}>
@@ -45,7 +43,7 @@ const HomeScreen = () => {
       </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 300 }}
+        contentContainerStyle={{ paddingBottom: 215 }}
       >
         {/* Navigation Pills */}
         <View style={styles.navPills}>
@@ -184,7 +182,6 @@ const HomeScreen = () => {
 // AppRegistry.registerComponent("myproject", () => SwiperComponent);
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // garante que ocupe toda a tela
     backgroundColor: "#1a1a1a",
   },
   // header: {
@@ -218,10 +215,11 @@ const styles = StyleSheet.create({
   // },
   searchContainer: {
     paddingHorizontal: 25,
-    paddingBottom: 15,
+    paddingBottom: 20,
     borderBottomColor: "#c7a31516",
     borderBottomWidth: 1,
-    marginBottom: 7,
+    marginBottom: 15,
+    marginTop: 20,
   },
   searchBar: {
     flexDirection: "row",

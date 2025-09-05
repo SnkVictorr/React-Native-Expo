@@ -29,11 +29,27 @@ export default function Login() {
 
     setIsLoading(true);
 
-    // Simular chamada de API
-    setTimeout(() => {
-      setIsLoading(false);
-      Alert.alert('Sucesso', 'Login realizado com sucesso!');
-    }, 2000);
+    //Aguarda 2 segundos para simular chamada de API
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    setIsLoading(false);
+
+    //Aguarda o clique no botão do alert
+    await new Promise((resolve) => {
+      Alert.alert(
+        'Sucesso',
+        'Login realizado com sucesso!',
+        [
+        {
+          text: 'OK',
+          onPress: () => resolve(true),
+        },
+        ],
+        { cancelable: false }
+      );
+    });
+
+    //Navega para a tela principal
+    router.push('/(tabs)');
   };
 
   const handleGoogleLogin = () => {
@@ -45,7 +61,7 @@ export default function Login() {
   };
 
   const handleBackPress = () => {
-    router.navigate('/');
+    router.navigate('/dashboard');
   };
 
   return (

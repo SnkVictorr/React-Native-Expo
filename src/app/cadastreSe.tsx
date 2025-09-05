@@ -62,7 +62,7 @@ export default function Cadastro() {
   };
 
   const handleBackPress = () => {
-    router.navigate('/');
+    router.navigate('/dashboard');
   };
 
   return (
