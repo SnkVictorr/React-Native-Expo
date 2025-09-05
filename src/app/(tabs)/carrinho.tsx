@@ -1,12 +1,10 @@
 import { Text, View } from "react-native";
 import React, { Component } from "react";
 
-export default class pedidos extends Component {
-  render() {
+export default function Carrinho() {
     return (
       <View>
-        <Text>pedidos</Text>
+        <Text>Carrinho</Text>
       </View>
     );
-  }
 }

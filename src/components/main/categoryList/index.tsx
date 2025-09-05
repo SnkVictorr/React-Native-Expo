@@ -1,15 +1,6 @@
 import { FlatList, Text, View, StyleSheet } from "react-native";
 import React, { Component } from "react";
 import { CategoryItem } from "../categoryItem";
-import {
-  Guitar,
-  Piano,
-  Drum,
-  Mic,
-  Headphones,
-  Music2,
-  Music,
-} from "lucide-react-native";
 import Title from "../title";
 import colors from "@/src/app/styles/colors";
 
@@ -56,6 +47,8 @@ export default function CategoryList() {
           style={{
             color: colors.principal,
             padding: 20,
+            paddingHorizontal: 10,
+            marginRight: 10,
             marginTop: 4,
             fontFamily: "Quiche",
           }}
@@ -68,11 +61,12 @@ export default function CategoryList() {
         data={categories}
         keyExtractor={(item) => item.name}
         renderItem={({ item }) => (
-          <CategoryItem
+          <CategoryItem 
             name={item.name}
             icon={item.icon}
             image={item.image}
             productCount={item.productCount}
+            onPress={() => {}}
           />
         )}
         horizontal
