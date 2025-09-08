@@ -1,26 +1,50 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { AirbnbRating } from "react-native-ratings";
+import { Ionicons } from "@expo/vector-icons";
+import colors from "@/src/app/styles/colors";
 
-export default function Avaliacoes() {
+type RatingReadOnlyProps = {
+  value: number; // valor da nota (ex: 3.5)
+  max?: number; // número máximo de estrelas (default 5)
+  size?: number; // tamanho das estrelas
+};
+
+export default function RatingReadOnly({
+  value = 3.5,
+  max = 5,
+  size = 15,
+}: RatingReadOnlyProps) {
+  const renderStar = (star: number) => {
+    if (value >= star) {
+      return "star"; // cheia
+    } else if (value + 0.5 >= star) {
+      return "star-half"; // meia
+    } else {
+      return "star-outline"; // vazia
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <AirbnbRating
-        count={5} // número de estrelas
-        defaultRating={3} // avaliação inicial
-        size={40} // tamanho das estrelas
-        showRating={false} // exibe texto "Ótimo", "Bom", etc
-        onFinishRating={(rating) => console.log("Avaliação:", rating)}
-      />
+      {[...Array(max)].map((_, i) => (
+        <Ionicons
+          key={i}
+          name={renderStar(i + 1) as any}
+          size={size}
+          color={colors.principal}
+          style={styles.star}
+        />
+      ))}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
+    flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#fff", // fundo branco pra não "sumir"
+  },
+  star: {
+    marginHorizontal: 1,
   },
 });
