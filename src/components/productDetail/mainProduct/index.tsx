@@ -5,11 +5,11 @@ import styles from "./style";
 import FavoriteButton from "../favoriteButton";
 import colors from "@/src/app/styles/colors";
 import Avaliacoes from "../avaliacoes";
+import RatingReadOnly from "../avaliacoes";
 
 export default function MainProduct() {
   return (
     <View style={styles.container}>
-      <Avaliacoes />
       <View style={styles.imgContainer}>
         <FavoriteButton />
         <Image
@@ -18,8 +18,10 @@ export default function MainProduct() {
         />
       </View>
       <View style={styles.mainContent}>
-        <Text style={{ color: colors.gray[400] }}>Marca</Text>
-
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <Text style={{ color: colors.gray[400] }}>Marca</Text>
+          <RatingReadOnly />
+        </View>
         <Text style={styles.title}>
           Violão Gewa de Madeira, com 6 cordas, cor madeira natural
         </Text>
