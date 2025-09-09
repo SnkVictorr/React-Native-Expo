@@ -5,13 +5,15 @@ import Login from "../login";
 import Dashboard from "../dashboard";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ProductDetail from "../productDetail";
+import { Home } from "lucide-react-native";
 
 export default function Index() {
   return (
     <>
       <SafeAreaView>
         {/* <Dashboard /> */}
-        <ProductDetail />
+        {/* <ProductDetail /> */}
+        <HomeScreen />
       </SafeAreaView>
     </>
   );
