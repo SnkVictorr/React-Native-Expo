@@ -10,9 +10,9 @@ type RatingReadOnlyProps = {
 };
 
 export default function RatingReadOnly({
-  value = 3.5,
+  value,
   max = 5,
-  size = 15,
+  size = 14,
 }: RatingReadOnlyProps) {
   const renderStar = (star: number) => {
     if (value >= star) {
