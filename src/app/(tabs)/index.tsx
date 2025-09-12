@@ -12,11 +12,11 @@ export default function Index() {
   return (
     <>
       <View
-        style={{ backgroundColor: colors.background, paddingTop: 20, flex: 1 }}
+        style={{ backgroundColor: colors.background, paddingTop: 40, flex: 1 }}
       >
         {/* <Dashboard /> */}
-        {/* <ProductDetail /> */}
-        <HomeScreen />
+        <ProductDetail />
+        {/* <HomeScreen /> */}
       </View>
     </>
   );

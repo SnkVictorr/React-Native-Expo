@@ -43,7 +43,7 @@ export default function ProductTabs() {
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={[
             styles.tabButton,
             activeTab === "reviews" && styles.activeTab,
@@ -58,7 +58,7 @@ export default function ProductTabs() {
           >
             Avaliações
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
 
       {/* Conteúdo das Tabs */}
