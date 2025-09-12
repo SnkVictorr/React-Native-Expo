@@ -17,6 +17,7 @@ import Swiper from "react-native-swiper";
 import ProductList1 from "../components/main/ProductList1";
 import MarcasList from "../components/main/MarcasList";
 import CategoryList from "../components/main/categoryList";
+import SearchBar from "../components/searchBar";
 
 const HomeScreen = () => {
   const banners = [
@@ -29,22 +30,11 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#1a1a1a" />
 
-
-      {/* Search Bar */}
-      <View style={styles.searchContainer}>
-        <View style={styles.searchBar}>
-          <TextInput
-            placeholder="O que você está procurando?"
-            placeholderTextColor="#888"
-            style={styles.searchInput}
-          />
-          <Ionicons name="search" size={20} color="#888" />
-        </View>
-      </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 215 }}
       >
+        <SearchBar />
         {/* Navigation Pills */}
         <View style={styles.navPills}>
           <TouchableOpacity style={[styles.pill, styles.activePill]}>
@@ -213,27 +203,7 @@ const styles = StyleSheet.create({
   // cartButton: {
   //   padding: 5,
   // },
-  searchContainer: {
-    paddingHorizontal: 25,
-    paddingBottom: 20,
-    borderBottomColor: "#c7a31516",
-    borderBottomWidth: 1,
-    marginBottom: 15,
-    marginTop: 20,
-  },
-  searchBar: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#333",
-    borderRadius: 12,
-    paddingHorizontal: 15,
-    gap: 10,
-  },
-  searchInput: {
-    flex: 1,
-    color: "#fff",
-    fontSize: 14,
-  },
+
   navPills: {
     flexDirection: "row",
     paddingHorizontal: 20,

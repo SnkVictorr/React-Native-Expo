@@ -223,8 +223,9 @@ export default function TabsLayout() {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => {setMenuVisible(false)
-                router.push("/favoritos")
+              onPress={() => {
+                setMenuVisible(false);
+                router.push("/favoritos");
               }}
               style={styles.modalItem}
             >
@@ -232,8 +233,9 @@ export default function TabsLayout() {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => {setMenuVisible(false)
-                router.push("/carrinho")
+              onPress={() => {
+                setMenuVisible(false);
+                router.push("/carrinho");
               }}
               style={styles.modalItem}
             >
@@ -241,8 +243,9 @@ export default function TabsLayout() {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => {setMenuVisible(false)
-                router.push("/perfil")
+              onPress={() => {
+                setMenuVisible(false);
+                router.push("/perfil");
               }}
               style={styles.modalItem}
             >
@@ -257,12 +260,15 @@ export default function TabsLayout() {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => {setMenuVisible(false)
-                router.push("/dashboard")
+              onPress={() => {
+                setMenuVisible(false);
+                router.push("/dashboard");
               }}
               style={styles.modalItemLogout}
             >
-              <Text style={[styles.modalText, { color: "red" }]}>🚪 Logout</Text>
+              <Text style={[styles.modalText, { color: "red" }]}>
+                🚪 Logout
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

@@ -3,10 +3,7 @@ import { Container } from "lucide-react-native";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: colors.background,
-    paddingBottom: 3000,
-  },
+  container: { flex: 1 },
   imgContainer: {
     zIndex: 1,
     borderWidth: 1,
@@ -17,7 +14,7 @@ const styles = StyleSheet.create({
     zIndex: -1,
     resizeMode: "contain",
     width: "100%",
-    height: 300,
+    height: 320,
   },
   title: {
     color: colors.white,

@@ -11,7 +11,6 @@ export default function HeaderProduct() {
     <View style={styles.header}>
       <Ionicons name="arrow-back-sharp" size={24} color={colors.white} />
       <Text style={styles.title}>Header</Text>
-      
     </View>
   );
 }
