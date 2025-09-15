@@ -2,9 +2,24 @@ import { Text, View, Image, FlatList } from "react-native";
 import React from "react";
 import { styles } from "./style";
 import ProductItem1 from "../ProductItem1";
-import { produtos } from "../../ProductData/data";
+// import { produtos } from "../../ProductData/data";
 
 export default function ProductList() {
+  const [produtos, setProdutos] = React.useState([]);
+  React.useEffect(() => {
+    fetch("http://localhost:8080/produtos", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          "stNOJvYxgbX3bRg3CEGMTNiqnIO3TMMHPi8K3ehLzk3KqcN3tJbDnBdMwWvAj84r2fiKvaAxQC58i1BsR5iqjBzzscwMudNv8xL6",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setProdutos(data))
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
     <View>
       <Text style={styles.title}>Produtos em Destaque</Text>
