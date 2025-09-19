@@ -15,7 +15,11 @@ interface Produto {
 export default function ProductList() {
   const [produtos, setProdutos] = React.useState([]);
   React.useEffect(() => {
+<<<<<<< HEAD
     fetch("http://10.63.45.59:8080/produtos", {
+=======
+    fetch("http://10.63.45.25:8080/produtos", {
+>>>>>>> 9ad5877d7ae266594af179aa4e07a062dd2dfb68
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -23,9 +27,15 @@ export default function ProductList() {
           "stNOJvYxgbX3bRg3CEGMTNiqnIO3TMMHPi8K3ehLzk3KqcN3tJbDnBdMwWvAj84r2fiKvaAxQC58i1BsR5iqjBzzscwMudNv8xL6",
       },
     })
+<<<<<<< HEAD
       .then((response) => response.json())
       .then((data) => setProdutos(data.data))
       .catch((error) => console.error(error));
+=======
+      .then((response) => response.json()) //converte a resposta para json
+      .then((data) => setProdutos(data)) //pega o objeto DATA do JSON
+      .catch((error) => console.error("Erro ao buscar dados:", error));
+>>>>>>> 9ad5877d7ae266594af179aa4e07a062dd2dfb68
   }, []);
 
   // teste pra ver se os produtos estão sendo carregados
