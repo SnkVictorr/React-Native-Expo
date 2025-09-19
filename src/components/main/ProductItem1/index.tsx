@@ -29,10 +29,10 @@ export default function ProductItem1({
             {nome}
           </Text>
           <View style={styles.infoContainer}>
-            <Text style={styles.price}>{`R$ ${preco.toFixed(2)}`}</Text>
+            <Text style={styles.price}>{`R$ ${preco}`}</Text>
             <Text
               style={styles.precoComDesconto}
-            >{`R$ ${precoComDesconto.toFixed(2)}`}</Text>
+            >{`R$ ${precoComDesconto}`}</Text>
           </View>
         </View>
       </Pressable>
