@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    marginLeft: 6
+    marginLeft: 6,
   },
   ProductItem: {
     padding: 12,
@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
   },
   content: {
     flex: 1, // <-- ESSENCIAL
-    flexDirection: "column"
+    flexDirection: "column",
   },
   image: {
     alignSelf: "center",

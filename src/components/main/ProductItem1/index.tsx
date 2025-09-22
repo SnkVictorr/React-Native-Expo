@@ -9,38 +9,41 @@ export default function ProductItem1({
   preco,
   precoComDesconto,
   imagem,
+  newStyles,
+  productItemStyle,
 }: {
   id: number;
   nome: string;
   preco: number;
   precoComDesconto: number;
   imagem: string;
+  newStyles?: object;
+  productItemStyle?: object;
 }) {
   return (
-    <View style={styles.container}>
+    <View style={styles.container && newStyles}>
       <Pressable
-        style={styles.ProductItem}
+        style={[styles.ProductItem, productItemStyle]}
         onPress={() => router.push(`/productDetail/${id}`)}
       >
         <View style={styles.content}>
-          {" "}
           {/* <- AGORA COM flex: 1 */}
           <Image
-            // source={{
-            //   uri: `http://192.168.1.2:8080/produtos/imagens/${imagem}`,
-            // }}
-            source={require("../../../../assets/images/violãoGewa.png")}
-            style={styles.image}
-            resizeMode="contain"
+        // source={{
+        //   uri: `http://192.168.1.2:8080/produtos/imagens/${imagem}`,
+        // }}
+        source={require("../../../../assets/images/violãoGewa.png")}
+        style={styles.image}
+        resizeMode="contain"
           />
           <Text style={styles.title} numberOfLines={2}>
-            {nome}
+        {nome}
           </Text>
           <View style={styles.infoContainer}>
-            <Text style={styles.price}>{`R$ ${preco}`}</Text>
-            <Text
-              style={styles.precoComDesconto}
-            >{`R$ ${precoComDesconto}`}</Text>
+        <Text style={styles.price}>{`R$ ${preco}`}</Text>
+        <Text
+          style={styles.precoComDesconto}
+        >{`R$ ${precoComDesconto}`}</Text>
           </View>
         </View>
       </Pressable>

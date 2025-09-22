@@ -1,6 +1,6 @@
 export default function getProducts() {
-  const produtos = fetch("http://192.168.1.2:8080/produtos", {
-    // const produtos = fetch("http://10.63.45.59:8080/produtos", {
+  // const produtos = fetch("http://192.168.1.2:8080/produtos", {
+  const produtos = fetch("http://10.63.45.59:8080/produtos", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
