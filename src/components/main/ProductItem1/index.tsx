@@ -4,11 +4,13 @@ import { styles } from "./style";
 import { router } from "expo-router";
 
 export default function ProductItem1({
+  id,
   nome,
   preco,
   precoComDesconto,
   imagem,
 }: {
+  id: number;
   nome: string;
   preco: number;
   precoComDesconto: number;
@@ -16,11 +18,17 @@ export default function ProductItem1({
 }) {
   return (
     <View style={styles.container}>
-      <Pressable style={styles.ProductItem}>
+      <Pressable
+        style={styles.ProductItem}
+        onPress={() => router.push(`/productDetail/${id}`)}
+      >
         <View style={styles.content}>
           {" "}
           {/* <- AGORA COM flex: 1 */}
           <Image
+            // source={{
+            //   uri: `http://192.168.1.2:8080/produtos/imagens/${imagem}`,
+            // }}
             source={require("../../../../assets/images/violãoGewa.png")}
             style={styles.image}
             resizeMode="contain"

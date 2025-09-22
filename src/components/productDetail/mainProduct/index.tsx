@@ -1,17 +1,36 @@
 import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { Image } from "react-native";
 import styles from "./style";
 import FavoriteButton from "../favoriteButton";
 import colors from "@/src/app/styles/colors";
 import Avaliacoes from "../avaliacoes";
 import RatingReadOnly from "../avaliacoes";
+import { Produto } from "@/src/app/interfaces/produto";
 
 import { Barcode, CreditCard } from "lucide-react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { Tabs } from "expo-router";
+import { Tabs, useLocalSearchParams } from "expo-router";
 import ProductTabs from "../tabs";
+import getProducts from "@/src/app/services/products/get";
 export default function MainProduct() {
+  const { id } = useLocalSearchParams();
+  const [instrumento, setInstrumento] = React.useState<Produto | null>(null);
+  useEffect(() => {
+    const loadProduct = async () => {
+      try {
+        const products = await getProducts();
+        const foundProduct = products.find(
+          (p: { id_produto: unknown }) => Number(p.id_produto) === Number(id)
+        );
+        setInstrumento(foundProduct || null);
+      } catch (err) {
+        setError("Erro ao carregar o produto.");
+        console.error(err);
+      }
+    };
+    loadProduct();
+  }, [id]);
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -189,4 +208,7 @@ export default function MainProduct() {
       </ScrollView>
     </View>
   );
+}
+function setError(arg0: string) {
+  throw new Error("Function not implemented.");
 }
