@@ -61,7 +61,7 @@ export default function CategoryList() {
         data={categories}
         keyExtractor={(item) => item.name}
         renderItem={({ item }) => (
-          <CategoryItem 
+          <CategoryItem
             name={item.name}
             icon={item.icon}
             image={item.image}

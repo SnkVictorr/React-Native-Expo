@@ -41,10 +41,11 @@ export default function RatingReadOnly({
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 10,
     flexDirection: "row",
     alignItems: "center",
   },
   star: {
-    marginHorizontal: 1,
+    marginHorizontal: 1.5,
   },
 });

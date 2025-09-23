@@ -7,23 +7,28 @@ import { styles as styles2 } from "@/src/components/main/ProductList1/style";
 import { styles } from "./style";
 import ProductItem1 from "@/src/components/main/ProductItem1";
 import { Scroll } from "lucide-react-native";
-const ProductsMarcas: React.FC = () => {
-  const [produtos, setProdutos] = React.useState<Produto[]>([]);
+import { produtos as produtosData } from "@/src/components/ProductData/data";
+import { useLocalSearchParams } from "expo-router";
 
-  React.useEffect(() => {
-    const fetchProdutos = async () => {
-      // Importe ou defina getProducts conforme necessário
-      const produtos = await getProducts();
-      setProdutos(produtos);
-    };
-    fetchProdutos();
-  }, []);
-  console.log(produtos);
+const ProductsMarcas: React.FC = () => {
+  const { param } = useLocalSearchParams();
+
+  const [produtos, setProdutos] = React.useState<Produto[]>(produtosData);
+
+  // React.useEffect(() => {
+  //   const fetchProdutos = async () => {
+  //     // Importe ou defina getProducts conforme necessário
+  //     const produtos = await getProducts();
+  //     setProdutos(produtos);
+  //   };
+  //   fetchProdutos();
+  // }, []);
+  // console.log(produtos);
 
   return (
     <ScrollView>
       <SearchBar />
-      <Text style={styles2.title}>Produtos em Destaque</Text>
+      <Text style={styles2.title}>Produtos</Text>
       <FlatList
         style={styles.list} // Estilo da lista
         data={produtos} // Onde os dados são passados como array na props data
@@ -42,7 +47,7 @@ const ProductsMarcas: React.FC = () => {
               alignItems: "center",
               flex: 1,
             }}
-            productItemStyle={{ width: 180 }}
+            productItemStyle={{ width: 190 }}
           />
         )} // para renderizar cada item da lista
       />

@@ -6,7 +6,7 @@ import FavoriteButton from "../favoriteButton";
 import colors from "@/src/app/styles/colors";
 import Avaliacoes from "../avaliacoes";
 import RatingReadOnly from "../avaliacoes";
-import { Produto } from "@/src/app/interfaces/produto";
+import { Produto } from "@/src/app/types/produto";
 
 import { Barcode, CreditCard } from "lucide-react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";

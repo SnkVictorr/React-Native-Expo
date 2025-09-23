@@ -2,6 +2,8 @@ import { Text, TouchableOpacity, View, Image, Pressable } from "react-native";
 import React from "react";
 import { styles } from "./style";
 import { router } from "expo-router";
+import RatingReadOnly from "../../productDetail/avaliacoes";
+import colors from "@/src/app/styles/colors";
 
 export default function ProductItem1({
   id,
@@ -29,21 +31,24 @@ export default function ProductItem1({
         <View style={styles.content}>
           {/* <- AGORA COM flex: 1 */}
           <Image
-        // source={{
-        //   uri: `http://192.168.1.2:8080/produtos/imagens/${imagem}`,
-        // }}
-        source={require("../../../../assets/images/violãoGewa.png")}
-        style={styles.image}
-        resizeMode="contain"
+            // source={{
+            //   uri: `http://192.168.1.2:8080/produtos/imagens/${imagem}`,
+            // }}
+            source={require("../../../../assets/images/violãoGewa.png")}
+            style={styles.image}
+            resizeMode="contain"
           />
+
+          <RatingReadOnly value={5} size={10} />
+
           <Text style={styles.title} numberOfLines={2}>
-        {nome}
+            {nome}
           </Text>
           <View style={styles.infoContainer}>
-        <Text style={styles.price}>{`R$ ${preco}`}</Text>
-        <Text
-          style={styles.precoComDesconto}
-        >{`R$ ${precoComDesconto}`}</Text>
+            <Text style={styles.price}>{`R$${preco.toFixed(2)}`}</Text>
+            <Text
+              style={styles.precoComDesconto}
+            >{`R$${precoComDesconto.toFixed(2)}`}</Text>
           </View>
         </View>
       </Pressable>

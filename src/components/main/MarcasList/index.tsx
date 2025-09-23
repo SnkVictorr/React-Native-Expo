@@ -39,7 +39,7 @@ export default function MarcasList() {
         style={{
           fontSize: 20,
           marginLeft: 4,
-          marginBottom: 15,
+          marginBottom: 18,
 
           textAlign: "left",
           color: "#e9e9e9",

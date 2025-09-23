@@ -3,18 +3,26 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    marginLeft: 6,
+    marginLeft: 10,
   },
   ProductItem: {
     padding: 12,
+
     width: 160,
-    height: 235, // altura fixa garante igualdade
+    minHeight: 248, // altura fixa garante igualdade
     backgroundColor: colors.white,
     borderRadius: 9,
     marginRight: 12,
     flexDirection: "column",
+    // borderWidth: 1,
+    // borderColor: colors.gray[400],
+    // shadowColor: "#000",        // sombra para iOS
+    boxShadow: "0px 4px 6px #e0e0e029", // sombra para Android
+    elevation: 3, // sombra para Android
   },
   content: {
+    justifyContent: "center",
+    alignItems: "center",
     flex: 1, // <-- ESSENCIAL
     flexDirection: "column",
   },
@@ -25,10 +33,11 @@ export const styles = StyleSheet.create({
     borderRadius: 12,
   },
   title: {
-    marginTop: 10,
+    textAlign: "center",
+    marginTop: 8,
     maxWidth: 180,
     fontSize: 14,
-    lineHeight: 20, // padroniza altura de linha
+    lineHeight: 16, // padroniza altura de linha
     fontWeight: "bold",
     color: colors.gray[800],
   },
@@ -36,14 +45,17 @@ export const styles = StyleSheet.create({
     marginTop: "auto", // empurra até o fundo do CARD
   },
   price: {
-    fontSize: 10,
+    textAlign: "center",
+
+    fontSize: 11,
     // fontWeight: "500",        // evite "medium" no Android
-    color: colors.gray[500],
+    color: colors.gray[400],
     textDecorationLine: "line-through",
   },
   precoComDesconto: {
-    fontSize: 14,
-    fontWeight: "bold",
+    textAlign: "center",
+    fontSize: 17,
+    fontWeight: "700",
     color: colors.principal,
   },
 });

@@ -7,19 +7,18 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import ProductDetail from "../productDetail/[id]";
 import { Home } from "lucide-react-native";
 import colors from "../styles/colors";
-import ProductsMarcas from "../productsMarcas";
+import ProductsMarcas from "../products/[filtro]";
 
 export default function Index() {
   return (
-    
     <>
       <View
         style={{ backgroundColor: colors.background, paddingTop: 40, flex: 1 }}
       >
         {/* <Dashboard /> */}
         {/* <ProductDetail /> */}
-        {/* <HomeScreen /> */}
-        <ProductsMarcas />
+        <HomeScreen />
+        {/* <ProductsMarcas /> */}
       </View>
     </>
   );

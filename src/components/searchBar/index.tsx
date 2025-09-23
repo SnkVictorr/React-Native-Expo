@@ -10,7 +10,7 @@ export default function SearchBar() {
       <View style={styles.searchContainer}>
         <View style={styles.searchBar}>
           <TextInput
-            placeholder="O que você está procurando?"
+            placeholder="Buscar produtos..."
             placeholderTextColor="#888"
             style={styles.searchInput}
           />

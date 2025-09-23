@@ -3,7 +3,7 @@ import React from "react";
 import { styles } from "./style";
 import ProductItem1 from "../ProductItem1";
 import getProducts from "../../../app/services/products/get";
-// import { produtos } from "../../ProductData/data";
+import { produtos as produtoData } from "../../ProductData/data";
 
 interface Produto {
   id_produto: number;
@@ -14,18 +14,19 @@ interface Produto {
 }
 
 export default function ProductList() {
-  const [produtos, setProdutos] = React.useState<Produto[]>([]);
-  React.useEffect(() => {
-    const fetchProdutos = async () => {
-      const produtos = await getProducts();
-      setProdutos(produtos);
-    };
-    fetchProdutos();
-  }, []);
+  //   const [produtos, setProdutos] = React.useState<Produto[]>([]);
+  //   React.useEffect(() => {
+  //     const fetchProdutos = async () => {
+  //       const produtos = await getProducts();
+  //       setProdutos(produtos);
+  //     };
+  //     fetchProdutos();
+  //   }, []);
 
-  // teste pra ver se os produtos estão sendo carregados
+  //   // teste pra ver se os produtos estão sendo carregados
 
-  console.log(produtos);
+  //   console.log(produtos);
+  const produtos: Produto[] = produtoData;
   return (
     <View>
       <Text style={styles.title}>Produtos em Destaque</Text>
