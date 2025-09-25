@@ -1,6 +1,7 @@
 import React from "react";
 import { View, FlatList, Image, StyleSheet, Text } from "react-native";
 import { styles } from "./style";
+import { OutfitText } from "../../outfittext";
 
 const marcas = [
   { id: "1", src: require("@/assets/images/marcas/casio-logo.png") },
@@ -35,9 +36,9 @@ const marcas = [
 export default function MarcasList() {
   return (
     <View style={styles.container}>
-      <Text
+      <OutfitText
         style={{
-          fontSize: 20,
+          fontSize: 19,
           marginLeft: 4,
           marginBottom: 18,
 
@@ -46,7 +47,7 @@ export default function MarcasList() {
         }}
       >
         As Melhores Marcas Você Encontra Aqui!
-      </Text>
+      </OutfitText>
       <FlatList
         data={marcas}
         horizontal

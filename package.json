@@ -13,6 +13,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo-google-fonts/outfit": "^0.4.3",
     "@expo-google-fonts/playfair-display": "^0.4.1",
     "@expo/vector-icons": "^14.1.0",
     "@iconify/react": "^6.0.1",

@@ -1,5 +1,11 @@
 import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
+import {
+  Outfit_400Regular,
+  Outfit_500Medium,
+  Outfit_600SemiBold,
+  Outfit_700Bold,
+} from "@expo-google-fonts/outfit";
 import { View, ActivityIndicator, StyleSheet } from "react-native";
 // import {
 //   PlayfairDisplay_400Regular,
@@ -11,7 +17,15 @@ export default function Layout() {
     // "MinhaFonte-Bold": require("../assets/fonts/MinhaFonte-Bold.ttf"),
     // PlayfairRegular: PlayfairDisplay_400Regular,
     // PlayfairBold: PlayfairDisplay_700Bold,
+    Outfit_400Regular,
+    Outfit_500Medium,
+    Outfit_600SemiBold,
+    Outfit_700Bold,
   });
+
+  if (!fontsLoaded) {
+    return null; // ou <AppLoading /> em versões antigas
+  }
 
   if (!fontsLoaded) {
     return (
