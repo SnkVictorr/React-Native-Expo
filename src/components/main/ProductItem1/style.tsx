@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     padding: 12,
 
     width: 160,
-    minHeight: 248, // altura fixa garante igualdade
+    minHeight: 245, // altura fixa garante igualdade
     backgroundColor: colors.white,
     borderRadius: 9,
     marginRight: 12,
@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
   },
   title: {
     textAlign: "center",
-    marginTop: 8,
+    marginTop: 5,
     maxWidth: 180,
     fontSize: 14,
     lineHeight: 16, // padroniza altura de linha

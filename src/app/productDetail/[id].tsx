@@ -7,9 +7,9 @@ import colors from "../styles/colors";
 
 export default function productDetail() {
   return (
-    <View>
+    <View style={{ flex: 1, backgroundColor: colors.background }}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <HeaderProduct />
+        {/* <HeaderProduct /> */}
         <MainProduct />
       </ScrollView>
     </View>

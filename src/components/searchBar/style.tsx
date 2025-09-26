@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
     borderBottomColor: "#c7a31516",
     borderBottomWidth: 1,
     marginBottom: 15,
-    marginTop: 20,
   },
   searchBar: {
     flexDirection: "row",

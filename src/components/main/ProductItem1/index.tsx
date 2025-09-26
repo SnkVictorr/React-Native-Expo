@@ -4,6 +4,7 @@ import { styles } from "./style";
 import { router } from "expo-router";
 import RatingReadOnly from "../../productDetail/avaliacoes";
 import colors from "@/src/app/styles/colors";
+import { TextQuiche } from "../../quiche";
 
 export default function ProductItem1({
   id,
@@ -41,14 +42,16 @@ export default function ProductItem1({
 
           <RatingReadOnly value={5} size={10} />
 
-          <Text style={styles.title} numberOfLines={2}>
+          <TextQuiche style={styles.title} numberOfLines={2}>
             {nome}
-          </Text>
+          </TextQuiche>
           <View style={styles.infoContainer}>
-            <Text style={styles.price}>{`R$${preco.toFixed(2)}`}</Text>
-            <Text
+            <TextQuiche style={styles.price}>{`R$${preco.toFixed(
+              2
+            )}`}</TextQuiche>
+            <TextQuiche
               style={styles.precoComDesconto}
-            >{`R$${precoComDesconto.toFixed(2)}`}</Text>
+            >{`R$${precoComDesconto.toFixed(2)}`}</TextQuiche>
           </View>
         </View>
       </Pressable>

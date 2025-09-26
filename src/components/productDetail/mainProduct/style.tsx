@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     zIndex: -1,
     resizeMode: "contain",
     width: "100%",
+
     height: 320,
   },
   title: {

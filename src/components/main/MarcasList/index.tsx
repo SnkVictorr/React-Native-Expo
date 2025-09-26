@@ -1,7 +1,7 @@
 import React from "react";
 import { View, FlatList, Image, StyleSheet, Text } from "react-native";
 import { styles } from "./style";
-import { OutfitText } from "../../outfittext";
+import { OutfitText } from "../../outfitText";
 
 const marcas = [
   { id: "1", src: require("@/assets/images/marcas/casio-logo.png") },

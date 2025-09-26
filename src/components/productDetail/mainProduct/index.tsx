@@ -1,5 +1,5 @@
 import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
-import React, { Component, useEffect } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { Image } from "react-native";
 import styles from "./style";
 import FavoriteButton from "../favoriteButton";
@@ -13,9 +13,14 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Tabs, useLocalSearchParams } from "expo-router";
 import ProductTabs from "../tabs";
 import getProducts from "@/src/app/services/products/get";
+import { Ionicons } from "@expo/vector-icons";
+import BackButton from "../../backButton";
+import { TextInputMask } from "react-native-masked-text";
+
 export default function MainProduct() {
   const { id } = useLocalSearchParams();
   const [instrumento, setInstrumento] = React.useState<Produto | null>(null);
+  const [cep, setCep] = useState("");
   useEffect(() => {
     const loadProduct = async () => {
       try {
@@ -35,6 +40,7 @@ export default function MainProduct() {
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.imgContainer}>
+          <BackButton />
           <FavoriteButton />
           <Image
             style={styles.img}
@@ -139,7 +145,16 @@ export default function MainProduct() {
               color={colors.principal}
               style={{ marginRight: 4 }}
             />
-            <TextInput
+            <TextInputMask
+              maxLength={9}
+              type="zip-code"
+              // type={"custom"}
+              // options={{
+              //   mask: "99999-999",
+              // }}
+              keyboardType="numeric"
+              value={cep}
+              onChangeText={setCep}
               placeholder="Digite seu CEP"
               placeholderTextColor="#aaa"
               style={{
@@ -147,7 +162,6 @@ export default function MainProduct() {
                 color: "#fff",
                 paddingVertical: 10,
               }}
-              maxLength={8}
             />
           </View>
           <View
