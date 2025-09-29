@@ -1,4 +1,4 @@
-import { ScrollView, Text, View } from "react-native";
+import { Pressable, ScrollView, Text, View } from "react-native";
 import React, { Component } from "react";
 import HeaderProduct from "../../components/productDetail/headerProduct";
 import MainProduct from "../../components/productDetail/mainProduct";
@@ -7,8 +7,11 @@ import colors from "../styles/colors";
 
 export default function productDetail() {
   return (
-    <View style={{ flex: 1, backgroundColor: colors.background }}>
+    <View
+      style={{ flex: 1, backgroundColor: colors.background, paddingTop: 20 }}
+    >
       <ScrollView showsVerticalScrollIndicator={false}>
+        <Pressable />
         {/* <HeaderProduct /> */}
         <MainProduct />
       </ScrollView>
