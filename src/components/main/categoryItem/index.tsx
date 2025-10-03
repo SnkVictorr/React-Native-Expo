@@ -5,16 +5,25 @@ import { LinearGradient } from "expo-linear-gradient";
 import { LucideIcon } from "lucide-react-native";
 import { Card } from "../../ui/card";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import { QuicheBold } from "../../quiche/quiche-bold";
+import { TextQuiche } from "../../quiche";
+import { QuicheMedium } from "../../quiche/quiche-medium";
 
 interface CategoryCardProps {
   name: string;
-  icon: LucideIcon;
-  image: string;
+  icon: any; // pode ser um require ou { uri: 'url' }
+  image: any; // pode ser um require ou { uri: 'url' }
   productCount: number;
   onPress?: () => void;
 }
 
-export const CategoryItem = ({ name, icon, image, productCount, onPress }) => {
+export const CategoryItem = ({
+  name,
+  icon,
+  image,
+  productCount,
+  onPress,
+}: CategoryCardProps) => {
   return (
     <Card style={styles.card}>
       <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
@@ -44,8 +53,10 @@ export const CategoryItem = ({ name, icon, image, productCount, onPress }) => {
               {/* <Icon size={20} color="rgba(238, 189, 43, 0.9)" /> */}
             </View>
             <View>
-              <Text style={styles.title}>{name}</Text>
-              <Text style={styles.subtitle}>{productCount} produtos</Text>
+              <QuicheMedium style={styles.title}>{name}</QuicheMedium>
+              <QuicheMedium style={styles.subtitle}>
+                {productCount} produtos
+              </QuicheMedium>
             </View>
           </View>
         </View>
@@ -60,7 +71,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     overflow: "hidden",
     backgroundColor: "#222", // ajuste conforme seu tema
-    margin: 8,
+    marginRight: 12,
     elevation: 3, // sombra Android
     shadowColor: "#000", // sombra iOS
     shadowOffset: { width: 0, height: 2 },
@@ -93,7 +104,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    fontWeight: "600",
+    // fontWeight: "600",
     color: "#fff",
   },
   subtitle: {

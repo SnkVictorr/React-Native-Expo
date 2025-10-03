@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { CategoryItem } from "../categoryItem";
 import Title from "../title";
 import colors from "@/src/app/styles/colors";
+import VerTudo from "../verTudo";
 
 export default function CategoryList() {
   const categories = [
@@ -39,22 +40,13 @@ export default function CategoryList() {
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
+          paddingVertical: 20,
+          paddingLeft: 20,
         }}
       >
         {" "}
         <Title conteudo="Categorias"></Title>
-        <Text
-          style={{
-            color: colors.principal,
-            padding: 20,
-            paddingHorizontal: 10,
-            marginRight: 10,
-            marginTop: 4,
-            fontFamily: "Quiche",
-          }}
-        >
-          Ver todas
-        </Text>
+        <VerTudo text="Ver todas" />
       </View>
 
       <FlatList

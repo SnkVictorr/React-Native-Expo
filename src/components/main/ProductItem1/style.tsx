@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     padding: 12,
 
     width: 160,
-    minHeight: 245, // altura fixa garante igualdade
+    minHeight: 235, // altura fixa garante igualdade
     backgroundColor: colors.white,
     borderRadius: 9,
     marginRight: 12,
@@ -36,9 +36,9 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 5,
     maxWidth: 180,
-    fontSize: 14,
+    fontSize: 13,
     lineHeight: 16, // padroniza altura de linha
-    fontWeight: "bold",
+    // fontWeight: "bold",
     color: colors.gray[800],
   },
   infoContainer: {
@@ -55,7 +55,7 @@ export const styles = StyleSheet.create({
   precoComDesconto: {
     textAlign: "center",
     fontSize: 17,
-    fontWeight: "700",
+    // fontWeight: "700",
     color: colors.principal,
   },
 });

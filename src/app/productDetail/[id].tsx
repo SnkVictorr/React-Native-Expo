@@ -7,9 +7,7 @@ import colors from "../styles/colors";
 
 export default function productDetail() {
   return (
-    <View
-      style={{ flex: 1, backgroundColor: colors.background, paddingTop: 20 }}
-    >
+    <View style={{ flex: 1, backgroundColor: colors.background }}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Pressable />
         {/* <HeaderProduct /> */}

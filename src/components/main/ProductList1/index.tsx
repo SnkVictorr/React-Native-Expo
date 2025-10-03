@@ -4,6 +4,7 @@ import { styles } from "./style";
 import ProductItem1 from "../ProductItem1";
 import getProducts from "../../../app/services/products/get";
 import { produtos as produtoData } from "../../ProductData/data";
+import VerTudo from "../verTudo";
 
 interface Produto {
   id_produto: number;
@@ -29,7 +30,18 @@ export default function ProductList() {
   const produtos: Produto[] = produtoData;
   return (
     <View>
-      <Text style={styles.title}>Produtos em Destaque</Text>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          paddingVertical: 20,
+          paddingLeft: 20,
+        }}
+      >
+        <Text style={styles.title}>Produtos em Destaque</Text>
+        <VerTudo text="Ver todos" />
+      </View>
+
       <FlatList
         style={styles.list} // Estilo da lista
         data={produtos} // Onde os dados são passados como array na props data

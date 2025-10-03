@@ -16,8 +16,8 @@ export default function Index() {
         style={{ backgroundColor: colors.background, paddingTop: 30, flex: 1 }}
       >
         {/* <Dashboard /> */}
-        <ProductDetail />
-        {/* <HomeScreen /> */}
+        {/* <ProductDetail /> */}
+        <HomeScreen />
         {/* <ProductsMarcas /> */}
       </View>
     </>

@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
     justifyContent: "center",
     alignItems: "center",
-    marginHorizontal: 6,
+    marginRight: 6,
     shadowColor: "#000000",
     shadowOpacity: 0.1,
     shadowOffset: { width: 0, height: 2 },
