@@ -8,17 +8,17 @@ import ProductDetail from "../productDetail/[id]";
 import { Home } from "lucide-react-native";
 import colors from "../styles/colors";
 import ProductsMarcas from "../products/[filtro]";
+import CartScreen from "./carrinho";
 
 export default function Index() {
   return (
     <>
-      <View
-        style={{ backgroundColor: colors.background, paddingTop: 30, flex: 1 }}
-      >
+      <View>
         {/* <Dashboard /> */}
         {/* <ProductDetail /> */}
-        <HomeScreen />
+        {/* <HomeScreen /> */}
         {/* <ProductsMarcas /> */}
+        <CartScreen />
       </View>
     </>
   );

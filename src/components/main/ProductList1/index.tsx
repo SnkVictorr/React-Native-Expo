@@ -4,7 +4,7 @@ import { styles } from "./style";
 import ProductItem1 from "../ProductItem1";
 import getProducts from "../../../app/services/products/get";
 import { produtos as produtoData } from "../../ProductData/data";
-import VerTudo from "../verTudo";
+import VerTudo from "../VerTudo/index";
 
 interface Produto {
   id_produto: number;

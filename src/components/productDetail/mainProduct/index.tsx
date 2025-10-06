@@ -40,7 +40,7 @@ export default function MainProduct() {
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.imgContainer}>
-          <BackButton />
+          <BackButton style={{ top: 15, left: 15 }} />
           <FavoriteButton />
           <Image
             style={styles.img}

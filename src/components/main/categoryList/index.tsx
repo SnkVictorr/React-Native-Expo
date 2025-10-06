@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { CategoryItem } from "../categoryItem";
 import Title from "../title";
 import colors from "@/src/app/styles/colors";
-import VerTudo from "../verTudo";
+import VerTudo from "../VerTudo";
 
 export default function CategoryList() {
   const categories = [

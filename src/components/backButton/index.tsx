@@ -4,7 +4,8 @@ import { Ionicons } from "@expo/vector-icons";
 import colors from "@/src/app/styles/colors";
 import { router } from "expo-router";
 
-export default function BackButton() {
+
+export default function BackButton({ style }: { style?: object }) {
   function handlePress() {
     // Logic to go back
     router.back();
@@ -15,7 +16,7 @@ export default function BackButton() {
         name="arrow-back-sharp"
         size={24}
         color={colors.principal}
-        style={{ position: "absolute", top: 15, left: 15, zIndex: 20 }}
+        style={[{ position: "absolute",  zIndex: 20 }, style]}
       />
     </TouchableHighlight>
   );

@@ -32,7 +32,7 @@ const HomeScreen = () => {
 
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 215 }}
+        contentContainerStyle={{ paddingBottom: 30 }}
       >
         <SearchBar />
         {/* Navigation Pills */}

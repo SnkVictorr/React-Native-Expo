@@ -1,12 +1,13 @@
-import { Text, View } from "react-native";
+import { SafeAreaView, Text, View } from "react-native";
 import React, { Component } from "react";
-import CarrinhoScreen from "../cart";
+import Cart from "@/src/components/cart";
+import colors from "../styles/colors";
 
-
-export default function Carrinho() {
-    return (
-      <View>
-        <CarrinhoScreen />
-      </View>
-    );
+export default function CartScreen() {
+  return (
+    <SafeAreaView style={{ backgroundColor: colors.background }}>
+      {/* <Image source={require('@/assets/images/logo-gold.png')} style={styles.image}/> */}
+      <Cart />
+    </SafeAreaView>
+  );
 }
