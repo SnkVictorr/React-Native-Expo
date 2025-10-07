@@ -14,11 +14,8 @@ export default function Index() {
   return (
     <>
       <View>
-        {/* <Dashboard /> */}
-        {/* <ProductDetail /> */}
-        {/* <HomeScreen /> */}
-        {/* <ProductsMarcas /> */}
-        <CartScreen />
+        {/* <Dashboard /> */}k{/* <HomeScreen /> */}
+        <ProductsMarcas />
       </View>
     </>
   );

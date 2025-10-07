@@ -9,6 +9,7 @@ import ProductItem1 from "@/src/components/main/ProductItem1";
 import { Scroll } from "lucide-react-native";
 import { produtos as produtosData } from "@/src/components/ProductData/data";
 import { useLocalSearchParams } from "expo-router";
+import colors from "../styles/colors";
 
 const ProductsMarcas: React.FC = () => {
   const { param } = useLocalSearchParams();
@@ -26,9 +27,11 @@ const ProductsMarcas: React.FC = () => {
   // console.log(produtos);
 
   return (
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: colors.background }}>
       <SearchBar />
-      <Text style={styles2.title}>Produtos</Text>
+      <Text style={[styles2.title, { paddingBottom: 10, paddingLeft: 15 }]}>
+        Produtos
+      </Text>
       <FlatList
         style={styles.list} // Estilo da lista
         data={produtos} // Onde os dados são passados como array na props data
@@ -43,7 +46,7 @@ const ProductsMarcas: React.FC = () => {
             imagem={item.imagem}
             precoComDesconto={item.preco - item.desconto}
             newStyles={{
-              marginBottom: 20,
+              marginBottom: 10,
               alignItems: "center",
               flex: 1,
             }}

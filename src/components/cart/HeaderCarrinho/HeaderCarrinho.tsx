@@ -8,28 +8,32 @@ import BackButton from "../../backButton";
 export default class HeaderCart extends Component {
   render() {
     return (
-      <SafeAreaView
+      <View
         style={{
           backgroundColor: colors.background,
           paddingHorizontal: 15,
-          flexDirection: "row",
-          paddingBottom: -16,
+          paddingTop: 28,
+          paddingBottom: 14,
+
+          justifyContent: "space-between",
           borderBottomColor: "#c7a31516",
           borderBottomWidth: 1,
         }}
       >
-        <BackButton style={{}} />
-        <OutfitText
-          style={{
-            color: colors.gray[300],
-            fontSize: 18,
-            textAlign: "center",
-            flex: 1,
-          }}
-        >
-          Carrinho
-        </OutfitText>
-      </SafeAreaView>
+        <View style={{}}>
+          {" "}
+          <BackButton style={{}} />
+          <OutfitText
+            style={{
+              color: colors.gray[300],
+              fontSize: 18,
+              textAlign: "center",
+            }}
+          >
+            Carrinho
+          </OutfitText>
+        </View>
+      </View>
     );
   }
 }

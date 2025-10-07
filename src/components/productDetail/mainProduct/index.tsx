@@ -16,6 +16,7 @@ import getProducts from "@/src/app/services/products/get";
 import { Ionicons } from "@expo/vector-icons";
 import BackButton from "../../backButton";
 import { TextInputMask } from "react-native-masked-text";
+import Frete from "../../Frete";
 
 export default function MainProduct() {
   const { id } = useLocalSearchParams();
@@ -117,7 +118,8 @@ export default function MainProduct() {
               <Text style={{ color: colors.gray[400] }}>Boleto</Text>
             </View>
           </View>
-          <Text
+          <Frete />
+          {/* <Text
             style={{
               fontSize: 16,
               fontWeight: "500",
@@ -163,7 +165,7 @@ export default function MainProduct() {
                 paddingVertical: 10,
               }}
             />
-          </View>
+          </View> */}
           <View
             style={{
               marginTop: 20,

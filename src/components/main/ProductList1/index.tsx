@@ -14,7 +14,7 @@ interface Produto {
   imagem: string;
 }
 
-export default function ProductList() {
+export default function ProductList({ title }: { title: string }) {
   //   const [produtos, setProdutos] = React.useState<Produto[]>([]);
   //   React.useEffect(() => {
   //     const fetchProdutos = async () => {
@@ -38,7 +38,7 @@ export default function ProductList() {
           paddingLeft: 20,
         }}
       >
-        <Text style={styles.title}>Produtos em Destaque</Text>
+        <Text style={styles.title}>{title}</Text>
         <VerTudo text="Ver todos" />
       </View>
 
