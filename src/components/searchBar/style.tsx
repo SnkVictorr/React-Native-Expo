@@ -3,11 +3,11 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   searchContainer: {
     paddingHorizontal: 25,
+    paddingTop: 10,
     paddingBottom: 20,
     borderBottomColor: "#c7a31516",
     borderBottomWidth: 1,
     marginBottom: 15,
-    marginTop: 20,
   },
   searchBar: {
     flexDirection: "row",

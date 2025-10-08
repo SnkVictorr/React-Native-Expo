@@ -1,24 +1,25 @@
-type Produto = {
-  idProduto: number;
-  idCategoria: number;
-  idMarca: number;
-  produto: string;
-  especificacoes: string;
-  descricao: string;
-  quantidade: number;
-  preco: number;
-  desconto: number;
-  imagem: string;
-  createdAt: Date;
-  updatedAt: Date;
-};
+// type Produto = {
+//   idProduto: number;
+//   idCategoria: number;
+//   idMarca: number;
+//   produto: string;
+//   especificacoes: string;
+//   descricao: string;
+//   quantidade: number;
+//   preco: number;
+//   desconto: number;
+//   imagem: string;
+//   createdAt: Date;
+//   updatedAt: Date;
+// };
 
+import { Produto } from "@/src/app/types/produto";
 export const produtos: Produto[] = [
   {
-    idProduto: 1,
-    idCategoria: 1,
-    idMarca: 1,
-    produto: "Violão",
+    id_produto: 1,
+    id_categoria: 1,
+    id_marca: 1,
+    produto: "Violão Fera demais VC-200 Casio Muito Bom Mesmo Quezy",
     especificacoes:
       "Tampo: Spruce | Laterais e fundo: Nato | Braço: Okoume | Trastes: 19",
     descricao:
@@ -27,13 +28,12 @@ export const produtos: Produto[] = [
     preco: 699.9,
     desconto: 50.0,
     imagem: "vc-200-casio.jpg",
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    marca: "",
   },
   {
-    idProduto: 2,
-    idCategoria: 2,
-    idMarca: 3,
+    id_produto: 2,
+    id_categoria: 2,
+    id_marca: 3,
     produto: "Guitarra Fender Stratocaster Standard",
     especificacoes:
       "Corpo: Alder | Braço: Maple | Captadores: 3x Single Coil | Ponte: Tremolo",
@@ -43,13 +43,12 @@ export const produtos: Produto[] = [
     preco: 5499.9,
     desconto: 200.0,
     imagem: "stratocaster-fender.jpg",
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    marca: "",
   },
   {
-    idProduto: 3,
-    idCategoria: 4,
-    idMarca: 5,
+    id_produto: 3,
+    id_categoria: 4,
+    id_marca: 5,
     produto: "Teclado Korg B2SP com Pedaleira",
     especificacoes:
       "Teclas: 88 | Polifonia: 120 | Timbres: 12 | Saídas: USB/MIDI | Pedais: Inclusos",
@@ -59,13 +58,12 @@ export const produtos: Produto[] = [
     preco: 3899.0,
     desconto: 150.0,
     imagem: "korg-b2sp.jpg",
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    marca: "",
   },
   {
-    idProduto: 4,
-    idCategoria: 6,
-    idMarca: 7,
+    id_produto: 4,
+    id_categoria: 6,
+    id_marca: 7,
     produto: "Saxofone Alto Selmer Paris Série II",
     especificacoes:
       "Afinação: Eb | Corpo: Latão | Acabamento: Dourado | Estojo: Incluso",
@@ -75,13 +73,12 @@ export const produtos: Produto[] = [
     preco: 19999.0,
     desconto: 500.0,
     imagem: "selmer-sax-serie2.jpg",
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    marca: "",
   },
   {
-    idProduto: 5,
-    idCategoria: 9,
-    idMarca: 8,
+    id_produto: 5,
+    id_categoria: 9,
+    id_marca: 8,
     produto: "Clarinete Yamaha YCL-255",
     especificacoes:
       "Afinação: Bb | Material: Resina ABS | Chaves: Níquel | Estojo: Incluso",
@@ -91,13 +88,12 @@ export const produtos: Produto[] = [
     preco: 3890.0,
     desconto: 200.0,
     imagem: "yamaha-ycl-255.jpg",
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    marca: "",
   },
   {
-    idProduto: 6,
-    idCategoria: 5,
-    idMarca: 15,
+    id_produto: 6,
+    id_categoria: 5,
+    id_marca: 15,
     produto: "Bateria Pearl Export EXX725S",
     especificacoes:
       "Cascos: Poplar | Tom holders: Opti-Loc | Ferragens: Incluídas | Pratos: Não inclusos",
@@ -107,13 +103,12 @@ export const produtos: Produto[] = [
     preco: 4999.0,
     desconto: 300.0,
     imagem: "pearl-export.jpg",
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    marca: "",
   },
   {
-    idProduto: 7,
-    idCategoria: 10,
-    idMarca: 14,
+    id_produto: 7,
+    id_categoria: 10,
+    id_marca: 14,
     produto: "Trombone King 606",
     especificacoes:
       "Afinação: Bb | Material: Latão Dourado | Estojo: Incluso | Bocal: Prateado",
@@ -123,13 +118,12 @@ export const produtos: Produto[] = [
     preco: 4590.0,
     desconto: 250.0,
     imagem: "king-606.jpg",
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    marca: "",
   },
   {
-    idProduto: 8,
-    idCategoria: 3,
-    idMarca: 4,
+    id_produto: 8,
+    id_categoria: 3,
+    id_marca: 4,
     produto: "Baixo Gibson Thunderbird IV",
     especificacoes:
       "Corpo: Mahogany | Escala: Rosewood | Captadores: Dual Humbucker",
@@ -139,13 +133,12 @@ export const produtos: Produto[] = [
     preco: 8790.0,
     desconto: 500.0,
     imagem: "gibson-thunderbird.jpg",
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    marca: "",
   },
   {
-    idProduto: 9,
-    idCategoria: 12,
-    idMarca: 11,
+    id_produto: 9,
+    id_categoria: 12,
+    id_marca: 11,
     produto: "Tuba Weril BCF440L",
     especificacoes:
       "Afinação: Bb | Válvulas: 4 | Acabamento: Laqueado | Estojo: Incluso",
@@ -155,13 +148,12 @@ export const produtos: Produto[] = [
     preco: 13990.0,
     desconto: 800.0,
     imagem: "tuba-weril.jpg",
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    marca: "",
   },
   {
-    idProduto: 10,
-    idCategoria: 7,
-    idMarca: 10,
+    id_produto: 10,
+    id_categoria: 7,
+    id_marca: 10,
     produto: "Trompete Jupiter JTR700",
     especificacoes:
       "Afinação: Bb | Acabamento: Laqueado | Pistões: Aço inox | Estojo: Incluso",
@@ -171,7 +163,6 @@ export const produtos: Produto[] = [
     preco: 3190.0,
     desconto: 150.0,
     imagem: "jupiter-jtr700.jpg",
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    marca: "",
   },
 ];

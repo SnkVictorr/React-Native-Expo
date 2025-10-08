@@ -32,11 +32,11 @@ const HomeScreen = () => {
 
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 215 }}
+        contentContainerStyle={{ paddingBottom: 30 }}
       >
         <SearchBar />
         {/* Navigation Pills */}
-        <View style={styles.navPills}>
+        {/* <View style={styles.navPills}>
           <TouchableOpacity style={[styles.pill, styles.activePill]}>
             <Text style={styles.activePillText}>Home</Text>
           </TouchableOpacity>
@@ -46,7 +46,7 @@ const HomeScreen = () => {
           <TouchableOpacity style={styles.pill}>
             <Text style={styles.pillText}>Novidades</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
 
         {/* Carousel */}
         <View style={[styles.carousel]}>
@@ -208,7 +208,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingHorizontal: 20,
     gap: 10,
-    marginBottom: 20,
   },
   pill: {
     paddingHorizontal: 16,
@@ -377,7 +376,7 @@ const styles = StyleSheet.create({
   wrapper: {},
   carousel: {
     marginHorizontal: 10,
-    marginVertical: 20,
+    marginBottom: 20,
   },
   slide: {
     flex: 1,

@@ -4,12 +4,13 @@
 // import Login from "./login";
 // import Dashboard from "./dashboard";
 // import HomeScreen from "./main";
+// import CartScreen from "./(tabs)/carrinho";
 
 // export default function Index() {
 //   return (
 //     <>
-//       <Dashboard />
-
+//       {/* <Dashboard /> */}
+//       <CartScreen />
 //       {/* <HomeScreen/> */}
 //     </>
 //   );

@@ -4,8 +4,7 @@ import CategoryItem from ".";
 
 export const styles = StyleSheet.create({
   title: {
-    padding: 20,
-
+    fontFamily: "Outfit_500Medium",
     fontSize: 20,
     color: "white",
   },

@@ -1,21 +1,47 @@
 import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { Image } from "react-native";
 import styles from "./style";
 import FavoriteButton from "../favoriteButton";
 import colors from "@/src/app/styles/colors";
 import Avaliacoes from "../avaliacoes";
 import RatingReadOnly from "../avaliacoes";
+import { Produto } from "@/src/app/types/produto";
 
 import { Barcode, CreditCard } from "lucide-react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { Tabs } from "expo-router";
+import { Tabs, useLocalSearchParams } from "expo-router";
 import ProductTabs from "../tabs";
+import getProducts from "@/src/app/services/products/get";
+import { Ionicons } from "@expo/vector-icons";
+import BackButton from "../../backButton";
+import { TextInputMask } from "react-native-masked-text";
+import Frete from "../../Frete";
+
 export default function MainProduct() {
+  const { id } = useLocalSearchParams();
+  const [instrumento, setInstrumento] = React.useState<Produto | null>(null);
+  const [cep, setCep] = useState("");
+  useEffect(() => {
+    const loadProduct = async () => {
+      try {
+        const products = await getProducts();
+        const foundProduct = products.find(
+          (p: { id_produto: unknown }) => Number(p.id_produto) === Number(id)
+        );
+        setInstrumento(foundProduct || null);
+      } catch (err) {
+        setError("Erro ao carregar o produto.");
+        console.error(err);
+      }
+    };
+    loadProduct();
+  }, [id]);
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.imgContainer}>
+          <BackButton style={{ top: 15, left: 15 }} />
           <FavoriteButton />
           <Image
             style={styles.img}
@@ -92,7 +118,8 @@ export default function MainProduct() {
               <Text style={{ color: colors.gray[400] }}>Boleto</Text>
             </View>
           </View>
-          <Text
+          <Frete />
+          {/* <Text
             style={{
               fontSize: 16,
               fontWeight: "500",
@@ -120,7 +147,16 @@ export default function MainProduct() {
               color={colors.principal}
               style={{ marginRight: 4 }}
             />
-            <TextInput
+            <TextInputMask
+              maxLength={9}
+              type="zip-code"
+              // type={"custom"}
+              // options={{
+              //   mask: "99999-999",
+              // }}
+              keyboardType="numeric"
+              value={cep}
+              onChangeText={setCep}
               placeholder="Digite seu CEP"
               placeholderTextColor="#aaa"
               style={{
@@ -128,9 +164,8 @@ export default function MainProduct() {
                 color: "#fff",
                 paddingVertical: 10,
               }}
-              maxLength={8}
             />
-          </View>
+          </View> */}
           <View
             style={{
               marginTop: 20,
@@ -189,4 +224,7 @@ export default function MainProduct() {
       </ScrollView>
     </View>
   );
+}
+function setError(arg0: string) {
+  throw new Error("Function not implemented.");
 }
