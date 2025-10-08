@@ -2,9 +2,7 @@ import { Text, View, Image, FlatList } from "react-native";
 import React from "react";
 import { styles } from "./style";
 import ProductItem1 from "../ProductItem1";
-import getProducts from "../../../app/services/products/get";
-import { produtos as produtoData } from "../../ProductData/data";
-import VerTudo from "../VerTudo/index";
+// import { produtos } from "../../ProductData/data";
 
 interface Produto {
   id_produto: number;
@@ -14,34 +12,25 @@ interface Produto {
   imagem: string;
 }
 
-export default function ProductList({ title }: { title: string }) {
-  //   const [produtos, setProdutos] = React.useState<Produto[]>([]);
-  //   React.useEffect(() => {
-  //     const fetchProdutos = async () => {
-  //       const produtos = await getProducts();
-  //       setProdutos(produtos);
-  //     };
-  //     fetchProdutos();
-  //   }, []);
+export default function ProductList() {
+  const [produtos, setProdutos] = React.useState<Produto[]>([]);
+  React.useEffect(() => {
+    fetch("http://10.63.45.25:8080/produtos", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          "DAenvhY03Rm2xspRZUmmKrj4PyzUNT4QjjVgK9XChTOe2yntmo9Rqbna7NcAVn2oPrZXoK8oRox6btrCuq59bdoXYaYBX8QVFcJj",
+      },
+    })
+      .then((response) => response.json()) //converte a resposta para json
+      .then((data) => setProdutos(data.data)) //pega o objeto DATA do JSON
+      .catch((error) => console.error(error));
+  }, []);
 
-  //   // teste pra ver se os produtos estão sendo carregados
-
-  //   console.log(produtos);
-  const produtos: Produto[] = produtoData;
   return (
     <View>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          paddingVertical: 20,
-          paddingLeft: 20,
-        }}
-      >
-        <Text style={styles.title}>{title}</Text>
-        <VerTudo text="Ver todos" />
-      </View>
-
+      <Text style={styles.title}>Produtos em Destaque</Text>
       <FlatList
         style={styles.list} // Estilo da lista
         data={produtos} // Onde os dados são passados como array na props data
@@ -50,7 +39,6 @@ export default function ProductList({ title }: { title: string }) {
         keyExtractor={(item) => item.id_produto.toString()} // para extrair a chave de cada item
         renderItem={({ item }) => (
           <ProductItem1
-            id={item.id_produto}
             nome={item.produto}
             preco={item.preco}
             imagem={item.imagem}
