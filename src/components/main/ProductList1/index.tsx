@@ -4,20 +4,28 @@ import { styles } from "./style";
 import ProductItem1 from "../ProductItem1";
 // import { produtos } from "../../ProductData/data";
 
+interface Produto {
+  id_produto: number;
+  produto: string;
+  preco: number;
+  desconto: number;
+  imagem: string;
+}
+
 export default function ProductList() {
-  const [produtos, setProdutos] = React.useState([]);
+  const [produtos, setProdutos] = React.useState<Produto[]>([]);
   React.useEffect(() => {
     fetch("http://10.63.45.25:8080/produtos", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization:
-          "stNOJvYxgbX3bRg3CEGMTNiqnIO3TMMHPi8K3ehLzk3KqcN3tJbDnBdMwWvAj84r2fiKvaAxQC58i1BsR5iqjBzzscwMudNv8xL6",
+          "DAenvhY03Rm2xspRZUmmKrj4PyzUNT4QjjVgK9XChTOe2yntmo9Rqbna7NcAVn2oPrZXoK8oRox6btrCuq59bdoXYaYBX8QVFcJj",
       },
     })
       .then((response) => response.json()) //converte a resposta para json
-      .then((data) => setProdutos(data)) //pega o objeto DATA do JSON
-      .catch((error) => console.error("Erro ao buscar dados:", error));
+      .then((data) => setProdutos(data.data)) //pega o objeto DATA do JSON
+      .catch((error) => console.error(error));
   }, []);
 
   return (
@@ -28,7 +36,7 @@ export default function ProductList() {
         data={produtos} // Onde os dados são passados como array na props data
         horizontal // para deixar a lista na posição horizontal
         showsHorizontalScrollIndicator={false} // para esconder a barra de rolagem
-        keyExtractor={(item) => item.idProduto.toString()} // para extrair a chave de cada item
+        keyExtractor={(item) => item.id_produto.toString()} // para extrair a chave de cada item
         renderItem={({ item }) => (
           <ProductItem1
             nome={item.produto}
