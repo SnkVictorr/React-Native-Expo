@@ -32,7 +32,7 @@ const ProductsMarcas: React.FC = () => {
       <ScrollView>
         <SearchBar />
         <Text
-          style={[styles2.title, { paddingBottom: 10, alignSelf: "center" }]}
+          style={[styles2.title, { paddingBottom: 5, alignSelf: "center" }]}
         >
           Produtos
         </Text>

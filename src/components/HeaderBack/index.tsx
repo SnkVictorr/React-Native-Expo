@@ -2,10 +2,14 @@ import { Text, View } from "react-native";
 import React, { Component } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "@/src/app/styles/colors";
-import { OutfitText } from "../../OutfitText";
-import BackButton from "../../backButton";
+import { OutfitText } from "../OutfitText";
+import BackButton from "../backButton";
 
-export default class HeaderCart extends Component {
+type HeaderBackProps = {
+  text: string;
+};
+
+export default class HeaderBack extends Component<HeaderBackProps> {
   render() {
     return (
       <View
@@ -30,7 +34,7 @@ export default class HeaderCart extends Component {
               textAlign: "center",
             }}
           >
-            Carrinho
+            {this.props.text}
           </OutfitText>
         </View>
       </View>

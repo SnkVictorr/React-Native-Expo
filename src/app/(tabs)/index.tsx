@@ -9,14 +9,15 @@ import { Home } from "lucide-react-native";
 import colors from "../styles/colors";
 import ProductsMarcas from "../products/[filtro]";
 import CartScreen from "./carrinho";
+import Favoritos from "./favoritos";
 
 export default function Index() {
   return (
     <>
-      <View>
-        {/* <Dashboard /> */}k{/* <HomeScreen /> */}
-        <ProductsMarcas />
-      </View>
+      {/* <Dashboard /> */}
+      {/* <HomeScreen /> */}
+      {/* <ProductsMarcas /> */}
+      <Favoritos />
     </>
   );
 }

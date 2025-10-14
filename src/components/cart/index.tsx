@@ -2,7 +2,7 @@ import { Pressable, ScrollView, View, Text } from "react-native";
 import { StyleSheet } from "react-native";
 import React from "react";
 
-import HeaderCart from "./HeaderCarrinho/HeaderCarrinho";
+import HeaderCart from "../HeaderBack";
 import CardCarrinho from "./CardCarrinho";
 import Footer from "./Footer";
 import Frete from "../Frete";
@@ -13,7 +13,7 @@ import ProductList from "../main/ProductList1";
 export default function Cart() {
   return (
     <>
-      <HeaderCart />
+      <HeaderCart text="Carrinho" />
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{ flex: 1, marginBottom: 10 }}
