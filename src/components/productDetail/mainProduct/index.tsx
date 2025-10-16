@@ -20,6 +20,7 @@ import Frete from "../../Frete";
 
 export default function MainProduct() {
   const { id } = useLocalSearchParams();
+
   const [instrumento, setInstrumento] = React.useState<Produto | null>(null);
   const [cep, setCep] = useState("");
   useEffect(() => {
@@ -42,7 +43,7 @@ export default function MainProduct() {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.imgContainer}>
           <BackButton style={{ top: 15, left: 15 }} />
-          <FavoriteButton />
+          <FavoriteButton productId={58} clienteId={8} />
           <Image
             style={styles.img}
             source={require("@/assets/images/violãoGewa.png")}

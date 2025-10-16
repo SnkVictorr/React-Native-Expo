@@ -1,34 +1,82 @@
-import React, { useState, useRef } from "react";
-import { TouchableOpacity, Animated, StyleSheet } from "react-native";
+import React, { useState, useRef, useEffect } from "react";
+import { TouchableOpacity, Animated, StyleSheet, Easing } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "@/src/app/styles/colors";
 
-export default function FavoriteButton() {
-  const [favorited, setFavorited] = useState(false);
+export default function FavoriteButton({
+  productId,
+  clienteId,
+}: {
+  productId: number | string;
+  clienteId: number | string;
+}) {
+  const [isFavorite, setIsFavorite] = useState(false);
   const scaleAnim = useRef(new Animated.Value(1)).current;
 
-  const toggleFavorite = () => {
-    // Animated.sequence([
-    //   Animated.timing(scaleAnim, {
-    //     toValue: 1.3,
-    //     duration: 200, // aumenta suavemente
-    //     useNativeDriver: true,
-    //   }),
-    //   Animated.timing(scaleAnim, {
-    //     toValue: 1,
-    //     duration: 200, // volta suavemente
-    //     useNativeDriver: true,
-    //   }),
-    // ]).start();
+  const API_URL = "http://10.63.45.59:8080/favoritos";
 
-    setFavorited(!favorited);
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      try {
+        const res = await fetch(`${API_URL}/?cliente_id=${clienteId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization:
+              "stNOJvYxgbX3bRg3CEGMTNiqnIO3TMMHPi8K3ehLzk3KqcN3tJbDnBdMwWvAj84r2fiKvaAxQC58i1BsR5iqjBzzscwMudNv8xL6",
+          },
+        });
+        const data = await res.json();
+        setIsFavorite(data.data.includes(productId));
+      } catch (err) {
+        console.error("Erro ao carregar favoritos:", err);
+      }
+    };
+    fetchFavorites();
+  }, [productId]);
+
+  // const toggleFavorite = () => {
+  //   // Animated.sequence([
+  //   //   Animated.timing(scaleAnim, {
+  //   //     toValue: 1.3,
+  //   //     duration: 200, // aumenta suavemente
+  //   //     useNativeDriver: true,
+  //   //   }),
+  //   //   Animated.timing(scaleAnim, {
+  //   //     toValue: 1,
+  //   //     duration: 200, // volta suavemente
+  //   //     useNativeDriver: true,
+  //   //   }),
+  //   // ]).start();
+
+  //   setFavorited(!favorited);
+  // };
+
+  const toggleFavorite = async () => {
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:
+            "stNOJvYxgbX3bRg3CEGMTNiqnIO3TMMHPi8K3ehLzk3KqcN3tJbDnBdMwWvAj84r2fiKvaAxQC58i1BsR5iqjBzzscwMudNv8xL6",
+        },
+        body: JSON.stringify({ cliente_id: clienteId, produto_id: productId }),
+      });
+      const result = await res.json();
+
+      if (result.status === "added") setIsFavorite(true);
+      if (result.status === "removed") setIsFavorite(false);
+    } catch (err) {
+      console.error("Erro ao atualizar favorito:", err);
+    }
   };
 
   return (
     <TouchableOpacity onPress={toggleFavorite} activeOpacity={0.8}>
       <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
         <Ionicons
-          name={favorited ? "heart" : "heart-outline"}
+          name={isFavorite ? "heart" : "heart-outline"}
           size={35}
           color={colors.principal}
           style={styles.icon}

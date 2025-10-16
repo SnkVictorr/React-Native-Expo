@@ -6,6 +6,7 @@ import RatingReadOnly from "../../productDetail/avaliacoes";
 import colors from "@/src/app/styles/colors";
 import { TextQuiche } from "../../quiche";
 import { QuicheBold } from "../../quiche/quiche-bold";
+import formatter from "@/src/app/utils/formatadorDeMoeda";
 
 export default function ProductItem1({
   id,
@@ -44,15 +45,16 @@ export default function ProductItem1({
           <RatingReadOnly value={5} size={10} />
 
           <QuicheBold style={styles.title} numberOfLines={2}>
+            {" "}
             {nome}
           </QuicheBold>
           <View style={styles.infoContainer}>
-            <TextQuiche style={styles.price}>{`R$${preco.toFixed(
-              2
+            <TextQuiche style={styles.price}>{`${formatter.format(
+              preco
             )}`}</TextQuiche>
-            <QuicheBold
-              style={styles.precoComDesconto}
-            >{`R$${precoComDesconto.toFixed(2)}`}</QuicheBold>
+            <QuicheBold style={styles.precoComDesconto}>{`${formatter.format(
+              precoComDesconto
+            )}`}</QuicheBold>
           </View>
         </View>
       </Pressable>
