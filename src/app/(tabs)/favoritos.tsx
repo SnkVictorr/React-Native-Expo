@@ -9,9 +9,9 @@ import ProductItem1 from "@/src/components/main/ProductItem1";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Favoritos({}) {
-  const API_URL = "http://10.63.45.59:8080/favoritos";
+  const API_URL = "http://localhost:8080/favoritos";
   const [produtos, setProdutos] = React.useState();
-  const clienteId = "8"; // ID do cliente logado (exemplo estático)
+  const clienteId = "1"; // ID do cliente logado (exemplo estático)
   useEffect(() => {
     const fetchFavoritos = async () => {
       try {

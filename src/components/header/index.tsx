@@ -4,9 +4,14 @@ import { styles } from "./style";
 import { router } from "expo-router";
 
 export default function Headers() {
-  const handleNext = () => {
-    router.navigate("/login/page");
+  const handleLogin = () => {
+    router.navigate("/login");
   };
+
+  const handleCadastre = () => {
+    router.navigate("/cadastreSe");
+  };
+
   return (
     <View
       style={{
@@ -17,13 +22,13 @@ export default function Headers() {
       }}
     >
       <Pressable
-        onPress={handleNext}
+        onPress={handleLogin}
         style={({ pressed }) => [styles.header, pressed ? styles.header : null]}
       >
         <Text style={styles.text}>Login</Text>
       </Pressable>
       <Pressable
-        onPress={handleNext}
+        onPress={handleCadastre}
         style={({ pressed }) => [styles.header, pressed ? styles.header : null]}
       >
         <Text style={styles.text}>Cadastre-se</Text>

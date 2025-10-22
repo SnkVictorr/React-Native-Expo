@@ -106,7 +106,7 @@ const HomeScreen = () => {
         </View>
         <MarcasList />
         {/* Lista de produtos 1 */}
-        <ProductList1 />
+        <ProductList1 title={""} />
 
         <CategoryList />
 
