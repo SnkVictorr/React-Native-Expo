@@ -1,7 +1,7 @@
 import React from "react";
 import { View, FlatList, Image, StyleSheet, Text } from "react-native";
 import { styles } from "./style";
-import { OutfitText } from "../../OutfitText";
+import { OutfitText } from "../../Outfittext";
 import VerTudo from "../VerTudo";
 
 const marcas = [

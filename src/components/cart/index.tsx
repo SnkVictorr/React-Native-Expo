@@ -7,7 +7,7 @@ import CardCarrinho from "./CardCarrinho";
 import Footer from "./Footer";
 import Frete from "../Frete";
 import colors from "@/src/app/styles/colors";
-import { OutfitText } from "../OutfitText";
+import { OutfitText } from "../Outfittext";
 import ProductList from "../main/ProductList1";
 
 export default function Cart() {

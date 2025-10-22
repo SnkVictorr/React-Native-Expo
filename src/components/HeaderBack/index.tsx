@@ -2,8 +2,13 @@ import { Text, View } from "react-native";
 import React, { Component } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "@/src/app/styles/colors";
+<<<<<<< Updated upstream:src/components/HeaderBack/index.tsx
 import { OutfitText } from "../OutfitText";
 import BackButton from "../backButton";
+=======
+import { OutfitText } from "../../Outfittext";
+import BackButton from "../../backButton";
+>>>>>>> Stashed changes:src/components/cart/HeaderCarrinho/HeaderCarrinho.tsx
 
 type HeaderBackProps = {
   text: string;
