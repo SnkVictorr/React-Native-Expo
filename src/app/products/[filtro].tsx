@@ -30,6 +30,7 @@ const ProductsMarcas: React.FC = () => {
   return (
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <View style={{ backgroundColor: colors.background, paddingTop: 40 }}>
       <ScrollView>
         <SearchBar />
@@ -63,6 +64,8 @@ const ProductsMarcas: React.FC = () => {
       </ScrollView>
     </View>
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     <ScrollView style={{ backgroundColor: colors.background, paddingTop: 50 }}>
