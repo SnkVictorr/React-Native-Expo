@@ -13,27 +13,30 @@ export default function FavoriteButton({
   const [isFavorite, setIsFavorite] = useState(false);
   const scaleAnim = useRef(new Animated.Value(1)).current;
 
-  const API_URL = "http://10.63.45.59:8080/favoritos";
+  const API_URL = "http://localhost:8080/favoritos";
 
-  useEffect(() => {
-    const fetchFavorites = async () => {
-      try {
-        const res = await fetch(`${API_URL}/?cliente_id=${clienteId}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization:
-              "stNOJvYxgbX3bRg3CEGMTNiqnIO3TMMHPi8K3ehLzk3KqcN3tJbDnBdMwWvAj84r2fiKvaAxQC58i1BsR5iqjBzzscwMudNv8xL6",
-          },
-        });
-        const data = await res.json();
-        setIsFavorite(data.data.includes(productId));
-      } catch (err) {
-        console.error("Erro ao carregar favoritos:", err);
-      }
-    };
-    fetchFavorites();
-  }, [productId]);
+  // useEffect(() => {
+  //   const fetchFavorites = async () => {
+  //     try {
+  //       const res = await fetch(`${API_URL}/?cliente_id=${clienteId}`, {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization:
+  //             "stNOJvYxgbX3bRg3CEGMTNiqnIO3TMMHPi8K3ehLzk3KqcN3tJbDnBdMwWvAj84r2fiKvaAxQC58i1BsR5iqjBzzscwMudNv8xL6",
+  //         },
+  //       });
+
+  //       const data = await res.json();
+  //       console.log("Favoritos carregados:", data);
+  //       setIsFavorite(data.data.includes(58));
+  //     } catch (err) {
+  //       console.error("Erro ao carregar favoritos:", err);
+  //     }
+  //   };
+  //   fetchFavorites();
+  // }, [productId]);
+  // console.log("isFavorite:", isFavorite);
 
   // const toggleFavorite = () => {
   //   // Animated.sequence([
@@ -61,7 +64,7 @@ export default function FavoriteButton({
           Authorization:
             "stNOJvYxgbX3bRg3CEGMTNiqnIO3TMMHPi8K3ehLzk3KqcN3tJbDnBdMwWvAj84r2fiKvaAxQC58i1BsR5iqjBzzscwMudNv8xL6",
         },
-        body: JSON.stringify({ cliente_id: clienteId, produto_id: productId }),
+        body: JSON.stringify({ cliente_id: clienteId, id_produto: productId }),
       });
       const result = await res.json();
 
