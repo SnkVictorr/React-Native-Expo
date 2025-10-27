@@ -7,6 +7,7 @@ import {
   Outfit_700Bold,
 } from "@expo-google-fonts/outfit";
 import { View, ActivityIndicator, StyleSheet } from "react-native";
+import React from "react";
 // import {
 //   PlayfairDisplay_400Regular,
 //   PlayfairDisplay_700Bold,

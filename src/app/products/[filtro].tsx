@@ -28,38 +28,34 @@ const ProductsMarcas: React.FC = () => {
   // console.log(produtos);
 
   return (
-    <View style={{ backgroundColor: colors.background, paddingTop: 40 }}>
-      <ScrollView>
-        <SearchBar />
-        <Text
-          style={[styles2.title, { paddingBottom: 5, alignSelf: "center" }]}
-        >
-          Produtos
-        </Text>
-        <FlatList
-          style={styles.list} // Estilo da lista
-          data={produtos} // Onde os dados são passados como array na props data
-          showsHorizontalScrollIndicator={false} // para esconder a barra de rolagem
-          keyExtractor={(item) => item.id_produto.toString()} // para extrair a chave de cada item
-          numColumns={2}
-          renderItem={({ item }) => (
-            <ProductItem1
-              id={item.id_produto}
-              nome={item.produto}
-              preco={item.preco}
-              imagem={item.imagem}
-              precoComDesconto={item.preco - item.desconto}
-              newStyles={{
-                marginBottom: 10,
-                alignItems: "center",
-                flex: 1,
-              }}
-              productItemStyle={{ width: "95%", marginRight: 0 }}
-            />
-          )} // para renderizar cada item da lista
-        />
-      </ScrollView>
-    </View>
+    <ScrollView style={{ backgroundColor: colors.background, paddingTop: 50 }}>
+      <SearchBar />
+      <Text style={[styles2.title, { paddingBottom: 10, paddingLeft: 15 }]}>
+        Produtos
+      </Text>
+      <FlatList
+        style={styles.list} // Estilo da lista
+        data={produtos} // Onde os dados são passados como array na props data
+        showsHorizontalScrollIndicator={false} // para esconder a barra de rolagem
+        keyExtractor={(item) => item.id_produto.toString()} // para extrair a chave de cada item
+        numColumns={2}
+        renderItem={({ item }) => (
+          <ProductItem1
+            id={item.id_produto}
+            nome={item.produto}
+            preco={item.preco}
+            imagem={item.imagem}
+            precoComDesconto={item.preco - item.desconto}
+            newStyles={{
+              marginBottom: 10,
+              alignItems: "center",
+              flex: 1,
+            }}
+            productItemStyle={{ width: 190 }}
+          />
+        )} // para renderizar cada item da lista
+      />
+    </ScrollView>
   );
 };
 

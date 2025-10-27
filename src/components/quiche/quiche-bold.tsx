@@ -1,4 +1,5 @@
 // components/AppText.tsx
+import React from "react";
 import { Text, TextProps, StyleSheet } from "react-native";
 
 export function QuicheBold({ style, ...props }: TextProps) {

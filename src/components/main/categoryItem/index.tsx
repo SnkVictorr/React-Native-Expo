@@ -5,9 +5,9 @@ import { LinearGradient } from "expo-linear-gradient";
 import { LucideIcon } from "lucide-react-native";
 import { Card } from "../../ui/card";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import { QuicheBold } from "../../quiche/quiche-bold";
-import { TextQuiche } from "../../quiche";
-import { QuicheMedium } from "../../quiche/quiche-medium";
+import { QuicheBold } from "../../Quiche/quiche-bold";
+import { TextQuiche } from "../../Quiche";
+import { QuicheMedium } from "../../Quiche/quiche-medium";
 
 interface CategoryCardProps {
   name: string;

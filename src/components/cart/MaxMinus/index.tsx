@@ -1,5 +1,6 @@
 import colors from "@/src/app/styles/colors";
 import { Minus, Plus, Trash } from "lucide-react-native";
+import React from "react";
 import { TouchableOpacity, View, Text } from "react-native";
 
 export default function MaxMinus() {

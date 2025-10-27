@@ -11,6 +11,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import colors from "@/src/app/styles/colors";
 import { useRouter } from "expo-router";
+import React from "react";
 
 function TabIcon({
   src,
