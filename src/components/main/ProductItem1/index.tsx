@@ -4,8 +4,8 @@ import { styles } from "./style";
 import { router } from "expo-router";
 import RatingReadOnly from "../../productDetail/avaliacoes";
 import colors from "@/src/app/styles/colors";
-import { TextQuiche } from "../../quiche";
-import { QuicheBold } from "../../quiche/quiche-bold";
+import { TextQuiche } from "../../Quiche";
+import { QuicheBold } from "../../Quiche/quiche-bold";
 import formatter from "@/src/app/utils/formatadorDeMoeda";
 
 export default function ProductItem1({
@@ -34,9 +34,6 @@ export default function ProductItem1({
         <View style={styles.content}>
           {/* <- AGORA COM flex: 1 */}
           <Image
-            // source={{
-            //   uri: `http://192.168.1.2:8080/produtos/imagens/${imagem}`,
-            // }}
             source={require("../../../../assets/images/violãoGewa.png")}
             style={styles.image}
             resizeMode="contain"
