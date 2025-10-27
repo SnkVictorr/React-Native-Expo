@@ -5,7 +5,7 @@ import React from "react";
 import HeaderCart from "../HeaderBack";
 import CardCarrinho from "./CardCarrinho";
 import Footer from "./Footer";
-import Frete from "../Frete";
+// import Frete from "../Frete";
 import colors from "@/src/app/styles/colors";
 
 import ProductList from "../main/ProductList1";
@@ -18,9 +18,6 @@ export default function Cart() {
         showsVerticalScrollIndicator={false}
         style={{ flex: 1, marginBottom: 10 }}
       >
-        <CardCarrinho />
-        <CardCarrinho />
-        <CardCarrinho />
         <CardCarrinho />
 
         <View
@@ -35,7 +32,7 @@ export default function Cart() {
             // borderTopColor: colors.gray[600],
           }}
         >
-          <Frete />
+          {/* <Frete /> */}
         </View>
         <View
           style={{
