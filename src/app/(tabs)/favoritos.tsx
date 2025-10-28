@@ -11,7 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function Favoritos({}) {
   const API_URL = "http://localhost:8080/favoritos";
   const [produtos, setProdutos] = React.useState();
-  const clienteId = "1"; // ID do cliente logado (exemplo estático)
+  const clienteId = "8"; // ID do cliente logado (exemplo estático)
   useEffect(() => {
     const fetchFavoritos = async () => {
       try {

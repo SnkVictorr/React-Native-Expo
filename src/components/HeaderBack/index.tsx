@@ -2,7 +2,7 @@ import { Text, View } from "react-native";
 import React, { Component } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "@/src/app/styles/colors";
-import { OutfitText } from "../Outfittext";
+import { OutfitText } from "../OutfitText";
 import BackButton from "../backButton";
 
 type HeaderBackProps = {

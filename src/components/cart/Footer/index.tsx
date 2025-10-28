@@ -1,7 +1,7 @@
 import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import React, { Component } from "react";
 import colors from "@/src/app/styles/colors";
-import { OutfitText } from "../../Outfittext";
+import { OutfitText } from "../../OutfitText";
 
 export default class FooterCarrinho extends Component {
   render() {

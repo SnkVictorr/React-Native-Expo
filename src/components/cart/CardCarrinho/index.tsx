@@ -2,7 +2,7 @@ import { Text, View } from "react-native";
 import React, { Component } from "react";
 import { Image } from "react-native";
 import { QuicheMedium } from "../../Quiche/quiche-medium";
-import { OutfitText } from "../../Outfittext";
+import { OutfitText } from "../../OutfitText";
 import MaxMinus from "../MaxMinus";
 
 export default class CardCarrinho extends Component {
