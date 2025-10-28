@@ -9,6 +9,7 @@ import Footer from "./Footer";
 import colors from "@/src/app/styles/colors";
 
 import ProductList from "../main/ProductList1";
+import Frete from "../Frete";
 
 export default function Cart() {
   return (
@@ -32,7 +33,7 @@ export default function Cart() {
             // borderTopColor: colors.gray[600],
           }}
         >
-          {/* <Frete /> */}
+          <Frete />
         </View>
         <View
           style={{

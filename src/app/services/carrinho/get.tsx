@@ -1,12 +1,13 @@
 export const fetchCarrinho = async (cliente_id: number) => {
-  const url = `http://localhost:8080/carrinho/?cliente_id=${cliente_id}`;
+  const url = `http://localhost:8080/carrinho/?cliente_id=8`;
 
   const response = await fetch(url, {
     method: "GET",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      authorization: "DAenvhY03Rm2xspRZUmmKrj4PyzUNT4QjjVgK9XChTOe2yntmo9Rqbna7NcAVn2oPrZXoK8oRox6btrCuq59bdoXYaYBX8QVFcJj",
+      authorization:
+        "stNOJvYxgbX3bRg3CEGMTNiqnIO3TMMHPi8K3ehLzk3KqcN3tJbDnBdMwWvAj84r2fiKvaAxQC58i1BsR5iqjBzzscwMudNv8xL6",
     },
   });
 

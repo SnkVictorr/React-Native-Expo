@@ -11,9 +11,7 @@ import { deleteItemCart } from "@/src/app/services/carrinho/delete";
 import { Trash } from "lucide-react-native";
 import formatter from "@/src/app/utils/formatadorDeMoeda";
 
-
 export default function CardCarrinho() {
-
   const [carrinho, setCarrinho] = useState<ItemCarrinho[] | null>(null);
   const [cliente_id, setCliente_id] = useState<number | null>(null);
 
@@ -45,7 +43,7 @@ export default function CardCarrinho() {
   const removerDoCarrinho = (
     index: number,
     id_produto: number,
-    id_cliente: number,
+    id_cliente: number
   ) => {
     if (!carrinho) return;
     const novosItens = [...carrinho];
@@ -72,62 +70,71 @@ export default function CardCarrinho() {
     }
   };
 
-    return (
-      <View style={{ paddingTop: 16 }}>
-        <FlatList
+  return (
+    <View style={{ paddingTop: 16 }}>
+      <FlatList
         data={carrinho}
         keyExtractor={(item) => item.id_produto.toString()}
         renderItem={({ item, index }) => (
-
-
-        <View
-          style={{
-            borderRadius: 8,
-            borderWidth: 1,
-            borderColor: "#333333",
-            padding: 16,
-            backgroundColor: "#111111",
-          }}
-        >
-          <View style={{ flexDirection: "row", gap: 16 }}>
-            <Image
-              source={{ uri: `http://localhost:8080/produtos/${item.imagem}` }}
-              style={{ width: 100, height: 100, borderRadius: 8 }}
-            />
-            <View style={{ flex: 1, flexDirection: "column", gap: 8 }}>
-              <OutfitText
-                style={{ flex: 1, flexWrap: "wrap" }}
-                numberOfLines={2}
-              >
-                {item.produto}
-              </OutfitText>
-
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
+          <View
+            style={{
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: "#333333",
+              padding: 16,
+              backgroundColor: "#111111",
+            }}
+          >
+            <View style={{ flexDirection: "row", gap: 16 }}>
+              <Image
+                source={{
+                  uri: `http://localhost:8080/produtos/imagens/${item.imagem}`,
+                  headers: {
+                    authorization:
+                      "stNOJvYxgbX3bRg3CEGMTNiqnIO3TMMHPi8K3ehLzk3KqcN3tJbDnBdMwWvAj84r2fiKvaAxQC58i1BsR5iqjBzzscwMudNv8xL6",
+                  },
                 }}
-              >
-                <QuicheMedium style={{ fontSize: 16, color: "#c7a315" }}>
-                  {formatter.format(item.preco - item.desconto)}
-                </QuicheMedium>
-                <MaxMinus quantidade={item.quantidade} incrementar={()=> incrementarQuantidade(index)} decrementar={()=> decrementarQuantidade(index)} />
+                style={{ width: 100, height: 100, borderRadius: 8 }}
+              />
+              <View style={{ flex: 1, flexDirection: "column", gap: 8 }}>
+                <OutfitText
+                  style={{ flex: 1, flexWrap: "wrap" }}
+                  numberOfLines={2}
+                >
+                  {item.produto}
+                </OutfitText>
+
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <QuicheMedium style={{ fontSize: 16, color: "#c7a315" }}>
+                    {formatter.format(item.preco - item.desconto)}
+                  </QuicheMedium>
+                  <MaxMinus
+                    quantidade={item.quantidade}
+                    incrementar={() => incrementarQuantidade(index)}
+                    decrementar={() => decrementarQuantidade(index)}
+                  />
+                </View>
+                <TouchableOpacity
+                  onPress={() =>
+                    removerDoCarrinho(
+                      index,
+                      item.id_produto,
+                      cliente_id as number
+                    )
+                  }
+                >
+                  <Trash />
+                </TouchableOpacity>
               </View>
-              <TouchableOpacity
-                    onPress={() =>
-                      removerDoCarrinho(
-                        index,
-                        item.id_produto,
-                        cliente_id as number,
-                      )
-                    }
-                  >
-                    <Trash />
-                  </TouchableOpacity>
             </View>
           </View>
-        </View>
-        )}/>
-      </View>
-    );
-  }
+        )}
+      />
+    </View>
+  );
+}
