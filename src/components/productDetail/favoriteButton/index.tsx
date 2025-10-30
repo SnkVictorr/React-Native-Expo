@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { TouchableOpacity, Animated, StyleSheet, Easing } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "@/src/app/styles/colors";
+import { FavoritosService } from "@/src/app/services/models/FavoritosService";
 
 export default function FavoriteButton({
   productId,
@@ -13,7 +14,7 @@ export default function FavoriteButton({
   const [isFavorite, setIsFavorite] = useState(false);
   const scaleAnim = useRef(new Animated.Value(1)).current;
 
-  const API_URL = "http://localhost:8080/favoritos";
+  const _favoritosService = new FavoritosService();
 
   // useEffect(() => {
   //   const fetchFavorites = async () => {
@@ -57,16 +58,20 @@ export default function FavoriteButton({
 
   const toggleFavorite = async () => {
     try {
-      const res = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization:
-            "stNOJvYxgbX3bRg3CEGMTNiqnIO3TMMHPi8K3ehLzk3KqcN3tJbDnBdMwWvAj84r2fiKvaAxQC58i1BsR5iqjBzzscwMudNv8xL6",
-        },
-        body: JSON.stringify({ cliente_id: clienteId, id_produto: productId }),
+      // const res = await fetch(API_URL, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization:
+      //       "stNOJvYxgbX3bRg3CEGMTNiqnIO3TMMHPi8K3ehLzk3KqcN3tJbDnBdMwWvAj84r2fiKvaAxQC58i1BsR5iqjBzzscwMudNv8xL6",
+      //   },
+      //   body: JSON.stringify({ cliente_id: clienteId, id_produto: productId }),
+      // });
+      // const result = await res.json();
+      const result = await _favoritosService.switchFavorite({
+        cliente_id: clienteId,
+        id_produto: productId,
       });
-      const result = await res.json();
 
       if (result.status === "added") setIsFavorite(true);
       if (result.status === "removed") setIsFavorite(false);
