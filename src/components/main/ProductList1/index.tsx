@@ -4,13 +4,6 @@ import { styles } from "./style";
 import ProductItem1 from "../ProductItem1";
 import { produtos } from "../../ProductData/data";
 
-interface Produto {
-  id_produto: number;
-  produto: string;
-  preco: number;
-  desconto: number;
-  imagem: string;
-}
 
 export default function ProductList({ title }: { title: string }) {
   // const [produtos, setProdutos] = React.useState<Produto[]>([]);

@@ -1,6 +1,5 @@
 {
   "expo": {
-    
     "name": "meu-primeiro-app",
     "slug": "meu-primeiro-app",
     "version": "1.0.0",
@@ -22,7 +21,9 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false,
+      "package": "com.br12zin.harmonix"
     },
     "web": {
       "bundler": "metro",
@@ -31,7 +32,8 @@
     },
     "plugins": [
       "expo-router",
-      "expo-font"
+      "expo-font",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true
@@ -41,6 +43,7 @@
       "eas": {
         "projectId": "83df7a5b-ce0a-447f-a433-d6dafbcedaac"
       }
-    }
+    },
+    "owner": "br12zin"
   }
 }

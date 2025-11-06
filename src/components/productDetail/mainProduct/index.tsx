@@ -1,21 +1,18 @@
-import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
-import React, { Component, useEffect, useState } from "react";
+import { Pressable, ScrollView, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
 import { Image } from "react-native";
 import styles from "./style";
 import FavoriteButton from "../favoriteButton";
 import colors from "@/src/app/styles/colors";
-import Avaliacoes from "../avaliacoes";
 import RatingReadOnly from "../avaliacoes";
 import { Produto } from "@/src/app/types/produto";
-
 import { Barcode, CreditCard } from "lucide-react-native";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { Tabs, useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 import ProductTabs from "../tabs";
 import getProducts from "@/src/app/services/products/get";
-import { Ionicons } from "@expo/vector-icons";
+
 import BackButton from "../../backButton";
-import { TextInputMask } from "react-native-masked-text";
+
 import Frete from "../../Frete";
 
 export default function MainProduct() {
@@ -46,7 +43,7 @@ export default function MainProduct() {
           <FavoriteButton productId={58} clienteId={8} />
           <Image
             style={styles.img}
-            source={require("@/assets/images/violãoGewa.png")}
+            source={require("@/assets/images/violaoGewa.jpg")}
           />
         </View>
         <View style={styles.mainContent}>

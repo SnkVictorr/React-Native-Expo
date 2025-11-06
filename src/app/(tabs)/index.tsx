@@ -10,6 +10,7 @@ import colors from "../styles/colors";
 import ProductsMarcas from "../products/[filtro]";
 import CartScreen from "./carrinho";
 import Favoritos from "./favoritos";
+import SignGoogle from "../SignGoogle";
 
 export default function Index() {
   return (
@@ -17,7 +18,8 @@ export default function Index() {
       {/* <Dashboard /> */}
       {/* <HomeScreen /> */}
       {/* <ProductsMarcas /> */}
-      <Favoritos />
+      {/* <Favoritos /> */}
+      <SignGoogle />
     </>
   );
 }

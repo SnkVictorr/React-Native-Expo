@@ -34,7 +34,7 @@ export default function ProductItem1({
         <View style={styles.content}>
           {/* <- AGORA COM flex: 1 */}
           <Image
-            source={require("../../../../assets/images/violãoGewa.png")}
+            source={require("../../../../assets/images/violaoGewa.jpg")}
             style={styles.image}
             resizeMode="contain"
           />

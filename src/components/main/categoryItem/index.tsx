@@ -1,12 +1,7 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-// import { Card } from "@/components/ui/card"; // seu componente Card já no RN
-import { LucideIcon } from "lucide-react-native";
 import { Card } from "../../ui/card";
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import { QuicheBold } from "../../Quiche/quiche-bold";
-import { TextQuiche } from "../../Quiche";
 import { QuicheMedium } from "../../Quiche/quiche-medium";
 
 interface CategoryCardProps {
