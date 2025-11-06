@@ -8,24 +8,21 @@ import { styles } from "../products/style";
 import ProductItem1 from "@/src/components/main/ProductItem1";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { FavoritosService } from "../services/models/FavoritosService";
+import { Produto } from "../types/produto";
+
 export default function Favoritos({}) {
-  const API_URL = "http://localhost:8080/favoritos";
-  const [produtos, setProdutos] = React.useState();
-  const clienteId = "8"; // ID do cliente logado (exemplo estático)
+  const [produtos, setProdutos] = React.useState<Produto[]>([]);
+
+  const _favoritosService = new FavoritosService();
+  const clienteId = 8; // ID do cliente
+  // logado (exemplo estático)
   useEffect(() => {
     const fetchFavoritos = async () => {
       try {
-        const response = await fetch(`${API_URL}?cliente_id=${clienteId}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization:
-              "stNOJvYxgbX3bRg3CEGMTNiqnIO3TMMHPi8K3ehLzk3KqcN3tJbDnBdMwWvAj84r2fiKvaAxQC58i1BsR5iqjBzzscwMudNv8xL6",
-          },
-        });
-        const favoritos = await response.json(); // array de produto_id
-        setProdutos(favoritos.data);
-        console.log(favoritos);
+        const data = await _favoritosService.getByClienteId(clienteId);
+        setProdutos(data);
+        console.log(data);
       } catch (error) {
         console.error("Erro ao buscar favoritos:", error);
       }
@@ -47,7 +44,7 @@ export default function Favoritos({}) {
         style={[styles.list]} // Estilo da lista
         data={produtos} // Onde os dados são passados como array na props data
         showsHorizontalScrollIndicator={false} // para esconder a barra de rolagem
-        keyExtractor={(item) => item.id_produto} // para extrair a chave de cada item
+        keyExtractor={(item) => item.id_produto.toString()} // para extrair a chave de cada item
         numColumns={2}
         renderItem={({ item }) => (
           <ProductItem1
