@@ -1,5 +1,5 @@
-import { Text, TouchableOpacity, View } from 'react-native'
-import React, { Component, use, useEffect } from 'react'
+import { Text, TouchableOpacity } from 'react-native'
+import React from 'react'
 import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
 
@@ -45,6 +45,7 @@ export default function SignGoogle(){
             padding: 10,
             borderRadius: 5,
             backgroundColor: '#4285F4',
+            marginTop: 50
 
         }}>
             <Text onPress={() => promptAsync()}>Sign in with Google</Text>
