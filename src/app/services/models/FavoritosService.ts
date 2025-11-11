@@ -1,11 +1,11 @@
 import { ApiService } from "./ApiService";
 import { Produto } from "../../types/produto";
-
+import { BASE_URL, AUTH_TOKEN } from "../../config/api";
 export class FavoritosService extends ApiService<Produto> {
   constructor() {
     super(
-      "http://localhost:8080/favoritos",
-      "stNOJvYxgbX3bRg3CEGMTNiqnIO3TMMHPi8K3ehLzk3KqcN3tJbDnBdMwWvAj84r2fiKvaAxQC58i1BsR5iqjBzzscwMudNv8xL6"
+      `${BASE_URL}/favoritos`,
+      AUTH_TOKEN  
     );
   }
   async getByClienteId(clienteId: number): Promise<Produto[]> {

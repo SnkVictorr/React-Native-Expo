@@ -1,15 +1,15 @@
 import { Produto } from "../../types/produto";
-
+import { BASE_URL, AUTH_TOKEN } from "../../config/api";
 export const editCart = async (
   product: Produto,
   cliente_id: number,
   quantidade: number,
 ): Promise<boolean> => {
-  const response = await fetch(`http://localhost:8080/carrinho/?cliente_id=${cliente_id}`, {
+  const response = await fetch(`${BASE_URL}/carrinho/?cliente_id=${cliente_id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      authorization: "DAenvhY03Rm2xspRZUmmKrj4PyzUNT4QjjVgK9XChTOe2yntmo9Rqbna7NcAVn2oPrZXoK8oRox6btrCuq59bdoXYaYBX8QVFcJj",
+      authorization: AUTH_TOKEN,
     },
     body: JSON.stringify({
       cliente_id,

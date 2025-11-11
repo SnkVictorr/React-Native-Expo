@@ -1,13 +1,18 @@
-export default function getProducts() {
+import { BASE_URL, AUTH_TOKEN } from "../../config/api";
+export default function getProducts(idProduto?: number) {
   // const produtos = fetch("http://192.168.1.2:8080/produtos", {
-  const produtos = fetch("http://localhost:8080/produtos", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization:
-        "stNOJvYxgbX3bRg3CEGMTNiqnIO3TMMHPi8K3ehLzk3KqcN3tJbDnBdMwWvAj84r2fiKvaAxQC58i1BsR5iqjBzzscwMudNv8xL6",
-    },
-  })
+
+  // Se idProduto for fornecido, busca o produto específico
+  const produtos = fetch(
+    `${BASE_URL}/produtos${idProduto ? `/?id=${idProduto}` : ""}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: AUTH_TOKEN,
+      },
+    }
+  )
     .then((response) => response.json())
     .then((data) => data.data)
     .catch((error) => console.error(error));

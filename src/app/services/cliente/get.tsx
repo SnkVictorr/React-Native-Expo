@@ -1,6 +1,8 @@
+import { BASE_URL, AUTH_TOKEN } from "../../config/api";
+
 export const getClienteId = async (): Promise<number | null> => {
   try {
-    const res = await fetch("http://localhost:8080/login/session.php", {
+    const res = await fetch(`${BASE_URL}/login/session.php`, {
       method: "GET",
       credentials: "include", // necessário para enviar cookies da sessão
     });

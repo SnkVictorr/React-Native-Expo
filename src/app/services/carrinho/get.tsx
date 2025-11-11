@@ -1,13 +1,14 @@
+import { BASE_URL, AUTH_TOKEN } from "../../config/api";
+
 export const fetchCarrinho = async (cliente_id: number) => {
-  const url = `http://localhost:8080/carrinho/?cliente_id=8`;
+  const url = `${BASE_URL}/carrinho/?cliente_id=${cliente_id}`;
 
   const response = await fetch(url, {
     method: "GET",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      authorization:
-        "stNOJvYxgbX3bRg3CEGMTNiqnIO3TMMHPi8K3ehLzk3KqcN3tJbDnBdMwWvAj84r2fiKvaAxQC58i1BsR5iqjBzzscwMudNv8xL6",
+      authorization: AUTH_TOKEN,
     },
   });
 
