@@ -16,10 +16,10 @@ export default function Index() {
   return (
     <>
       {/* <Dashboard /> */}
-      {/* <HomeScreen /> */}
+      <HomeScreen />
       {/* <ProductsMarcas /> */}
       {/* <Favoritos /> */}
-      <SignGoogle />
+      {/* <SignGoogle /> */}
     </>
   );
 }

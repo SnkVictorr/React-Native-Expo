@@ -1,23 +1,17 @@
 import React from "react";
 import {
-  AppRegistry,
   View,
-  Text,
   StyleSheet,
   ScrollView,
-  TextInput,
-  TouchableOpacity,
   StatusBar,
-  SafeAreaView,
   Image,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-
 import Swiper from "react-native-swiper";
 import ProductList1 from "../components/main/ProductList1";
 import MarcasList from "../components/main/MarcasList";
 import CategoryList from "../components/main/categoryList";
 import SearchBar from "../components/searchBar";
+import getProducts from "./services/products/get";
 
 const HomeScreen = () => {
   const banners = [
@@ -26,6 +20,18 @@ const HomeScreen = () => {
     require("@/assets/images/banners/banner3.jpeg"),
     require("@/assets/images/banners/banner4.jpeg"),
   ];
+
+  const [produtos, setProdutos] = React.useState([]);
+  React.useEffect(() => {
+    try{
+      getProducts().then((data) => {
+        setProdutos(data);
+      });
+    } catch (error) {
+      console.error("Erro ao carregar produtos:", error);
+    }
+  }, []);
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#1a1a1a" />
@@ -35,18 +41,7 @@ const HomeScreen = () => {
         contentContainerStyle={{ paddingBottom: 30 }}
       >
         <SearchBar />
-        {/* Navigation Pills */}
-        {/* <View style={styles.navPills}>
-          <TouchableOpacity style={[styles.pill, styles.activePill]}>
-            <Text style={styles.activePillText}>Home</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.pill}>
-            <Text style={styles.pillText}>Promoções</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.pill}>
-            <Text style={styles.pillText}>Novidades</Text>
-          </TouchableOpacity>
-        </View> */}
+        
 
         {/* Carousel */}
         <View style={[styles.carousel]}>
@@ -106,7 +101,7 @@ const HomeScreen = () => {
         </View>
         <MarcasList />
         {/* Lista de produtos 1 */}
-        <ProductList1 title={""} />
+        <ProductList1 produtosObj={produtos} />
 
         <CategoryList />
 

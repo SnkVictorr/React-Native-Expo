@@ -7,7 +7,7 @@ import colors from "@/src/app/styles/colors";
 import { TextQuiche } from "../../Quiche";
 import { QuicheBold } from "../../Quiche/quiche-bold";
 import formatter from "@/src/app/utils/formatadorDeMoeda";
-
+import { BASE_URL } from "@/src/app/config/api";
 export default function ProductItem1({
   id,
   nome,
@@ -34,7 +34,7 @@ export default function ProductItem1({
         <View style={styles.content}>
           {/* <- AGORA COM flex: 1 */}
           <Image
-            source={require("../../../../assets/images/violaoGewa.jpg")}
+            source={{ uri: `${BASE_URL}/produtos/imagens/${imagem}` }}
             style={styles.image}
             resizeMode="contain"
           />

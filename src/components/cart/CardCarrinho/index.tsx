@@ -8,36 +8,41 @@ import ItemCarrinho from "@/src/app/types/carrinho";
 import { getClienteId } from "@/src/app/services/cliente/get";
 import { fetchCarrinho } from "@/src/app/services/carrinho/get";
 import { deleteItemCart } from "@/src/app/services/carrinho/delete";
-import { Trash } from "lucide-react-native";
+import { Trash, ShoppingCart } from "lucide-react-native";
 import formatter from "@/src/app/utils/formatadorDeMoeda";
+import Frete from "../../Frete";
+import { BASE_URL, AUTH_TOKEN } from "@/src/app/config/api";
 
 export default function CardCarrinho() {
   const [carrinho, setCarrinho] = useState<ItemCarrinho[] | null>(null);
   const [cliente_id, setCliente_id] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchClienteId = async () => {
-      const id = await getClienteId();
-      console.log("Cliente ID:", id);
-      if (id) {
-        setCliente_id(id);
-      }
-    };
-
-    fetchClienteId();
-  }, []);
-
-  useEffect(() => {
-    const LoadCarrinho = async () => {
+    const fetchData = async () => {
       try {
-        const carrinhoCarregado = await fetchCarrinho(cliente_id as number);
-        setCarrinho(carrinhoCarregado || null);
+        setLoading(true);
+        const id = 3;
+        console.log("Cliente ID:", id);
+        
+        if (id) {
+          setCliente_id(id);
+          // Buscar carrinho imediatamente após obter o ID
+          const carrinhoCarregado = await fetchCarrinho(id);
+          setCarrinho(carrinhoCarregado || []);
+        } else {
+          setCarrinho([]);
+        }
       } catch (err) {
-        console.error(err);
+        console.error("Erro ao carregar dados:", err);
+        setCarrinho([]);
+      } finally {
+        setLoading(false);
       }
     };
-    LoadCarrinho();
-  }, [cliente_id]);
+
+    fetchData();
+  }, []); // Removida a dependência do cliente_id
 
   // Função para remover item do carrinho
   const removerDoCarrinho = (
@@ -70,11 +75,59 @@ export default function CardCarrinho() {
     }
   };
 
+  // Verificação automática para carrinho vazio
+  const carrinhoVazio = !carrinho || carrinho.length === 0;
+
+  if (loading) {
+    return (
+      <View style={{ 
+        flex: 1, 
+        justifyContent: "center", 
+        alignItems: "center", 
+        padding: 20,
+        minHeight: 50
+      }}>
+        <Text style={{ color: "#FFFFFF" }}>Carregando carrinho...</Text>
+      </View>
+    );
+  }
+
+  if (carrinhoVazio) {
+    return (
+      <View style={{ 
+        flex: 1, 
+        justifyContent: "center", 
+        alignItems: "center", 
+        padding: 20,
+        minHeight: 100 
+      }}>
+        <ShoppingCart size={64} color="#666666" />
+        <OutfitText style={{ 
+          fontSize: 18, 
+          color: "#666666", 
+          textAlign: "center",
+          marginTop: 16,
+          marginBottom: 8
+        }}>
+          Seu carrinho está vazio
+        </OutfitText>
+        <Text style={{ 
+          fontSize: 14, 
+          color: "#888888", 
+          textAlign: "center",
+          lineHeight: 20
+        }}>
+          Adicione alguns produtos para continuar com suas compras
+        </Text>
+      </View>
+    );
+  }
+
   return (
-    <View style={{ paddingTop: 16 }}>
+    <View style={{ paddingTop: 16, flex: 1 }}>
       <FlatList
         data={carrinho}
-        keyExtractor={(item) => item.id_produto.toString()}
+        keyExtractor={(item) => `${item.id_produto}-${item.quantidade}`}
         renderItem={({ item, index }) => (
           <View
             style={{
@@ -83,16 +136,13 @@ export default function CardCarrinho() {
               borderColor: "#333333",
               padding: 16,
               backgroundColor: "#111111",
+              marginBottom: 12,
             }}
           >
             <View style={{ flexDirection: "row", gap: 16 }}>
               <Image
                 source={{
-                  uri: `http://localhost:8080/produtos/imagens/${item.imagem}`,
-                  headers: {
-                    authorization:
-                      "stNOJvYxgbX3bRg3CEGMTNiqnIO3TMMHPi8K3ehLzk3KqcN3tJbDnBdMwWvAj84r2fiKvaAxQC58i1BsR5iqjBzzscwMudNv8xL6",
-                  },
+                  uri: `${BASE_URL}/produtos/imagens/${item.imagem}`,
                 }}
                 style={{ width: 100, height: 100, borderRadius: 8 }}
               />
@@ -128,13 +178,29 @@ export default function CardCarrinho() {
                     )
                   }
                 >
-                  <Trash />
+                  <Trash color="#ff4444" />
                 </TouchableOpacity>
               </View>
             </View>
           </View>
         )}
+        contentContainerStyle={{ paddingBottom: 20 }}
+        showsVerticalScrollIndicator={false}
       />
+      
+      {!carrinhoVazio && (
+        <View
+          style={{
+            backgroundColor: "#111111",
+            paddingHorizontal: 20,
+            marginTop: 10,
+            paddingBottom: 20,
+            borderRadius: 8,
+          }}
+        >
+          <Frete />
+        </View>
+      )}
     </View>
   );
 }

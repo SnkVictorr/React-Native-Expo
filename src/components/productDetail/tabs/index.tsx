@@ -1,4 +1,5 @@
 import colors from "@/src/app/styles/colors";
+import { Produto } from "@/src/app/types/produto";
 import React, { useState } from "react";
 import {
   View,
@@ -8,7 +9,7 @@ import {
   ScrollView,
 } from "react-native";
 
-export default function ProductTabs() {
+export default function ProductTabs({produtosObj}: {produtosObj: Produto}) {
   const [activeTab, setActiveTab] = useState("description");
 
   return (
@@ -73,28 +74,14 @@ export default function ProductTabs() {
       >
         {activeTab === "description" && (
           <Text style={styles.description}>
-            A icônica Stratocaster americana com melhorias modernas que mantêm o
-            tom clássico. Captadores V-Mod II oferecem o vintage tone autêntico
-            dos anos 60, enquanto o braço em formato "Deep C" garante conforto
-            excepcional.
+            {produtosObj.descricao}
           </Text>
         )}
 
         {activeTab === "specs" && (
-          <View>
-            <View style={styles.specRow}>
-              <Text style={styles.specLabel}>label</Text>
-              <Text style={styles.specValue}>valor</Text>
-            </View>
-            <View style={styles.specRow}>
-              <Text style={styles.specLabel}>label</Text>
-              <Text style={styles.specValue}>valor</Text>
-            </View>
-            <View style={styles.specRow}>
-              <Text style={styles.specLabel}>label</Text>
-              <Text style={styles.specValue}>valor</Text>
-            </View>
-          </View>
+          <Text style={styles.description}>
+            {produtosObj.especificacoes?.replace(/\s\|\s/g, '\n')}
+          </Text>
         )}
 
         {activeTab === "reviews" && (

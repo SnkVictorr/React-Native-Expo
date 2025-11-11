@@ -15,7 +15,7 @@ export default function Favoritos({}) {
   const [produtos, setProdutos] = React.useState<Produto[]>([]);
 
   const _favoritosService = new FavoritosService();
-  const clienteId = 8; // ID do cliente
+  const clienteId = 2; // ID do cliente
   // logado (exemplo estático)
   useEffect(() => {
     const fetchFavoritos = async () => {
