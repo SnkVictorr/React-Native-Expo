@@ -5,6 +5,10 @@ export const getClienteId = async (): Promise<number | null> => {
     const res = await fetch(`${BASE_URL}/login/session.php`, {
       method: "GET",
       credentials: "include", // necessário para enviar cookies da sessão
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${AUTH_TOKEN}`,
+      },
     });
 
     const data = await res.json();
