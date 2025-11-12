@@ -3,11 +3,11 @@ import { AUTH_TOKEN, BASE_URL } from "../../config/api";
 export default async function makeCadastro({
   name,
   email,
-  password,
+  senha,
 }: {
   name: string;
   email: string;
-  password: string;
+  senha: string;
 }) {
   try {
     const res = await fetch(`${BASE_URL}/cadastro/`, {
@@ -19,7 +19,7 @@ export default async function makeCadastro({
       body: JSON.stringify({
         name,
         email,
-        password,
+        senha,
       }),
     });
 

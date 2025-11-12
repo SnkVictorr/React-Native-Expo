@@ -29,6 +29,7 @@ export default function Login() {
     }
 
     try {
+      // A data não está sendo usada aqui, mas pode ser útil futuramente
       const data = await makeLogin({ email, password });
     } catch (error) {
       Alert.alert(
