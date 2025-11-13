@@ -1,4 +1,4 @@
-import { AUTH_TOKEN, BASE_URL } from "../../config/api";
+import { AUTH_TOKEN, BASE_URL } from "../../../config/api";
  
 export default async function makeCadastro({
   name,

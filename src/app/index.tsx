@@ -1,17 +1,17 @@
-// import { Text, View } from "react-native";
-// import React, { Component } from "react";
+import { Text, View } from "react-native";
+import React, { Component } from "react";
 
-// import Login from "./login";
-// import Dashboard from "./dashboard";
-// import HomeScreen from "./main";
-// import CartScreen from "./(tabs)/carrinho";
+import Login from "./login";
+import Dashboard from "./dashboard";
+import HomeScreen from "./main";
+import CartScreen from "./(tabs)/carrinho";
 
-// export default function Index() {
-//   return (
-//     <>
-//       {/* <Dashboard /> */}
-//       <CartScreen />
-//       {/* <HomeScreen/> */}
-//     </>
-//   );
-// }
+export default function Index() {
+  return (
+    <>
+      <Dashboard />
+      {/* <CartScreen /> */}
+      {/* <HomeScreen/> */}
+    </>
+  );
+}

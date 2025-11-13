@@ -17,7 +17,7 @@ import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import Input from "../components/input";
 import { AUTH_TOKEN, BASE_URL } from "./config/api";
-import makeCadastro from "./services/clientes/post";
+import makeCadastro from "./services/clientes/cadastro/post";
  
 export default function Cadastro() {
   const [name, setName] = useState("");
@@ -28,7 +28,7 @@ export default function Cadastro() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
  
-    const handleCadastro = async () => {
+  const handleCadastro = async () => {
     if (!email || !password || !name || !confirmPassword) {
       Alert.alert("Erro", "Por favor, preencha todos os campos");
       return;
@@ -44,18 +44,19 @@ export default function Cadastro() {
     try {
       const data = await makeCadastro({ name, email, password });
       Alert.alert("Sucesso", "Cadastro realizado com sucesso!");
-      router.push("/login");
-    } catch (error) {
-      Alert.alert(
-        "Erro",
-        "Erro ao cadastrar. Verifique os dados e tente novamente."
-      );
+      router.push("./login");
+    } catch (error: any) {
+      console.log("Erro no cadastro => ", error);
+      const errorMessage =
+        error?.response?.data?.message || // Caso use Axios
+        error?.message || // Caso seja um erro simples
+        "Erro ao cadastrar. Verifique os dados e tente novamente."; // Fallback
+ 
+      Alert.alert("Erro", errorMessage);
     } finally {
       setIsLoading(false);
     }
   };
- 
- 
  
   useEffect(() => {
     if (!confirmPassword) return; // se o campo estiver vazio, não faz nada
@@ -78,7 +79,7 @@ export default function Cadastro() {
   };
  
   const handleBackPress = () => {
-    router.navigate("/dashboard");
+    router.navigate("./dashboard");
   };
  
   return (
