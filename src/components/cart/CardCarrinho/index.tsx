@@ -24,7 +24,7 @@ export default function CardCarrinho() {
         setLoading(true);
         const id = 3;
         console.log("Cliente ID:", id);
-        
+
         if (id) {
           setCliente_id(id);
           // Buscar carrinho imediatamente após obter o ID
@@ -80,13 +80,15 @@ export default function CardCarrinho() {
 
   if (loading) {
     return (
-      <View style={{ 
-        flex: 1, 
-        justifyContent: "center", 
-        alignItems: "center", 
-        padding: 20,
-        minHeight: 50
-      }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          padding: 20,
+          minHeight: 50,
+        }}
+      >
         <Text style={{ color: "#FFFFFF" }}>Carregando carrinho...</Text>
       </View>
     );
@@ -94,29 +96,35 @@ export default function CardCarrinho() {
 
   if (carrinhoVazio) {
     return (
-      <View style={{ 
-        flex: 1, 
-        justifyContent: "center", 
-        alignItems: "center", 
-        padding: 20,
-        minHeight: 100 
-      }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          padding: 20,
+          minHeight: 100,
+        }}
+      >
         <ShoppingCart size={64} color="#666666" />
-        <OutfitText style={{ 
-          fontSize: 18, 
-          color: "#666666", 
-          textAlign: "center",
-          marginTop: 16,
-          marginBottom: 8
-        }}>
+        <OutfitText
+          style={{
+            fontSize: 18,
+            color: "#666666",
+            textAlign: "center",
+            marginTop: 16,
+            marginBottom: 8,
+          }}
+        >
           Seu carrinho está vazio
         </OutfitText>
-        <Text style={{ 
-          fontSize: 14, 
-          color: "#888888", 
-          textAlign: "center",
-          lineHeight: 20
-        }}>
+        <Text
+          style={{
+            fontSize: 14,
+            color: "#888888",
+            textAlign: "center",
+            lineHeight: 20,
+          }}
+        >
           Adicione alguns produtos para continuar com suas compras
         </Text>
       </View>
@@ -187,7 +195,7 @@ export default function CardCarrinho() {
         contentContainerStyle={{ paddingBottom: 20 }}
         showsVerticalScrollIndicator={false}
       />
-      
+
       {!carrinhoVazio && (
         <View
           style={{

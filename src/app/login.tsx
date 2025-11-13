@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -11,63 +11,52 @@ import {
   Alert,
   Image,
   ImageBackground,
-} from 'react-native';
-import { router } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
-import Input from '../components/input';
+} from "react-native";
+import { router } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import Input from "../components/input";
+import makeLogin from "./services/clientes/login/post";
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async () => {
     if (!email || !password) {
-      Alert.alert('Erro', 'Por favor, preencha todos os campos');
+      Alert.alert("Erro", "Por favor, preencha todos os campos");
       return;
     }
 
-    setIsLoading(true);
-
-    //Aguarda 2 segundos para simular chamada de API
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    setIsLoading(false);
-
-    //Aguarda o clique no botão do alert
-    await new Promise((resolve) => {
+    try {
+      // A data não está sendo usada aqui, mas pode ser útil futuramente
+      const data = await makeLogin({ email, password });
+    } catch (error) {
       Alert.alert(
-        'Sucesso',
-        'Login realizado com sucesso!',
-        [
-        {
-          text: 'OK',
-          onPress: () => resolve(true),
-        },
-        ],
-        { cancelable: false }
+        "Erro",
+        "Erro ao realizar login. Verifique os dados e tente novamente."
       );
-    });
-
-    //Navega para a tela principal
-    router.push('/(tabs)');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleGoogleLogin = () => {
-    Alert.alert('Google Login', 'Função não implementada');
+    Alert.alert("Google Login", "Função não implementada");
   };
 
   const handleFacebookLogin = () => {
-    Alert.alert('Facebook Login', 'Função não implementada');
+    Alert.alert("Facebook Login", "Função não implementada");
   };
 
   const handleBackPress = () => {
-    router.navigate('/dashboard');
+    router.navigate("/dashboard");
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
-        source={require('@/assets/images/fundologin.jpeg')}
+        source={require("@/assets/images/fundologin.jpeg")}
         style={styles.fundologin}
         resizeMode="cover"
       >
@@ -75,19 +64,22 @@ export default function Login() {
         <View style={styles.overlay} />
 
         <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={styles.keyboardView}
         >
           <View style={styles.content}>
             {/* Header com botão voltar */}
             <View style={styles.headerContainer}>
-              <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
+              <TouchableOpacity
+                style={styles.backButton}
+                onPress={handleBackPress}
+              >
                 <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
               </TouchableOpacity>
             </View>
 
             <Image
-              source={require('../../assets/images/logo-gold.png')}
+              source={require("../../assets/images/logo-gold.png")}
               style={styles.imagem}
             />
 
@@ -104,7 +96,6 @@ export default function Login() {
                   autoCapitalize="none"
                   autoCorrect={false}
                 />
-
               </View>
 
               {/* Campo Password */}
@@ -116,17 +107,19 @@ export default function Login() {
                   onChangeText={setPassword}
                   secureTextEntry
                 />
-
               </View>
 
               {/* Botão Sign In */}
               <TouchableOpacity
-                style={[styles.signInButton, isLoading && styles.buttonDisabled]}
+                style={[
+                  styles.signInButton,
+                  isLoading && styles.buttonDisabled,
+                ]}
                 onPress={handleLogin}
                 disabled={isLoading}
               >
                 <Text style={styles.signInButtonText}>
-                  {isLoading ? 'Carregando...' : 'Sign In'}
+                  {isLoading ? "Carregando..." : "Sign In"}
                 </Text>
               </TouchableOpacity>
 
@@ -135,15 +128,27 @@ export default function Login() {
 
               {/* Botões de redes sociais */}
               <View style={styles.socialContainer}>
-                <TouchableOpacity style={styles.socialButton} onPress={handleGoogleLogin}>
+                <TouchableOpacity
+                  style={styles.socialButton}
+                  onPress={handleGoogleLogin}
+                >
                   <View style={styles.googleIcon}>
-                    <Image source={require('../../assets/images/google.png')} style={styles.googleImage} />
+                    <Image
+                      source={require("../../assets/images/google.png")}
+                      style={styles.googleImage}
+                    />
                   </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.socialButton} onPress={handleFacebookLogin}>
+                <TouchableOpacity
+                  style={styles.socialButton}
+                  onPress={handleFacebookLogin}
+                >
                   <View style={styles.facebookIcon}>
-                    <Image source={require("@/assets/images/facebook.png")} style={styles.facebookImage} />
+                    <Image
+                      source={require("@/assets/images/facebook.png")}
+                      style={styles.facebookImage}
+                    />
                   </View>
                 </TouchableOpacity>
               </View>
@@ -165,7 +170,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 0, 0.4)', // escurece só a imagem
+    backgroundColor: "rgba(0, 0, 0, 0.4)", // escurece só a imagem
     zIndex: 1,
   },
   content: {
@@ -181,26 +186,26 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     marginTop: 30,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   imagem: {
     width: 90,
     height: 90,
-    alignSelf: 'center',
+    alignSelf: "center",
     marginBottom: 50,
   },
   fundologin: {
     flex: 1,
   },
   titleContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 30,
   },
   title: {
     fontSize: 26,
-    fontWeight: 'bold',
-    color: '#d4af37',
-    textAlign: 'center',
+    fontWeight: "bold",
+    color: "#d4af37",
+    textAlign: "center",
   },
   form: {
     flex: 1,
@@ -210,26 +215,26 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    color: '#ececec',
+    color: "#ececec",
     marginBottom: 8,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   input: {
-    backgroundColor: 'rgba(255,255,255,0.85)', // translúcido
+    backgroundColor: "rgba(255,255,255,0.85)", // translúcido
     borderRadius: 25,
     paddingHorizontal: 20,
     paddingVertical: 15,
     fontSize: 16,
-    color: '#333',
+    color: "#333",
   },
   signInButton: {
-    backgroundColor: '#D4AF37',
+    backgroundColor: "#D4AF37",
     borderRadius: 25,
     paddingVertical: 15,
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 20,
     marginBottom: 30,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOpacity: 0.2,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
@@ -239,36 +244,36 @@ const styles = StyleSheet.create({
     opacity: 0.6,
   },
   signInButtonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   orText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: 10,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 20,
   },
   socialContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
     gap: 30,
   },
   socialButton: {
     width: 50,
     height: 50,
     borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   googleIcon: {
     width: 50,
     height: 50,
     borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginRight: 100,
   },
   googleImage: {
@@ -278,14 +283,14 @@ const styles = StyleSheet.create({
   facebookIcon: {
     width: 50,
     height: 50,
-    backgroundColor: '#1877F2',
+    backgroundColor: "#1877F2",
     borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginLeft: 100,
   },
   facebookImage: {
     width: 50,
-    height: 50 ,
+    height: 50,
   },
 });

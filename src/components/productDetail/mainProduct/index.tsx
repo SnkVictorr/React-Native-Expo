@@ -88,7 +88,12 @@ export default function MainProduct() {
 
   if (loading) {
     return (
-      <View style={[styles.container, { justifyContent: "center", alignItems: "center" }]}>
+      <View
+        style={[
+          styles.container,
+          { justifyContent: "center", alignItems: "center" },
+        ]}
+      >
         <Text style={{ color: "#FFFFFF" }}>Carregando produto...</Text>
       </View>
     );
@@ -96,7 +101,12 @@ export default function MainProduct() {
 
   if (error || !instrumento) {
     return (
-      <View style={[styles.container, { justifyContent: "center", alignItems: "center" }]}>
+      <View
+        style={[
+          styles.container,
+          { justifyContent: "center", alignItems: "center" },
+        ]}
+      >
         <Text style={{ color: "#FFFFFF" }}>
           {error || "Produto não encontrado"}
         </Text>
@@ -112,7 +122,9 @@ export default function MainProduct() {
           <FavoriteButton productId={58} clienteId={8} />
           <Image
             style={styles.img}
-            source={{uri: `${BASE_URL}/produtos/imagens/${instrumento.imagem}`}}
+            source={{
+              uri: `${BASE_URL}/produtos/imagens/${instrumento.imagem}`,
+            }}
           />
         </View>
         <View style={styles.mainContent}>

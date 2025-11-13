@@ -115,7 +115,7 @@ export default function Cadastro() {
                 <Input
                   placeholder="Nome"
                   value={name}
-                  onChangeText={setName}
+                  onChangeText={(text) => setName(text)}
                   keyboardType="default"
                   autoCapitalize="words"
                   autoCorrect={false}
