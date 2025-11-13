@@ -15,8 +15,8 @@ import SignGoogle from "../SignGoogle";
 export default function Index() {
   return (
     <>
-      {/* <Dashboard /> */}
-      <HomeScreen />
+      <Dashboard />
+      {/* <HomeScreen /> */}
       {/* <ProductsMarcas /> */}
       {/* <Favoritos /> */}
       {/* <SignGoogle /> */}

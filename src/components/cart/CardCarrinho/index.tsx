@@ -5,7 +5,7 @@ import { QuicheMedium } from "../../Quiche/quiche-medium";
 import { OutfitText } from "../../OutfitText";
 import MaxMinus from "../MaxMinus";
 import ItemCarrinho from "@/src/app/types/carrinho";
-import { getClienteId } from "@/src/app/services/cliente/get";
+import { getClienteId } from "@/src/app/services/clientes/get";
 import { fetchCarrinho } from "@/src/app/services/carrinho/get";
 import { deleteItemCart } from "@/src/app/services/carrinho/delete";
 import { Trash, ShoppingCart } from "lucide-react-native";
