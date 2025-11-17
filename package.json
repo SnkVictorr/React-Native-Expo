@@ -28,6 +28,7 @@
     "expo-font": "~13.3.2",
     "expo-linear-gradient": "~14.1.5",
     "expo-linking": "~7.1.7",
+    "expo-notifications": "~0.31.4",
     "expo-router": "~5.1.7",
     "expo-splash-screen": "~0.30.10",
     "expo-status-bar": "~2.2.3",
@@ -46,7 +47,9 @@
     "react-native-swiper": "^1.6.0-rc.3",
     "react-native-vector-icons": "^10.3.0",
     "react-native-web": "~0.20.0",
-    "simple-swizzle": "^0.2.2"
+    "simple-swizzle": "^0.2.2",
+    "expo-local-authentication": "~16.0.5",
+    "@react-native-async-storage/async-storage": "2.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

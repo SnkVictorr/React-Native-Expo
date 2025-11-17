@@ -1,6 +1,6 @@
 import { AUTH_TOKEN, BASE_URL } from "../../../config/api";
- 
-export default async function makeCadastro({
+
+export async function makeCadastro({
   name,
   email,
   password,
@@ -22,13 +22,13 @@ export default async function makeCadastro({
         password,
       }),
     });
- 
+
     const data = await res.json();
- 
+
     if (!res.ok) {
       throw new Error(data?.error || data?.message || "Erro no cadastro");
     }
- 
+
     return data; // ✅ já retorna o JSON processado
   } catch (error) {
     console.error("Erro no makeCadastro:", error);

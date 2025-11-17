@@ -16,9 +16,9 @@ import {
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import Input from "../components/input";
-import { AUTH_TOKEN, BASE_URL } from "./config/api";
-import makeCadastro from "./services/clientes/cadastro/post";
- 
+
+import { makeCadastro } from "./services/clientes/cadastro/post";
+
 export default function Cadastro() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -27,20 +27,20 @@ export default function Cadastro() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
- 
+
   const handleCadastro = async () => {
     if (!email || !password || !name || !confirmPassword) {
       Alert.alert("Erro", "Por favor, preencha todos os campos");
       return;
     }
- 
+
     if (password !== confirmPassword) {
       Alert.alert("Erro", "As senhas não coincidem!");
       return;
     }
- 
+
     setIsLoading(true);
- 
+
     try {
       const data = await makeCadastro({ name, email, password });
       Alert.alert("Sucesso", "Cadastro realizado com sucesso!");
@@ -51,37 +51,37 @@ export default function Cadastro() {
         error?.response?.data?.message || // Caso use Axios
         error?.message || // Caso seja um erro simples
         "Erro ao cadastrar. Verifique os dados e tente novamente."; // Fallback
- 
+
       Alert.alert("Erro", errorMessage);
     } finally {
       setIsLoading(false);
     }
   };
- 
+
   useEffect(() => {
     if (!confirmPassword) return; // se o campo estiver vazio, não faz nada
- 
+
     const timer = setTimeout(() => {
       if (password !== confirmPassword) {
         Alert.alert("Erro", "As senhas não coincidem");
       }
     }, 1000); //esperar até que o usuário termine de digitar
- 
+
     return () => clearTimeout(timer);
   }, [password, confirmPassword]); // só roda quando password OU confirmPassword mudarem
- 
+
   const handleGoogleLogin = () => {
     Alert.alert("Google Login", "Função não implementada");
   };
- 
+
   const handleFacebookLogin = () => {
     Alert.alert("Facebook Login", "Função não implementada");
   };
- 
+
   const handleBackPress = () => {
     router.navigate("./dashboard");
   };
- 
+
   return (
     <ScrollView>
       <SafeAreaView style={styles.container}>
@@ -92,7 +92,7 @@ export default function Cadastro() {
         >
           {/* Overlay para escurecer a imagem e melhorar contraste */}
           <View style={styles.overlay} />
- 
+
           <View style={styles.content}>
             {/* Header com botão voltar */}
             <View style={styles.headerContainer}>
@@ -107,7 +107,7 @@ export default function Cadastro() {
                 style={styles.imagem}
               />
             </View>
- 
+
             {/* Form */}
             <View style={styles.form}>
               {/* Campo Nome */}
@@ -134,7 +134,7 @@ export default function Cadastro() {
                   autoCorrect={false}
                 />
               </View>
- 
+
               {/* Campo Password */}
               <View style={styles.inputContainer}>
                 <Text style={styles.label}>Password</Text>
@@ -155,7 +155,7 @@ export default function Cadastro() {
                   secureTextEntry
                 />
               </View>
- 
+
               {/* Botão Sign In */}
               <TouchableOpacity
                 style={[
@@ -169,10 +169,10 @@ export default function Cadastro() {
                   {isLoading ? "Carregando..." : "Sign Up"}
                 </Text>
               </TouchableOpacity>
- 
+
               {/* Texto "Or sign in with" */}
               <Text style={styles.orText}>- Or sign in with -</Text>
- 
+
               {/* Botões de redes sociais */}
               <View style={styles.socialContainer}>
                 {/* <TouchableOpacity style={styles.socialButton} onPress={handleGoogleLogin}>
@@ -180,7 +180,7 @@ export default function Cadastro() {
                     <Image source={require('../../assets/images/google.png')} style={styles.googleImage} />
                   </View>
                 </TouchableOpacity> */}
- 
+
                 <TouchableOpacity
                   style={styles.socialButton}
                   onPress={handleFacebookLogin}
@@ -200,7 +200,7 @@ export default function Cadastro() {
     </ScrollView>
   );
 }
- 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -336,5 +336,3 @@ const styles = StyleSheet.create({
     height: 50,
   },
 });
- 
- 

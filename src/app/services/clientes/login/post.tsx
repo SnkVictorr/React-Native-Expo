@@ -1,39 +1,34 @@
 import { AUTH_TOKEN, BASE_URL } from "../../../config/api";
- 
-export default async function makeCadastro({
-  name,
+
+export async function makeLogin({
   email,
   password,
 }: {
-  name: string;
   email: string;
   password: string;
 }) {
   try {
-    const res = await fetch(`${BASE_URL}/cadastro/`, {
+    const res = await fetch(`${BASE_URL}/login/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `${AUTH_TOKEN}`,
       },
       body: JSON.stringify({
-        name,
         email,
         password,
       }),
     });
- 
+
     const data = await res.json();
- 
+
     if (!res.ok) {
-      throw new Error(data?.error || data?.message || "Erro no cadastro");
+      throw new Error(data?.error || data?.message || "Erro no login");
     } else {
     }
- 
+
     return data; // ✅ já retorna o JSON processado
   } catch (error) {
     throw error;
   }
 }
- 
- 

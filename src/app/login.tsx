@@ -1,56 +1,119 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  SafeAreaView,
-  KeyboardAvoidingView,
-  Platform,
   Alert,
   Image,
+  SafeAreaView,
+  TouchableOpacity,
   ImageBackground,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
 } from "react-native";
-import { router } from "expo-router";
+import * as LocalAuthentication from "expo-local-authentication";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
 import Input from "../components/input";
-import makeLogin from "./services/clientes/login/post";
+import { makeLogin } from "./services/clientes/login/post";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [biometricAvailable, setBiometricAvailable] = useState(false);
 
+  // ----------------------------------------------------------
+  // VERIFICA SE O USUÁRIO ATIVOU A BIOMETRIA E FAZ LOGIN AUTO
+  // ----------------------------------------------------------
+  useEffect(() => {
+    (async () => {
+      const enabled = await AsyncStorage.getItem("biometriaAtivada");
+      if (enabled === "true") {
+        checkAndTriggerBiometricLogin();
+      }
+    })();
+  }, []);
+
+  const checkAndTriggerBiometricLogin = async () => {
+    const hasHardware = await LocalAuthentication.hasHardwareAsync();
+    const enrolled = await LocalAuthentication.isEnrolledAsync();
+
+    if (!hasHardware || !enrolled) {
+      setBiometricAvailable(false);
+      return;
+    }
+
+    setBiometricAvailable(true);
+
+    const biometric = await LocalAuthentication.authenticateAsync({
+      promptMessage: "Use sua digital para entrar",
+      cancelLabel: "Cancelar",
+    });
+
+    if (biometric.success) {
+      const savedToken = await AsyncStorage.getItem("token");
+      if (savedToken) {
+        router.push("/(tabs)");
+      }
+    }
+  };
+
+  // ----------------------------------------------------------
+  // LOGIN NORMAL
+  // ----------------------------------------------------------
   const handleLogin = async () => {
     if (!email || !password) {
-      Alert.alert("Erro", "Por favor, preencha todos os campos");
+      Alert.alert("Erro", "Por favor, preencha todos os campos.");
       return;
     }
 
     try {
-      // A data não está sendo usada aqui, mas pode ser útil futuramente
+      setIsLoading(true);
+
       const data = await makeLogin({ email, password });
-    } catch (error) {
-      Alert.alert(
-        "Erro",
-        "Erro ao realizar login. Verifique os dados e tente novamente."
-      );
+      console.log("Login bem-sucedido:", data);
+      // ❗ Ajuste aqui para pegar o token certo do seu backend:
+      await AsyncStorage.setItem("token", data?.token || "TOKEN_FAKE");
+      await AsyncStorage.setItem("biometriaAtivada", "true");
+
+      router.push("/(tabs)");
+    } catch (err) {
+      Alert.alert("Erro", "Email ou senha incorretos.");
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleGoogleLogin = () => {
-    Alert.alert("Google Login", "Função não implementada");
-  };
+  // ----------------------------------------------------------
+  // LOGIN VIA BIOMETRIA MANUAL (botão)
+  // ----------------------------------------------------------
+  const handleBiometricButton = async () => {
+    const biometric = await LocalAuthentication.authenticateAsync({
+      promptMessage: "Confirme sua identidade",
+      cancelLabel: "Cancelar",
+    });
 
-  const handleFacebookLogin = () => {
-    Alert.alert("Facebook Login", "Função não implementada");
+    if (biometric.success) {
+      const savedToken = await AsyncStorage.getItem("token");
+      if (savedToken) {
+        router.push("/(tabs)");
+      } else {
+        Alert.alert("Erro", "Nenhum login salvo. Use email e senha primeiro.");
+      }
+    }
   };
 
   const handleBackPress = () => {
     router.navigate("/dashboard");
+  };
+
+  const handleGoogleLogin = () => {
+    Alert.alert("Google Login", "Função não implementada");
+  };
+  const handleFacebookLogin = () => {
+    Alert.alert("Facebook Login", "Função não implementada");
   };
 
   return (
@@ -60,7 +123,6 @@ export default function Login() {
         style={styles.fundologin}
         resizeMode="cover"
       >
-        {/* Overlay para escurecer a imagem e melhorar contraste */}
         <View style={styles.overlay} />
 
         <KeyboardAvoidingView
@@ -68,7 +130,6 @@ export default function Login() {
           style={styles.keyboardView}
         >
           <View style={styles.content}>
-            {/* Header com botão voltar */}
             <View style={styles.headerContainer}>
               <TouchableOpacity
                 style={styles.backButton}
@@ -83,9 +144,7 @@ export default function Login() {
               style={styles.imagem}
             />
 
-            {/* Form */}
             <View style={styles.form}>
-              {/* Campo Email */}
               <View style={styles.inputContainer}>
                 <Text style={styles.label}>Email</Text>
                 <Input
@@ -98,7 +157,6 @@ export default function Login() {
                 />
               </View>
 
-              {/* Campo Password */}
               <View style={styles.inputContainer}>
                 <Text style={styles.label}>Password</Text>
                 <Input
@@ -109,7 +167,7 @@ export default function Login() {
                 />
               </View>
 
-              {/* Botão Sign In */}
+              {/* BOTÃO SIGN IN */}
               <TouchableOpacity
                 style={[
                   styles.signInButton,
@@ -123,34 +181,52 @@ export default function Login() {
                 </Text>
               </TouchableOpacity>
 
-              {/* Texto "Or sign in with" */}
+              {/* BOTÃO BIOMETRIA */}
+              {biometricAvailable && (
+                <TouchableOpacity
+                  style={styles.fingerprintButton}
+                  onPress={handleBiometricButton}
+                >
+                  <Ionicons name="finger-print" size={32} color="#fff" />
+                  <Text style={styles.biometricText}>Entrar com digital</Text>
+                </TouchableOpacity>
+              )}
+
               <Text style={styles.orText}>- Or sign in with -</Text>
 
-              {/* Botões de redes sociais */}
+              {/* SOCIAL */}
               <View style={styles.socialContainer}>
-                <TouchableOpacity
-                  style={styles.socialButton}
-                  onPress={handleGoogleLogin}
-                >
-                  <View style={styles.googleIcon}>
-                    <Image
-                      source={require("../../assets/images/google.png")}
-                      style={styles.googleImage}
-                    />
-                  </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  style={styles.socialButton}
-                  onPress={handleFacebookLogin}
-                >
-                  <View style={styles.facebookIcon}>
-                    <Image
-                      source={require("@/assets/images/facebook.png")}
-                      style={styles.facebookImage}
-                    />
-                  </View>
-                </TouchableOpacity>
+                {/* Seus botões existentes */}
+                {/* Botões de redes sociais */}{" "}
+                <View style={styles.socialContainer}>
+                  {" "}
+                  <TouchableOpacity
+                    style={styles.socialButton}
+                    onPress={handleGoogleLogin}
+                  >
+                    {" "}
+                    <View style={styles.googleIcon}>
+                      {" "}
+                      <Image
+                        source={require("../../assets/images/google.png")}
+                        style={styles.googleImage}
+                      />{" "}
+                    </View>{" "}
+                  </TouchableOpacity>{" "}
+                  <TouchableOpacity
+                    style={styles.socialButton}
+                    onPress={handleFacebookLogin}
+                  >
+                    {" "}
+                    <View style={styles.facebookIcon}>
+                      {" "}
+                      <Image
+                        source={require("@/assets/images/facebook.png")}
+                        style={styles.facebookImage}
+                      />{" "}
+                    </View>{" "}
+                  </TouchableOpacity>{" "}
+                </View>
               </View>
             </View>
           </View>
@@ -292,5 +368,21 @@ const styles = StyleSheet.create({
   facebookImage: {
     width: 50,
     height: 50,
+  },
+  fingerprintButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(255,255,255,0.12)",
+    borderRadius: 25,
+    paddingVertical: 12,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.3)",
+  },
+  biometricText: {
+    color: "#fff",
+    fontSize: 16,
+    marginLeft: 10,
   },
 });
