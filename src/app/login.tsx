@@ -73,12 +73,13 @@ export default function Login() {
       setIsLoading(true);
 
       const data = await makeLogin({ email, password });
-      console.log("Login bem-sucedido:", data);
+   
       // ❗ Ajuste aqui para pegar o token certo do seu backend:
       await AsyncStorage.setItem("token", data?.token || "TOKEN_FAKE");
       await AsyncStorage.setItem("biometriaAtivada", "true");
-
-      router.push("/(tabs)");
+      if (data.status === "success") {
+        router.push("/(tabs)");
+      }
     } catch (err) {
       Alert.alert("Erro", "Email ou senha incorretos.");
     } finally {

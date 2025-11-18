@@ -169,7 +169,9 @@ export default function CardCarrinho() {
                   }}
                 >
                   <QuicheMedium style={{ fontSize: 16, color: "#c7a315" }}>
-                    {formatter.format(item.preco - item.desconto)}
+                    {formatter.format(
+                      (item.preco - item.desconto) * item.quantidade
+                    )}
                   </QuicheMedium>
                   <MaxMinus
                     quantidade={item.quantidade}
