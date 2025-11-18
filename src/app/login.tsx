@@ -17,13 +17,13 @@ import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import Input from "../components/input";
 import { makeLogin } from "./services/clientes/login/post";
-
+import { useAuth } from "./context/AuthContext";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [biometricAvailable, setBiometricAvailable] = useState(false);
-
+  const { login } = useAuth();
   // ----------------------------------------------------------
   // VERIFICA SE O USUÁRIO ATIVOU A BIOMETRIA E FAZ LOGIN AUTO
   // ----------------------------------------------------------
@@ -73,7 +73,8 @@ export default function Login() {
       setIsLoading(true);
 
       const data = await makeLogin({ email, password });
-   
+      await login(data.usuario);
+      console.log("DATA DO USUARIO =>", data.usuario);
       // ❗ Ajuste aqui para pegar o token certo do seu backend:
       await AsyncStorage.setItem("token", data?.token || "TOKEN_FAKE");
       await AsyncStorage.setItem("biometriaAtivada", "true");
@@ -95,6 +96,8 @@ export default function Login() {
       promptMessage: "Confirme sua identidade",
       cancelLabel: "Cancelar",
     });
+
+    console.log("RESULTADO DA BIOMETRIA =>", biometric);
 
     if (biometric.success) {
       const savedToken = await AsyncStorage.getItem("token");

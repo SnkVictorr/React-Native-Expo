@@ -12,6 +12,7 @@ import { useEffect, useRef, useState } from "react";
 import colors from "@/src/app/styles/colors";
 import { useRouter } from "expo-router";
 import React from "react";
+import { useAuth } from "../context/AuthContext";
 
 function TabIcon({
   src,
@@ -84,12 +85,13 @@ function TabIcon({
 export default function TabsLayout() {
   const [menuVisible, setMenuVisible] = useState(false);
   const router = useRouter();
-
-  // dados mockados (pode vir da API depois)
-  const user = {
-    name: "Bruno Lobo",
-    email: "brunolobo@email.com",
-  };
+  const { user, logout } = useAuth();
+  console.log("Usuário no layout de tabs:", user);
+  // // dados mockados (pode vir da API depois)
+  // const user = {
+  //   name: "Bruno Lobo",
+  //   email: "brunolobo@email.com",
+  // };
 
   return (
     <>
@@ -202,17 +204,19 @@ export default function TabsLayout() {
             <Text style={styles.appTitle}>HarmoniX</Text>
 
             {/* Perfil do usuário */}
-            <View style={styles.profileContainer}>
-              <View style={styles.avatar}>
-                <Text style={styles.avatarText}>
-                  {user.name.charAt(0).toUpperCase()}
-                </Text>
+            {user ? (
+              <View style={styles.profileContainer}>
+                <View style={styles.avatar}>
+                  <Text style={styles.avatarText}>
+                    {user.name.charAt(0).toUpperCase()}
+                  </Text>
+                </View>
+                <View>
+                  <Text style={styles.userName}>{user.name}</Text>
+                  <Text style={styles.userEmail}>{user.email}</Text>
+                </View>
               </View>
-              <View>
-                <Text style={styles.userName}>{user.name}</Text>
-                <Text style={styles.userEmail}>{user.email}</Text>
-              </View>
-            </View>
+            ) : null}
 
             {/* Itens de navegação */}
             <TouchableOpacity
