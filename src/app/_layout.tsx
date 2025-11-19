@@ -8,6 +8,7 @@ import {
 } from "@expo-google-fonts/outfit";
 import { View, ActivityIndicator, StyleSheet } from "react-native";
 import React from "react";
+import { AuthProvider } from "./context/AuthContext";
 // import {
 //   PlayfairDisplay_400Regular,
 //   PlayfairDisplay_700Bold,
@@ -39,7 +40,11 @@ export default function Layout() {
     );
   }
 
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return (
+    <AuthProvider>
+      <Stack screenOptions={{ headerShown: false }} />
+    </AuthProvider>
+  );
 }
 
 const styles = StyleSheet.create({

@@ -21,7 +21,7 @@ export async function makeLogin({
     });
 
     const data = await res.json();
-    console.log("data do login:", data);
+
 
     if (!res.ok) {
       throw new Error(data?.error || data?.message || "Erro no login");

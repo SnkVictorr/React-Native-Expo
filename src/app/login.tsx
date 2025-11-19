@@ -73,6 +73,7 @@ export default function Login() {
       setIsLoading(true);
 
       const data = await makeLogin({ email, password });
+      // login com contexto
       await login(data.usuario);
       console.log("DATA DO USUARIO =>", data.usuario);
       // ❗ Ajuste aqui para pegar o token certo do seu backend:

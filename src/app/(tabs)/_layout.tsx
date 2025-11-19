@@ -208,11 +208,11 @@ export default function TabsLayout() {
               <View style={styles.profileContainer}>
                 <View style={styles.avatar}>
                   <Text style={styles.avatarText}>
-                    {user.name.charAt(0).toUpperCase()}
+                    {user.nome.charAt(0).toUpperCase()}
                   </Text>
                 </View>
                 <View>
-                  <Text style={styles.userName}>{user.name}</Text>
+                  <Text style={styles.userName}>{user.nome}</Text>
                   <Text style={styles.userEmail}>{user.email}</Text>
                 </View>
               </View>

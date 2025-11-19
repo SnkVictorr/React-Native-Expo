@@ -1,16 +1,12 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-type User = {
-  id: number;
-  name: string;
-  email: string;
-};
+
 
 type AuthContextType = {
-  user: User | null;
+  user: any | null;
   loading: boolean;
-  login: (user: User) => Promise<void>;
+  login: (user: any) => Promise<void>;
   logout: () => Promise<void>;
 };
 
@@ -22,13 +18,15 @@ const AuthContext = createContext<AuthContextType>({
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
+  console.log("AuthProvider renderizado. Usuário atual:", user);
 
   // 🔹 Carregar usuário ao abrir o app
   useEffect(() => {
     async function loadUser() {
       const storedUser = await AsyncStorage.getItem("user");
+      console.log("storedUser:", storedUser);
       if (storedUser) {
         setUser(JSON.parse(storedUser));
       }
@@ -38,7 +36,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   // 🔹 Login
-  async function login(userData: User) {
+  async function login(userData: any) {
+    console.log("Salvando usuário:", userData);
     await AsyncStorage.setItem("user", JSON.stringify(userData));
     setUser(userData);
   }
