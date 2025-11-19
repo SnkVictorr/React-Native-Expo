@@ -10,12 +10,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { FavoritosService } from "../services/models/FavoritosService";
 import { Produto } from "../types/produto";
+import { useAuth } from "../context/AuthContext";
 
 export default function Favoritos({}) {
   const [produtos, setProdutos] = React.useState<Produto[]>([]);
 
   const _favoritosService = new FavoritosService();
-  const clienteId = 2; // ID do cliente
+  const { user } = useAuth();
+  const clienteId = user?.cliente_id || null; // ID do cliente
+
   // logado (exemplo estático)
   useEffect(() => {
     const fetchFavoritos = async () => {

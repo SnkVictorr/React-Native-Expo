@@ -1,5 +1,5 @@
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
-import React, { Component, useEffect, useState } from "react";
+import React, { Component, use, useEffect, useState } from "react";
 import { Image } from "react-native";
 import { QuicheMedium } from "../../Quiche/quiche-medium";
 import { OutfitText } from "../../OutfitText";
@@ -12,23 +12,24 @@ import { Trash, ShoppingCart } from "lucide-react-native";
 import formatter from "@/src/app/utils/formatadorDeMoeda";
 import Frete from "../../Frete";
 import { BASE_URL, AUTH_TOKEN } from "@/src/app/config/api";
+import { useAuth } from "@/src/app/context/AuthContext";
 
 export default function CardCarrinho() {
   const [carrinho, setCarrinho] = useState<ItemCarrinho[] | null>(null);
-  const [cliente_id, setCliente_id] = useState<number | null>(null);
+  const { user } = useAuth();
+  const clienteId = user?.cliente_id || null; // ID do cliente
+  console.log("Cliente ID no carrinho:", clienteId);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const id = 3;
-        console.log("Cliente ID:", id);
 
-        if (id) {
-          setCliente_id(id);
+        if (clienteId) {
+          // setClienteId(clienteId);
           // Buscar carrinho imediatamente após obter o ID
-          const carrinhoCarregado = await fetchCarrinho(id);
+          const carrinhoCarregado = await fetchCarrinho(clienteId);
           setCarrinho(carrinhoCarregado || []);
         } else {
           setCarrinho([]);
@@ -184,7 +185,7 @@ export default function CardCarrinho() {
                     removerDoCarrinho(
                       index,
                       item.id_produto,
-                      cliente_id as number
+                      clienteId as number
                     )
                   }
                 >

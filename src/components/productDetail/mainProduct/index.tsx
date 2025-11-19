@@ -1,4 +1,11 @@
-import { Modal, Pressable, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {
+  Modal,
+  Pressable,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { Image } from "react-native";
 import styles from "./style";
@@ -6,7 +13,15 @@ import FavoriteButton from "../favoriteButton";
 import colors from "@/src/app/styles/colors";
 import RatingReadOnly from "../avaliacoes";
 import { Produto } from "@/src/app/types/produto";
-import { Barcode, CreditCard, X, Plus, Minus, ShoppingCart, ShoppingBag } from "lucide-react-native";
+import {
+  Barcode,
+  CreditCard,
+  X,
+  Plus,
+  Minus,
+  ShoppingCart,
+  ShoppingBag,
+} from "lucide-react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import ProductTabs from "../tabs";
 import getProducts from "@/src/app/services/products/get";
@@ -16,26 +31,18 @@ import { BASE_URL } from "@/src/app/config/api";
 import formatter from "@/src/app/utils/formatadorDeMoeda";
 import { addToCart } from "@/src/app/services/carrinho/post";
 import { getClienteId } from "@/src/app/services/clientes/get";
+import { useAuth } from "@/src/app/context/AuthContext";
 
 export default function MainProduct() {
   const { id } = useLocalSearchParams();
   const [instrumento, setInstrumento] = useState<Produto | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [cliente_id, setCliente_id] = useState<number | null>(null);
+  const { user } = useAuth();
+  const clienteId = user?.cliente_id || null;
   const [quantidade, setQuantidade] = useState(1);
   const [modalVisible, setModalVisible] = useState(false); // Estado para controlar o modal de prévia
   const router = useRouter();
-
-  useEffect(() => {
-    const fetchClienteId = async () => {
-      const id = await getClienteId();
-      if (id) {
-        setCliente_id(id);
-      }
-    };
-    fetchClienteId();
-  }, [cliente_id]);
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -58,11 +65,11 @@ export default function MainProduct() {
 
   const handleAddToCart = async () => {
     if (instrumento) {
-      if (!cliente_id) {
+      if (!clienteId) {
         setError("Cliente ID não encontrado. Por favor, faça login.");
         return;
       }
-      const success = await addToCart(instrumento, cliente_id, quantidade);
+      const success = await addToCart(instrumento, clienteId, quantidade);
       if (success) {
         alert("Produto adicionado ao carrinho!");
         setModalVisible(false); // Fecha o modal após adicionar
@@ -83,7 +90,9 @@ export default function MainProduct() {
     }
   };
 
-  const precoComDesconto = instrumento ? instrumento.preco - instrumento.desconto : 0;
+  const precoComDesconto = instrumento
+    ? instrumento.preco - instrumento.desconto
+    : 0;
   const precoTotal = precoComDesconto * quantidade;
 
   if (loading) {
@@ -119,7 +128,10 @@ export default function MainProduct() {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.imgContainer}>
           <BackButton style={{ top: 15, left: 15 }} />
-          <FavoriteButton productId={58} clienteId={8} />
+          <FavoriteButton
+            productId={instrumento.id_produto}
+            clienteId={clienteId}
+          />
           <Image
             style={styles.img}
             source={{
@@ -128,38 +140,81 @@ export default function MainProduct() {
           />
         </View>
         <View style={styles.mainContent}>
-          <View style={{ flexDirection: "row", justifyContent: "space-between", paddingBottom: 7 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              paddingBottom: 7,
+            }}
+          >
             <Text style={{ color: colors.gray[400] }}>{instrumento.marca}</Text>
             <RatingReadOnly value={4.5} />
           </View>
           <Text style={styles.title}>{instrumento.produto}</Text>
-          <Text style={{ marginTop: 7, fontSize: 16, color: colors.gray[600], textDecorationLine: "line-through" }}>
+          <Text
+            style={{
+              marginTop: 7,
+              fontSize: 16,
+              color: colors.gray[600],
+              textDecorationLine: "line-through",
+            }}
+          >
             {formatter.format(instrumento.preco)}
           </Text>
-          <View style={{ flexDirection: "row", alignItems: "baseline", gap: 8 }}>
-            <Text style={{ marginTop: 1, fontSize: 25, fontWeight: "500", color: colors.principal }}>
+          <View
+            style={{ flexDirection: "row", alignItems: "baseline", gap: 8 }}
+          >
+            <Text
+              style={{
+                marginTop: 1,
+                fontSize: 25,
+                fontWeight: "500",
+                color: colors.principal,
+              }}
+            >
               {formatter.format(precoComDesconto)}
             </Text>
-            <Text style={{ fontSize: 16, color: colors.gray[400] }}>à vista</Text>
+            <Text style={{ fontSize: 16, color: colors.gray[400] }}>
+              à vista
+            </Text>
           </View>
           <Text style={{ fontSize: 13, color: "rgb(74 222 128)" }}>
-            Com 10% de desconto no Pix / Boleto Bancário / 1x no Cartão de Crédito
+            Com 10% de desconto no Pix / Boleto Bancário / 1x no Cartão de
+            Crédito
           </Text>
-          <Text style={{ fontSize: 14, color: colors.gray[400], marginBottom: 10 }}>
-            ou até 10x de {formatter.format(precoComDesconto / 10)} sem juros no cartão
+          <Text
+            style={{ fontSize: 14, color: colors.gray[400], marginBottom: 10 }}
+          >
+            ou até 10x de {formatter.format(precoComDesconto / 10)} sem juros no
+            cartão
           </Text>
           <View style={{ flexDirection: "row" }}>
-            <View style={{ flexDirection: "row", alignItems: "center", marginRight: 16, gap: 4 }}>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginRight: 16,
+                gap: 4,
+              }}
+            >
               <CreditCard color={colors.gray[400]} />
               <Text style={{ color: colors.gray[400] }}>Cartão</Text>
             </View>
-            <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
+            <View
+              style={{ flexDirection: "row", alignItems: "center", gap: 4 }}
+            >
               <Barcode color={colors.gray[400]} />
               <Text style={{ color: colors.gray[400] }}>Boleto</Text>
             </View>
           </View>
           <Frete />
-          <View style={{ marginTop: 20, borderBottomWidth: 1, borderBottomColor: colors.gray[500] }} />
+          <View
+            style={{
+              marginTop: 20,
+              borderBottomWidth: 1,
+              borderBottomColor: colors.gray[500],
+            }}
+          />
 
           {/* Botão Adicionar ao Carrinho - Abre o Modal */}
           <Pressable
@@ -178,7 +233,7 @@ export default function MainProduct() {
             </Text>
           </Pressable>
 
-           <Pressable
+          <Pressable
             style={{
               marginTop: 12,
               borderColor: colors.principal,
@@ -200,7 +255,7 @@ export default function MainProduct() {
             </Text>
           </Pressable>
 
-          <ProductTabs produtosObj={instrumento}/>
+          <ProductTabs produtosObj={instrumento} />
         </View>
       </ScrollView>
 
@@ -216,7 +271,10 @@ export default function MainProduct() {
             {/* Header do Modal */}
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Adicionar ao Carrinho</Text>
-              <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.closeButton}>
+              <TouchableOpacity
+                onPress={() => setModalVisible(false)}
+                style={styles.closeButton}
+              >
                 <X size={24} color={colors.gray[600]} />
               </TouchableOpacity>
             </View>
@@ -227,7 +285,9 @@ export default function MainProduct() {
               <View style={styles.productInfo}>
                 <Image
                   style={styles.modalImage}
-                  source={{uri: `${BASE_URL}/produtos/imagens/${instrumento.imagem}`}}
+                  source={{
+                    uri: `${BASE_URL}/produtos/imagens/${instrumento.imagem}`,
+                  }}
                 />
                 <View style={styles.productDetails}>
                   <Text style={styles.productName}>{instrumento.produto}</Text>
@@ -242,16 +302,21 @@ export default function MainProduct() {
               <View style={styles.quantitySelector}>
                 <Text style={styles.quantityLabel}>Quantidade</Text>
                 <View style={styles.quantityControls}>
-                  <TouchableOpacity 
-                    style={styles.quantityButton} 
+                  <TouchableOpacity
+                    style={styles.quantityButton}
                     onPress={diminuirQuantidade}
                     disabled={quantidade === 1}
                   >
-                    <Minus size={20} color={quantidade === 1 ? colors.gray[100] : colors.principal} />
+                    <Minus
+                      size={20}
+                      color={
+                        quantidade === 1 ? colors.gray[100] : colors.principal
+                      }
+                    />
                   </TouchableOpacity>
                   <Text style={styles.quantityText}>{quantidade}</Text>
-                  <TouchableOpacity 
-                    style={styles.quantityButton} 
+                  <TouchableOpacity
+                    style={styles.quantityButton}
                     onPress={aumentarQuantidade}
                   >
                     <Plus size={20} color={colors.principal} />
@@ -262,23 +327,22 @@ export default function MainProduct() {
               {/* Preço Total */}
               <View style={styles.totalContainer}>
                 <Text style={styles.totalLabel}>Total</Text>
-                <Text style={styles.totalPrice}>{formatter.format(precoTotal)}</Text>
+                <Text style={styles.totalPrice}>
+                  {formatter.format(precoTotal)}
+                </Text>
               </View>
             </ScrollView>
 
             {/* Botão de Confirmar */}
             <View style={styles.modalFooter}>
-              <Pressable 
-                style={styles.confirmButton}
-                onPress={handleAddToCart}
-              >
+              <Pressable style={styles.confirmButton} onPress={handleAddToCart}>
                 <ShoppingCart size={20} color="#FFFFFF" />
                 <Text style={styles.confirmButtonText}>
                   Adicionar ao Carrinho
                 </Text>
               </Pressable>
-            {/* Botão de continuar compra */}
-              <Pressable 
+              {/* Botão de continuar compra */}
+              <Pressable
                 style={styles.continueButton}
                 onPress={handleAddToCart}
               >
