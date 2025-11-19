@@ -1,10 +1,18 @@
-import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView, TouchableOpacity, View } from "react-native";
 import React, { Component } from "react";
 import colors from "@/src/app/styles/colors";
 import { OutfitText } from "../../OutfitText";
+import formatter from "@/src/app/utils/formatadorDeMoeda";
+import Frete from "../../Frete";
 
-export default class FooterCarrinho extends Component {
+interface FooterCarrinhoProps {
+  total: number;
+}
+
+export default class FooterCarrinho extends Component<FooterCarrinhoProps> {
   render() {
+    const { total } = this.props;
+
     return (
       <SafeAreaView
         style={{
@@ -16,6 +24,9 @@ export default class FooterCarrinho extends Component {
           paddingBottom: 45,
         }}
       >
+        <View style={{ marginBottom: 20 }} >
+        <Frete />
+        </View>
         <View
           style={{
             flexDirection: "row",
@@ -26,10 +37,12 @@ export default class FooterCarrinho extends Component {
           <OutfitText style={{ fontSize: 16, color: colors.white }}>
             Total
           </OutfitText>
+
           <OutfitText style={{ fontSize: 16, color: colors.white }}>
-            R$ 3.600,00
+            {formatter.format(total)}
           </OutfitText>
         </View>
+
         <TouchableOpacity
           style={{
             alignItems: "center",

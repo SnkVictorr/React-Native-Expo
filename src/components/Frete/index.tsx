@@ -33,7 +33,7 @@ export default function Frete() {
         style={{
           fontSize: 16,
           fontWeight: "500",
-          marginTop: 12,
+          marginTop: 2,
           color: colors.white,
         }}
       >
@@ -46,7 +46,7 @@ export default function Frete() {
 
           borderColor: "#ccc",
           borderRadius: 6,
-          backgroundColor: "#333",
+          backgroundColor: "#363535",
           paddingHorizontal: 8,
           marginTop: 12,
         }}

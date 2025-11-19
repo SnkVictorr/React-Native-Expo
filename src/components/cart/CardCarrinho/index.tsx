@@ -1,25 +1,30 @@
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
-import React, { Component, use, useEffect, useState } from "react";
-import { Image } from "react-native";
+import {
+  FlatList,
+  Text,
+  TouchableOpacity,
+  View,
+  Image,
+} from "react-native";
+import React, { useEffect, useState } from "react";
 import { QuicheMedium } from "../../Quiche/quiche-medium";
 import { OutfitText } from "../../OutfitText";
 import MaxMinus from "../MaxMinus";
 import ItemCarrinho from "@/src/app/types/carrinho";
-import { getClienteId } from "@/src/app/services/clientes/get";
 import { fetchCarrinho } from "@/src/app/services/carrinho/get";
 import { deleteItemCart } from "@/src/app/services/carrinho/delete";
 import { Trash, ShoppingCart } from "lucide-react-native";
 import formatter from "@/src/app/utils/formatadorDeMoeda";
 import Frete from "../../Frete";
-import { BASE_URL, AUTH_TOKEN } from "@/src/app/config/api";
+import { BASE_URL } from "@/src/app/config/api";
 import { useAuth } from "@/src/app/context/AuthContext";
+import FooterCarrinho from "../Footer/";
 
 export default function CardCarrinho() {
   const [carrinho, setCarrinho] = useState<ItemCarrinho[] | null>(null);
   const { user } = useAuth();
-  const clienteId = user?.cliente_id || null; // ID do cliente
-  console.log("Cliente ID no carrinho:", clienteId);
-  const [loading, setLoading] = useState(true);
+  const clienteId = user?.cliente_id || null;
+
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,8 +32,6 @@ export default function CardCarrinho() {
         setLoading(true);
 
         if (clienteId) {
-          // setClienteId(clienteId);
-          // Buscar carrinho imediatamente após obter o ID
           const carrinhoCarregado = await fetchCarrinho(clienteId);
           setCarrinho(carrinhoCarregado || []);
         } else {
@@ -43,9 +46,8 @@ export default function CardCarrinho() {
     };
 
     fetchData();
-  }, []); // Removida a dependência do cliente_id
+  }, []);
 
-  // Função para remover item do carrinho
   const removerDoCarrinho = (
     index: number,
     id_produto: number,
@@ -55,10 +57,10 @@ export default function CardCarrinho() {
     const novosItens = [...carrinho];
     novosItens.splice(index, 1);
     setCarrinho(novosItens);
+
     deleteItemCart(id_produto, id_cliente);
   };
 
-  // Função para incrementar quantidade
   const incrementarQuantidade = (index: number) => {
     if (!carrinho) return;
     const novosItens = [...carrinho];
@@ -66,18 +68,25 @@ export default function CardCarrinho() {
     setCarrinho(novosItens);
   };
 
-  // Função para decrementar quantidade
   const decrementarQuantidade = (index: number) => {
     if (!carrinho) return;
     const novosItens = [...carrinho];
+
     if (novosItens[index].quantidade > 1) {
       novosItens[index].quantidade -= 1;
       setCarrinho(novosItens);
     }
   };
 
-  // Verificação automática para carrinho vazio
   const carrinhoVazio = !carrinho || carrinho.length === 0;
+
+  // 🔥 CÁLCULO AUTOMÁTICO DO TOTAL
+  const total: number =
+    carrinho?.reduce((acc, item) => {
+      const subtotal =
+        (item.preco - item.desconto) * item.quantidade;
+      return acc + subtotal;
+    }, 0) || 0;
 
   if (loading) {
     return (
@@ -87,7 +96,6 @@ export default function CardCarrinho() {
           justifyContent: "center",
           alignItems: "center",
           padding: 20,
-          minHeight: 50,
         }}
       >
         <Text style={{ color: "#FFFFFF" }}>Carregando carrinho...</Text>
@@ -103,7 +111,6 @@ export default function CardCarrinho() {
           justifyContent: "center",
           alignItems: "center",
           padding: 20,
-          minHeight: 100,
         }}
       >
         <ShoppingCart size={64} color="#666666" />
@@ -111,9 +118,9 @@ export default function CardCarrinho() {
           style={{
             fontSize: 18,
             color: "#666666",
-            textAlign: "center",
             marginTop: 16,
             marginBottom: 8,
+            textAlign: "center",
           }}
         >
           Seu carrinho está vazio
@@ -133,85 +140,90 @@ export default function CardCarrinho() {
   }
 
   return (
-    <View style={{ paddingTop: 16, flex: 1 }}>
-      <FlatList
-        data={carrinho}
-        keyExtractor={(item) => `${item.id_produto}-${item.quantidade}`}
-        renderItem={({ item, index }) => (
-          <View
-            style={{
-              borderRadius: 8,
-              borderWidth: 1,
-              borderColor: "#333333",
-              padding: 16,
-              backgroundColor: "#111111",
-              marginBottom: 12,
-            }}
-          >
-            <View style={{ flexDirection: "row", gap: 16 }}>
-              <Image
-                source={{
-                  uri: `${BASE_URL}/produtos/imagens/${item.imagem}`,
-                }}
-                style={{ width: 100, height: 100, borderRadius: 8 }}
-              />
-              <View style={{ flex: 1, flexDirection: "column", gap: 8 }}>
-                <OutfitText
-                  style={{ flex: 1, flexWrap: "wrap" }}
-                  numberOfLines={2}
-                >
-                  {item.produto}
-                </OutfitText>
-
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
+    <>
+      <View style={{ paddingTop: 16, flex: 1 }}>
+        <FlatList
+          data={carrinho}
+          keyExtractor={(item) =>
+            `${item.id_produto}-${item.quantidade}`
+          }
+          renderItem={({ item, index }) => (
+            <View
+              style={{
+                borderRadius: 8,
+                borderWidth: 1,
+                borderColor: "#333333",
+                padding: 16,
+                backgroundColor: "#111111",
+                marginBottom: 12,
+              }}
+            >
+              <View style={{ flexDirection: "row", gap: 16 }}>
+                <Image
+                  source={{
+                    uri: `${BASE_URL}/produtos/imagens/${item.imagem}`,
                   }}
-                >
-                  <QuicheMedium style={{ fontSize: 16, color: "#c7a315" }}>
-                    {formatter.format(
-                      (item.preco - item.desconto) * item.quantidade
-                    )}
-                  </QuicheMedium>
+                  style={{
+                    width: 100,
+                    height: 100,
+                    borderRadius: 8,
+                  }}
+                />
+
+                <View style={{ flex: 1, gap: 8 }}>
+                  <OutfitText numberOfLines={2}>
+                    {item.produto}
+                  </OutfitText>
+
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <QuicheMedium
+                      style={{ fontSize: 16, color: "#c7a315" }}
+                    >
+                      {formatter.format(
+                        (item.preco - item.desconto) *
+                          item.quantidade
+                      )}
+                    </QuicheMedium>
+                      
+                    
+                  </View>
+
+                  <TouchableOpacity
+                    onPress={() =>
+                      removerDoCarrinho(
+                        index,
+                        item.id_produto,
+                        clienteId as number
+                      )
+                    }
+                  >
+                    <Trash color="#ff4444" size={18} style={{marginTop: 25}} />
+                  </TouchableOpacity>
                   <MaxMinus
-                    quantidade={item.quantidade}
-                    incrementar={() => incrementarQuantidade(index)}
-                    decrementar={() => decrementarQuantidade(index)}
-                  />
+                      quantidade={item.quantidade}
+                      incrementar={() =>
+                        incrementarQuantidade(index)
+                      }
+                      decrementar={() =>
+                        decrementarQuantidade(index)
+                      }
+                    />
                 </View>
-                <TouchableOpacity
-                  onPress={() =>
-                    removerDoCarrinho(
-                      index,
-                      item.id_produto,
-                      clienteId as number
-                    )
-                  }
-                >
-                  <Trash color="#ff4444" />
-                </TouchableOpacity>
               </View>
             </View>
-          </View>
-        )}
-        contentContainerStyle={{ paddingBottom: 20 }}
-        showsVerticalScrollIndicator={false}
-      />
+          )}
+          contentContainerStyle={{ paddingBottom: 20 }}
+          showsVerticalScrollIndicator={false}
+        />
+      </View>
 
-      {!carrinhoVazio && (
-        <View
-          style={{
-            backgroundColor: "#111111",
-            paddingHorizontal: 20,
-            marginTop: 10,
-            paddingBottom: 20,
-            borderRadius: 8,
-          }}
-        >
-          <Frete />
-        </View>
-      )}
-    </View>
+      {/* 🔥 ENVIA O TOTAL PARA O FOOTER */}
+      <FooterCarrinho total={total} />
+    </>
   );
 }

@@ -19,7 +19,7 @@ export default function MaxMinus({ incrementar, decrementar, quantidade }: MaxMi
           alignItems: "center",
           backgroundColor: colors.background,
           position: "absolute",
-          bottom: -5,
+          bottom: 5,
           right: 0,
           padding: 4,
           borderRadius: 8,
