@@ -1,10 +1,11 @@
-import { Text, View } from "react-native";
-import React, { Component } from "react";
+import { View } from "react-native";
+import React from "react";
+import PerfilTabs from "@/src/components/perfil";
 
-export default function Perfil () {
-    return (
-      <View>
-        <Text>Perfil</Text>
-      </View>
-    );
+export default function Perfil() {
+  return (
+    <View style={{ flex: 1 }}>
+      <PerfilTabs />
+    </View>
+  );
 }
