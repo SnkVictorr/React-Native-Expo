@@ -13,6 +13,7 @@ import colors from "@/src/app/styles/colors";
 import { useRouter } from "expo-router";
 import React from "react";
 import { useAuth } from "../context/AuthContext";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 function TabIcon({
   src,
@@ -92,7 +93,7 @@ export default function TabsLayout() {
   //   name: "Bruno Lobo",
   //   email: "brunolobo@email.com",
   // };
-
+  const insets = useSafeAreaInsets();
   return (
     <>
       <Tabs
@@ -106,8 +107,12 @@ export default function TabsLayout() {
             backgroundColor: "#1a1a1a",
             borderTopColor: colors.principal,
             paddingTop: 25,
+            bottom: 0,
 
             // height: 95,
+
+            height: 65 + insets.bottom,
+            paddingBottom: insets.bottom,
           },
         }}
       >
@@ -299,7 +304,10 @@ const styles = StyleSheet.create({
     borderRadius: 17,
   },
   label: {
-    fontSize: 12,
+    fontSize: 10,
+    width: "120%", // Força o texto a ter mais espaço que o container
+    textAlign: "center", // Garante que continue centralizado
+    paddingHorizontal: 5, // Cria um respiro nas laterais interna
   },
   underline: {
     position: "absolute",

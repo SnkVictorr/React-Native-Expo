@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  StatusBar,
-  Image,
-} from "react-native";
+import { View, StyleSheet, ScrollView, StatusBar, Image } from "react-native";
 import Swiper from "react-native-swiper";
 import ProductList1 from "../components/main/ProductList1";
 import MarcasList from "../components/main/MarcasList";
@@ -23,7 +17,7 @@ const HomeScreen = () => {
 
   const [produtos, setProdutos] = React.useState([]);
   React.useEffect(() => {
-    try{
+    try {
       getProducts().then((data) => {
         setProdutos(data);
       });
@@ -38,10 +32,9 @@ const HomeScreen = () => {
 
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 30 }}
+        contentContainerStyle={{ paddingBottom: 130 }}
       >
         <SearchBar />
-        
 
         {/* Carousel */}
         <View style={[styles.carousel]}>

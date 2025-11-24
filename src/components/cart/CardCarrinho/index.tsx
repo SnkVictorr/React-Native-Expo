@@ -1,11 +1,5 @@
-import {
-  FlatList,
-  Text,
-  TouchableOpacity,
-  View,
-  Image,
-} from "react-native";
-import React, { useEffect, useState } from "react";
+import { FlatList, Text, TouchableOpacity, View, Image } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
 import { QuicheMedium } from "../../Quiche/quiche-medium";
 import { OutfitText } from "../../OutfitText";
 import MaxMinus from "../MaxMinus";
@@ -18,6 +12,7 @@ import Frete from "../../Frete";
 import { BASE_URL } from "@/src/app/config/api";
 import { useAuth } from "@/src/app/context/AuthContext";
 import FooterCarrinho from "../Footer/";
+import { useFocusEffect } from "expo-router";
 
 export default function CardCarrinho() {
   const [carrinho, setCarrinho] = useState<ItemCarrinho[] | null>(null);
@@ -26,7 +21,8 @@ export default function CardCarrinho() {
 
   const [loading, setLoading] = useState<boolean>(true);
 
-  useEffect(() => {
+useFocusEffect(
+  useCallback(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
@@ -46,7 +42,8 @@ export default function CardCarrinho() {
     };
 
     fetchData();
-  }, []);
+  }, [clienteId]) // <--- dependência correta
+);
 
   const removerDoCarrinho = (
     index: number,
@@ -83,8 +80,7 @@ export default function CardCarrinho() {
   // 🔥 CÁLCULO AUTOMÁTICO DO TOTAL
   const total: number =
     carrinho?.reduce((acc, item) => {
-      const subtotal =
-        (item.preco - item.desconto) * item.quantidade;
+      const subtotal = (item.preco - item.desconto) * item.quantidade;
       return acc + subtotal;
     }, 0) || 0;
 
@@ -144,9 +140,7 @@ export default function CardCarrinho() {
       <View style={{ paddingTop: 16, flex: 1 }}>
         <FlatList
           data={carrinho}
-          keyExtractor={(item) =>
-            `${item.id_produto}-${item.quantidade}`
-          }
+          keyExtractor={(item) => `${item.id_produto}-${item.quantidade}`}
           renderItem={({ item, index }) => (
             <View
               style={{
@@ -171,9 +165,7 @@ export default function CardCarrinho() {
                 />
 
                 <View style={{ flex: 1, gap: 8 }}>
-                  <OutfitText numberOfLines={2}>
-                    {item.produto}
-                  </OutfitText>
+                  <OutfitText numberOfLines={2}>{item.produto}</OutfitText>
 
                   <View
                     style={{
@@ -181,16 +173,11 @@ export default function CardCarrinho() {
                       justifyContent: "space-between",
                     }}
                   >
-                    <QuicheMedium
-                      style={{ fontSize: 16, color: "#c7a315" }}
-                    >
+                    <QuicheMedium style={{ fontSize: 16, color: "#c7a315" }}>
                       {formatter.format(
-                        (item.preco - item.desconto) *
-                          item.quantidade
+                        (item.preco - item.desconto) * item.quantidade
                       )}
                     </QuicheMedium>
-                      
-                    
                   </View>
 
                   <TouchableOpacity
@@ -202,17 +189,17 @@ export default function CardCarrinho() {
                       )
                     }
                   >
-                    <Trash color="#ff4444" size={18} style={{marginTop: 25}} />
+                    <Trash
+                      color="#ff4444"
+                      size={18}
+                      style={{ marginTop: 25 }}
+                    />
                   </TouchableOpacity>
                   <MaxMinus
-                      quantidade={item.quantidade}
-                      incrementar={() =>
-                        incrementarQuantidade(index)
-                      }
-                      decrementar={() =>
-                        decrementarQuantidade(index)
-                      }
-                    />
+                    quantidade={item.quantidade}
+                    incrementar={() => incrementarQuantidade(index)}
+                    decrementar={() => decrementarQuantidade(index)}
+                  />
                 </View>
               </View>
             </View>

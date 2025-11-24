@@ -4,7 +4,6 @@ import Texto from "../components/texto";
 import Botao from "../components/button";
 import VideoComponent from "../components/Video";
 
-
 export default function Dashboard() {
   return (
     <View style={styles.container}>
@@ -12,11 +11,11 @@ export default function Dashboard() {
         <Image
           source={require("../../assets/images/logo-gold.png")}
           style={styles.imagem}
-          />
+        />
         <Texto conteudo="HarmoniX" />
         <View style={styles.botaoContainer}>
-          <Botao texto="Sign In" estilo={styles.botao} rota="/login"/>
-          <Botao texto="Sign Up" estilo={styles.botao} rota="/cadastreSe"/>
+          <Botao texto="Sign In" estilo={styles.botao} rota="/login" />
+          <Botao texto="Sign Up" estilo={styles.botao} rota="/cadastreSe" />
         </View>
       </View>
     </View>
@@ -55,16 +54,16 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
   botaoContainer: {
-  flexDirection: "row",
-  justifyContent: "center",
-  gap: 12,
-},
-botao: {
-  backgroundColor: "#d4a017",
-  paddingHorizontal: 18,
-  paddingVertical: 10,
-  borderRadius: 8,
-  minWidth: 90, // tamanho mínimo
-  alignItems: "center",
-},
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 12,
+  },
+  botao: {
+    backgroundColor: "#d4a017",
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    borderRadius: 8,
+    minWidth: 90, // tamanho mínimo
+    alignItems: "center",
+  },
 });

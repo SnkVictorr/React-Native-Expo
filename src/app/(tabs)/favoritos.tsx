@@ -1,5 +1,5 @@
 import { FlatList, Text, View } from "react-native";
-import React, { Component, use, useEffect } from "react";
+import React, { Component, use, useCallback, useEffect } from "react";
 import colors from "../styles/colors";
 import HeaderBack from "@/src/components/HeaderBack";
 import ProductList from "@/src/components/main/ProductList1";
@@ -11,6 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { FavoritosService } from "../services/models/FavoritosService";
 import { Produto } from "../types/produto";
 import { useAuth } from "../context/AuthContext";
+import { useFocusEffect } from "expo-router";
 
 export default function Favoritos({}) {
   const [produtos, setProdutos] = React.useState<Produto[]>([]);
@@ -20,19 +21,21 @@ export default function Favoritos({}) {
   const clienteId = user?.cliente_id || null; // ID do cliente
 
   // logado (exemplo estático)
-  useEffect(() => {
-    const fetchFavoritos = async () => {
-      try {
-        const data = await _favoritosService.getByClienteId(clienteId);
-        setProdutos(data);
-        console.log(data);
-      } catch (error) {
-        console.error("Erro ao buscar favoritos:", error);
-      }
-    };
+  useFocusEffect(
+    useCallback(() => {
+      const fetchFavoritos = async () => {
+        try {
+          const data = await _favoritosService.getByClienteId(clienteId);
+          setProdutos(data);
+          console.log(data);
+        } catch (error) {
+          console.error("Erro ao buscar favoritos:", error);
+        }
+      };
 
-    fetchFavoritos();
-  }, []);
+      fetchFavoritos();
+    }, [])
+  );
   console.log(produtos);
   return (
     <View
