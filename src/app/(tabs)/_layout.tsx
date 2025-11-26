@@ -279,7 +279,7 @@ export default function TabsLayout() {
               style={styles.modalItemLogout}
             >
               <Text style={[styles.modalText, { color: "red" }]}>
-                🚪 Logout
+                🚪 Sair
               </Text>
             </TouchableOpacity>
           </View>
