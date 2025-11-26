@@ -3,10 +3,7 @@ import { Produto } from "../../types/produto";
 import { BASE_URL, AUTH_TOKEN } from "../../config/api";
 export class FavoritosService extends ApiService<Produto> {
   constructor() {
-    super(
-      `${BASE_URL}/favoritos`,
-      AUTH_TOKEN  
-    );
+    super(`${BASE_URL}/favoritos`, AUTH_TOKEN);
   }
   async getByClienteId(clienteId: number): Promise<Produto[]> {
     const response = await fetch(`${this._baseUrl}?cliente_id=${clienteId}`, {
@@ -16,7 +13,14 @@ export class FavoritosService extends ApiService<Produto> {
     if (!response.ok) {
       throw new Error("Erro ao buscar cliente");
     }
-    const favoritos = await response.json();
+    const textData = await response.text();
+    // 2. Verifique se veio algo
+    if (!textData) {
+      console.warn("A resposta da API veio vazia!");
+      return []; // Retorna lista vazia para não quebrar o app
+    }
+
+    const favoritos = JSON.parse(textData);
     return favoritos.data;
   }
 

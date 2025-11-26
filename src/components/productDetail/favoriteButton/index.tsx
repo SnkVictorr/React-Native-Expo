@@ -16,28 +16,30 @@ export default function FavoriteButton({
 
   const _favoritosService = new FavoritosService();
 
-  // useEffect(() => {
-  //   const fetchFavorites = async () => {
-  //     try {
-  //       const res = await fetch(`${API_URL}/?cliente_id=${clienteId}`, {
-  //         method: "GET",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization:
-  //             "stNOJvYxgbX3bRg3CEGMTNiqnIO3TMMHPi8K3ehLzk3KqcN3tJbDnBdMwWvAj84r2fiKvaAxQC58i1BsR5iqjBzzscwMudNv8xL6",
-  //         },
-  //       });
-
-  //       const data = await res.json();
-  //       console.log("Favoritos carregados:", data);
-  //       setIsFavorite(data.data.includes(58));
-  //     } catch (err) {
-  //       console.error("Erro ao carregar favoritos:", err);
-  //     }
-  //   };
-  //   fetchFavorites();
-  // }, [productId]);
-  // console.log("isFavorite:", isFavorite);
+  useEffect(() => {
+    let isMounted = true; // Para evitar erro de atualização se o componente desmontar
+    const checkFavoriteStatus = async () => {
+      try {
+        const listaFavoritos = await _favoritosService.getByClienteId(
+          Number(clienteId)
+        );
+        if (isMounted && listaFavoritos) {
+          const data = listaFavoritos.map((produto) => produto.id_produto);
+          console.log("Favoritos carregados:", data);
+          setIsFavorite(data.includes(Number(productId)));
+        }
+      } catch (err) {
+        console.error("Erro ao carregar favoritos:", err);
+      }
+    };
+    if (clienteId && productId) {
+      checkFavoriteStatus();
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, [productId, clienteId]);
+  console.log("isFavorite:", isFavorite);
 
   // const toggleFavorite = () => {
   //   // Animated.sequence([
@@ -57,25 +59,20 @@ export default function FavoriteButton({
   // };
 
   const toggleFavorite = async () => {
+    // UI Optimistic Update: Muda a cor imediatamente para o usuário não esperar o banco
+    const previousState = isFavorite;
+    setIsFavorite(!previousState);
     try {
-      // const res = await fetch(API_URL, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     Authorization:
-      //       "stNOJvYxgbX3bRg3CEGMTNiqnIO3TMMHPi8K3ehLzk3KqcN3tJbDnBdMwWvAj84r2fiKvaAxQC58i1BsR5iqjBzzscwMudNv8xL6",
-      //   },
-      //   body: JSON.stringify({ cliente_id: clienteId, id_produto: productId }),
-      // });
-      // const result = await res.json();
       const result = await _favoritosService.switchFavorite({
         cliente_id: clienteId,
         id_produto: productId,
       });
-
+      // Confirmação do banco (opcional, pois já mudamos visualmente antes)
       if (result.status === "added") setIsFavorite(true);
       if (result.status === "removed") setIsFavorite(false);
     } catch (err) {
+      // Se der erro, desfaz a mudança visual
+      setIsFavorite(previousState);
       console.error("Erro ao atualizar favorito:", err);
     }
   };
