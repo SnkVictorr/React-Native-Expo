@@ -14,8 +14,8 @@ export default function Dashboard() {
         />
         <Texto conteudo="HarmoniX" />
         <View style={styles.botaoContainer}>
-          <Botao texto="Sign In" estilo={styles.botao} rota="/login" />
-          <Botao texto="Sign Up" estilo={styles.botao} rota="/cadastreSe" />
+          <Botao texto="Entrar" estilo={styles.botao} rota="/login" />
+          <Botao texto="Cadastrar" estilo={styles.botao} rota="/cadastreSe" />
         </View>
       </View>
     </View>
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   botao: {
     backgroundColor: "#d4a017",
-    paddingHorizontal: 18,
+    paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 8,
     minWidth: 90, // tamanho mínimo

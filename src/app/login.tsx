@@ -163,9 +163,9 @@ export default function Login() {
               </View>
 
               <View style={styles.inputContainer}>
-                <Text style={styles.label}>Password</Text>
+                <Text style={styles.label}>Senha</Text>
                 <Input
-                  placeholder="Password"
+                  placeholder="Senha"
                   value={password}
                   onChangeText={setPassword}
                   secureTextEntry
@@ -182,7 +182,7 @@ export default function Login() {
                 disabled={isLoading}
               >
                 <Text style={styles.signInButtonText}>
-                  {isLoading ? "Carregando..." : "Sign In"}
+                  {isLoading ? "Carregando..." : "Entrar"}
                 </Text>
               </TouchableOpacity>
 
@@ -197,7 +197,7 @@ export default function Login() {
                 </TouchableOpacity>
               )}
 
-              <Text style={styles.orText}>- Or sign in with -</Text>
+              <Text style={styles.orText}>- ou entre com -</Text>
 
               {/* SOCIAL */}
               <View style={styles.socialContainer}>

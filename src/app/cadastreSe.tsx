@@ -137,9 +137,9 @@ export default function Cadastro() {
 
               {/* Campo Password */}
               <View style={styles.inputContainer}>
-                <Text style={styles.label}>Password</Text>
+                <Text style={styles.label}>Senha</Text>
                 <Input
-                  placeholder="Password"
+                  placeholder="Senha"
                   value={password}
                   onChangeText={setPassword}
                   secureTextEntry
@@ -147,9 +147,9 @@ export default function Cadastro() {
               </View>
               {/* Campo confirmar Password */}
               <View style={styles.inputContainer}>
-                <Text style={styles.label}>Confirmar Password</Text>
+                <Text style={styles.label}>Confirmar Senha</Text>
                 <Input
-                  placeholder="Password"
+                  placeholder="Senha"
                   value={confirmPassword}
                   onChangeText={setConfirmPassword}
                   secureTextEntry
@@ -166,20 +166,26 @@ export default function Cadastro() {
                 disabled={isLoading}
               >
                 <Text style={styles.signInButtonText}>
-                  {isLoading ? "Carregando..." : "Sign Up"}
+                  {isLoading ? "Carregando..." : "Cadastrar"}
                 </Text>
               </TouchableOpacity>
 
               {/* Texto "Or sign in with" */}
-              <Text style={styles.orText}>- Or sign in with -</Text>
+              <Text style={styles.orText}>- Ou entre com -</Text>
 
               {/* Botões de redes sociais */}
               <View style={styles.socialContainer}>
-                {/* <TouchableOpacity style={styles.socialButton} onPress={handleGoogleLogin}>
+                <TouchableOpacity
+                  style={styles.socialButton}
+                  onPress={handleGoogleLogin}
+                >
                   <View style={styles.googleIcon}>
-                    <Image source={require('../../assets/images/google.png')} style={styles.googleImage} />
+                    <Image
+                      source={require("../../assets/images/google.png")}
+                      style={styles.googleImage}
+                    />
                   </View>
-                </TouchableOpacity> */}
+                </TouchableOpacity>
 
                 <TouchableOpacity
                   style={styles.socialButton}
