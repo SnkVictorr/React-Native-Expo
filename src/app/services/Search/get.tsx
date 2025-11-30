@@ -1,6 +1,6 @@
 import { BASE_URL, AUTH_TOKEN } from "../../config/api";
 
-export default async function buscarProdutos(query: string) {
+export async function buscarProdutos(query: string) {
   try {
     const response = await fetch(
       `${BASE_URL}/produtos/?q=${encodeURIComponent(query)}`,

@@ -8,7 +8,7 @@ import {
 import React, { Component, useEffect, useState } from "react";
 import styles from "./style";
 import { Ionicons } from "@expo/vector-icons";
-import buscarProdutos from "@/src/app/services/Search/get";
+import { buscarProdutos } from "@/src/app/services/Search/get";
 import { Produto } from "@/src/app/types/produto";
 export default function SearchBar() {
   const [query, setQuery] = useState("");
