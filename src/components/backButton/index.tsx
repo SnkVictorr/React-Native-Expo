@@ -1,23 +1,30 @@
-import { Text, TouchableHighlight, View } from "react-native";
-import React, { Component } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "@/src/app/styles/colors";
 import { router } from "expo-router";
 
-
 export default function BackButton({ style }: { style?: object }) {
   function handlePress() {
-    // Logic to go back
     router.back();
   }
+  
   return (
-    <TouchableHighlight onPress={handlePress}>
+    <TouchableOpacity 
+      onPress={handlePress}
+      style={[
+        { 
+          padding: 8, // ← Adiciona área de toque
+          marginRight: 8, // ← Espaço entre botão e texto
+        }, 
+        style
+      ]}
+    >
       <Ionicons
         name="arrow-back-sharp"
         size={24}
         color={colors.principal}
-        style={[{ position: "absolute",  zIndex: 20 }, style]}
       />
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 }

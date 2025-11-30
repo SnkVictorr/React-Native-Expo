@@ -15,7 +15,7 @@ import SignGoogle from "../SignGoogle";
 export default function Index() {
   return (
     <SafeAreaView
-      style={{ flex: 1, backgroundColor: "#1a1a1a" }}
+      style={{ flex: 1, backgroundColor: "#1a1a1a", paddingTop: 15 }}
       edges={["top"]}
     >
       {/* <Dashboard /> */}

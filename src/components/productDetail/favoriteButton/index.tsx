@@ -94,8 +94,7 @@ export default function FavoriteButton({
 const styles = StyleSheet.create({
   icon: {
     position: "absolute",
-    top: 15,
     right: 15,
-    zIndex: 20,
+    bottom: -10,
   },
 });

@@ -1,6 +1,7 @@
 import { View } from "react-native";
 import React from "react";
-import Profile from "@/src/components/perfil/editar";
+import Profile from "@/src/components/perfil";
+
 
 export default function Perfil() {
   return (

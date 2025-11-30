@@ -52,6 +52,7 @@ export default function SearchBar() {
             <Text style={{ padding: 10 }}>Carregando...</Text>
           ) : (
             <FlatList
+            // nestedScrollEnabled={true}
               data={results}
               keyExtractor={(item) => item.id_produto.toString()}
               renderItem={({ item }) => (

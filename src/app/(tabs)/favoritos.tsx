@@ -22,26 +22,32 @@ export default function Favoritos({}) {
 
   // logado (exemplo estático)
   useFocusEffect(
-    useCallback(() => {
-      const fetchFavoritos = async () => {
-        try {
-          const data = await _favoritosService.getByClienteId(clienteId);
-          setProdutos(data);
-          console.log(data);
-        } catch (error) {
-          console.error("Erro ao buscar favoritos:", error);
+  useCallback(() => {
+    const fetchFavoritos = async () => {
+      try {
+        if (!clienteId) {
+          console.warn("Cliente não encontrado.");
+          return;
         }
-      };
 
-      fetchFavoritos();
-    }, [])
-  );
+        const data = await _favoritosService.getByClienteId(clienteId);
+        setProdutos(data);
+        console.log("Favoritos carregados:", data);
+      } catch (error) {
+        console.error("Erro ao buscar favoritos:", error);
+      }
+    };
+
+    fetchFavoritos();
+  }, [clienteId])
+);
   console.log(produtos);
   return (
     <View
       style={{
         backgroundColor: colors.background,
         flex: 1,
+        paddingTop: 30,
       }}
     >
       <HeaderBack text="Favoritos" />

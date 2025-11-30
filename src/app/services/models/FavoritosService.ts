@@ -3,7 +3,7 @@ import { Produto } from "../../types/produto";
 import { BASE_URL, AUTH_TOKEN } from "../../config/api";
 export class FavoritosService extends ApiService<Produto> {
   constructor() {
-    super(`${BASE_URL}/favoritos`, AUTH_TOKEN);
+    super(`${BASE_URL}/favoritos/index.php`, AUTH_TOKEN);
   }
   async getByClienteId(clienteId: number): Promise<Produto[]> {
     const response = await fetch(`${this._baseUrl}?cliente_id=${clienteId}`, {

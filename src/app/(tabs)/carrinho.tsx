@@ -9,6 +9,7 @@ export default function CartScreen() {
       style={{
         backgroundColor: colors.background,
         height: "100%",
+        paddingTop: 30,
       }}
     >
       {/* <Image source={require('@/assets/images/logo-gold.png')} style={styles.image}/> */}
