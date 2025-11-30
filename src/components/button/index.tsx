@@ -1,28 +1,49 @@
-// components/botao/index.tsx
 import { View, Text, Pressable, StyleProp, ViewStyle } from "react-native";
 import React from "react";
 import { styles } from "./style";
 import { router } from "expo-router";
 
 interface BotaoProps {
-  rota?: any; // Rota para navegar
-  estilo?: StyleProp<ViewStyle>; // Estilo adicional para o botão
-  texto?: string; // Texto que aparece no botão
-  mensagem?: string; // Mensagem opcional do alerta
+  rota?: any;
+  estilo?: StyleProp<ViewStyle>;
+  texto?: string;
+  mensagem?: string;
 }
 
 export default function Botao({ 
   rota,
   estilo, 
-  texto , 
+  texto, 
   mensagem 
 }: BotaoProps) {
   
-  const handleNext = () => {
-    if (mensagem) {
-      alert(mensagem);
+  const handleNext = async () => {
+    try {
+      console.log('Botão pressionado:', { texto, rota, mensagem });
+      
+      if (mensagem) {
+        alert(mensagem);
+        return;
+      }
+      
+      if (!rota) {
+        console.warn("Nenhuma rota definida para o botão");
+        return;
+      }
+
+      console.log('Tentando navegar para:', rota);
+      
+      // Verifica se podemos navegar
+      if (router.canGoBack()) {
+        router.navigate(rota);
+      } else {
+        router.replace(rota);
+      }
+      
+    } catch (error) {
+      console.error('Erro ao navegar:', error);
+      alert('Erro de navegação. Verifique se a rota existe.');
     }
-    router.navigate(rota);
   };
 
   return (
@@ -35,7 +56,7 @@ export default function Botao({
           pressed ? styles.pressed : null,
         ]}
       >
-        <Text style={styles.text}>{texto}</Text>
+        <Text style={styles.text}>{texto || "Botão"}</Text>
       </Pressable>
     </View>
   );

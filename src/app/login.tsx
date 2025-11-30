@@ -111,7 +111,7 @@ export default function Login() {
   };
 
   const handleBackPress = () => {
-    router.navigate("/dashboard");
+    router.navigate("/");
   };
 
   const handleGoogleLogin = () => {

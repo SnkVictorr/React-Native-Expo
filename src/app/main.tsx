@@ -1,11 +1,13 @@
 import React from "react";
-import { View, StyleSheet, ScrollView, StatusBar, Image } from "react-native";
+import { View, StyleSheet, ScrollView, StatusBar, Image, Text, TouchableOpacity } from "react-native";
 import Swiper from "react-native-swiper";
 import ProductList1 from "../components/main/ProductList1";
 import MarcasList from "../components/main/MarcasList";
 import CategoryList from "../components/main/categoryList";
 import SearchBar from "../components/searchBar";
 import getProducts from "./services/products/get";
+import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
 
 const HomeScreen = () => {
   const banners = [
@@ -26,8 +28,19 @@ const HomeScreen = () => {
     }
   }, []);
 
+  const handleCartPress = () => {
+    router.navigate("./(tabs)/carrinho")
+  };
+
   return (
     <View style={styles.container}>
+      <View style={{ flexDirection: "row", alignItems: "center", gap: 8, justifyContent: "space-between" }}>
+      <Text style={styles.titleHarmonix}>HarmoniX</Text>
+      <TouchableOpacity onPress={handleCartPress}>
+
+      <Ionicons style={{paddingRight: 15}} name="cart" size={26} color="#FFFFFF" />
+      </TouchableOpacity>
+      </View>
       <StatusBar barStyle="light-content" backgroundColor="#1a1a1a" />
 
       <ScrollView
@@ -384,6 +397,12 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 30,
     fontWeight: "bold",
+  },
+  titleHarmonix:{
+    color: "#f5c842",
+    fontSize: 18,
+    fontWeight: "bold",
+    paddingLeft: 20, 
   },
 });
 
