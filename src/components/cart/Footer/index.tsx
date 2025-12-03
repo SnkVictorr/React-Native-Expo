@@ -4,6 +4,7 @@ import colors from "@/src/app/styles/colors";
 import { OutfitText } from "../../OutfitText";
 import formatter from "@/src/app/utils/formatadorDeMoeda";
 import Frete from "../../Frete";
+import { router } from "expo-router";
 
 interface FooterCarrinhoProps {
   total: number;
@@ -24,8 +25,8 @@ export default class FooterCarrinho extends Component<FooterCarrinhoProps> {
           paddingBottom: 45,
         }}
       >
-        <View style={{ marginBottom: 20 }} >
-        <Frete />
+        <View style={{ marginBottom: 20 }}>
+          <Frete />
         </View>
         <View
           style={{
@@ -44,6 +45,7 @@ export default class FooterCarrinho extends Component<FooterCarrinhoProps> {
         </View>
 
         <TouchableOpacity
+          onPress={() => router.push("/checkout")}
           style={{
             alignItems: "center",
             backgroundColor: colors.principal,

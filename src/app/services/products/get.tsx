@@ -18,9 +18,9 @@ export default async function getProducts(params?: GetProductsParams) {
 
     if (Array.from(query).length === 0) {
       // Se não houver parâmetros, retorna todos os produtos
-      url = `${BASE_URL}/produtos`;
+      url = `${BASE_URL}/produtos/`;
     } else {
-      url = `${BASE_URL}/produtos?${query.toString()}`;
+      url = `${BASE_URL}/produtos?${query.toString()}/`;
     }
     console.log("Fetching products from URL:", url);
     const response = await fetch(url, {

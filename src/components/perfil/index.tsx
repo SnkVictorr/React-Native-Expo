@@ -100,7 +100,7 @@ export default function Perfil() {
         id: user.cliente_id,
         nome,
         cpf,
-        whatsapp: telefone,
+        telefone: telefone,
         email,
       };
 
@@ -133,7 +133,7 @@ export default function Perfil() {
           ...user,
           nome,
           cpf,
-          whatsapp: telefone,
+          telefone: telefone,
           email,
         };
 
@@ -304,6 +304,7 @@ export default function Perfil() {
               onChangeText={setNome}
               placeholder="Seu nome"
               placeholderTextColor="#999"
+              maxLength={150}
             />
 
             <Text style={localStyles.label}>Email</Text>
@@ -315,6 +316,7 @@ export default function Perfil() {
               keyboardType="email-address"
               autoCapitalize="none"
               placeholderTextColor="#999"
+              maxLength={150}
             />
 
             <Text style={localStyles.label}>Senha</Text>
@@ -327,6 +329,7 @@ export default function Perfil() {
                 placeholderTextColor="#999"
                 secureTextEntry={!showPassword}
                 autoCapitalize="none"
+                maxLength={50}
               />
               <TouchableOpacity
                 onPress={() => setShowPassword(!showPassword)}
@@ -351,6 +354,7 @@ export default function Perfil() {
               style={localStyles.input}
               placeholder="000.000.000-00"
               placeholderTextColor="#999"
+              maxLength={15}
             />
 
             <Text style={localStyles.label}>Telefone</Text>
@@ -366,6 +370,7 @@ export default function Perfil() {
               style={localStyles.input}
               placeholder="(00) 00000-0000"
               placeholderTextColor="#999"
+              maxLength={15}
             />
 
             <TouchableOpacity
@@ -400,7 +405,8 @@ export default function Perfil() {
 
           <View style={localStyles.form}>
             <Text style={localStyles.label}>CEP</Text>
-            <TextInput
+            <TextInputMask
+              type={"zip-code"}
               style={localStyles.input}
               value={cep}
               onChangeText={(t) => setCep(t)}
@@ -415,6 +421,7 @@ export default function Perfil() {
               onChangeText={setEndereco}
               placeholder="Rua / Avenida"
               placeholderTextColor="#999"
+              maxLength={200}
             />
 
             <Text style={localStyles.label}>Número</Text>
@@ -424,6 +431,7 @@ export default function Perfil() {
               onChangeText={setNumero}
               placeholder="Número"
               placeholderTextColor="#999"
+              maxLength={10}
             />
 
             <Text style={localStyles.label}>Complemento</Text>
@@ -433,6 +441,7 @@ export default function Perfil() {
               onChangeText={setComplemento}
               placeholder="Apartamento, bloco..."
               placeholderTextColor="#999"
+              maxLength={50}
             />
 
             <Text style={localStyles.label}>Bairro</Text>
@@ -442,6 +451,7 @@ export default function Perfil() {
               onChangeText={setBairro}
               placeholder="Bairro"
               placeholderTextColor="#999"
+              maxLength={150}
             />
 
             <Text style={localStyles.label}>Cidade</Text>
@@ -451,6 +461,7 @@ export default function Perfil() {
               onChangeText={setCidade}
               placeholder="Cidade"
               placeholderTextColor="#999"
+              maxLength={50}
             />
 
             <Text style={localStyles.label}>Estado</Text>
@@ -460,6 +471,7 @@ export default function Perfil() {
               onChangeText={setEstado}
               placeholder="UF"
               placeholderTextColor="#999"
+              maxLength={50}
             />
 
             <TouchableOpacity
@@ -486,6 +498,7 @@ const localStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#000",
+    marginTop: 0,
     padding: 20,
   },
   back: {
@@ -533,6 +546,7 @@ const localStyles = StyleSheet.create({
     borderRadius: 12,
     marginTop: 18,
     alignItems: "center",
+    marginBottom: 30,
   },
   saveText: {
     color: "#000",
