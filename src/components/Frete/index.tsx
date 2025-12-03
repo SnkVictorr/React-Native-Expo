@@ -28,13 +28,14 @@ export default function Frete() {
   console.log(freteData);
 
   return (
-    <View>
+    <View style={{ marginTop: 20 }}>
       <Text
         style={{
           fontSize: 16,
           fontWeight: "500",
           marginTop: 2,
           color: colors.white,
+          marginLeft: 2,
         }}
       >
         Consultar Frete

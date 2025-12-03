@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     zIndex: -1,
     resizeMode: "contain",
     width: "100%",
-    height: 320,
+    height: 310,
   },
   title: {
     color: colors.white,
@@ -64,24 +64,24 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     minHeight: 500,
   },
-  
+
   // Novos estilos para o modal de prévia
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'flex-end',
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "flex-end",
   },
   modalHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: colors.gray[100],
   },
   modalTitle: {
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: "600",
     color: colors.gray[100],
   },
   closeButton: {
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   productInfo: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginBottom: 20,
   },
   modalImage: {
@@ -102,11 +102,11 @@ const styles = StyleSheet.create({
   },
   productDetails: {
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   productName: {
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: "500",
     color: colors.gray[100],
     marginBottom: 4,
   },
@@ -117,13 +117,13 @@ const styles = StyleSheet.create({
   },
   productPrice: {
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: "600",
     color: colors.principal,
   },
   quantitySelector: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingVertical: 16,
     borderTopWidth: 1,
     borderBottomWidth: 1,
@@ -131,12 +131,12 @@ const styles = StyleSheet.create({
   },
   quantityLabel: {
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: "500",
     color: colors.gray[100],
   },
   quantityControls: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 16,
   },
   quantityButton: {
@@ -145,30 +145,30 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     borderWidth: 1,
     borderColor: colors.gray[100],
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   quantityText: {
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: "600",
     color: colors.gray[100],
     minWidth: 40,
-    textAlign: 'center',
+    textAlign: "center",
   },
   totalContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingVertical: 16,
   },
   totalLabel: {
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: "500",
     color: colors.gray[100],
   },
   totalPrice: {
     fontSize: 20,
-    fontWeight: '600',
+    fontWeight: "600",
     color: colors.principal,
   },
   modalFooter: {
@@ -178,24 +178,24 @@ const styles = StyleSheet.create({
   },
   confirmButton: {
     backgroundColor: colors.principal,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     paddingVertical: 16,
     borderRadius: 8,
     gap: 8,
   },
   confirmButtonText: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   continueButton: {
     borderColor: colors.principal,
     borderWidth: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     paddingVertical: 16,
     marginTop: 8,
     borderRadius: 8,
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
   continueButtonText: {
     color: colors.principal,
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 });
 

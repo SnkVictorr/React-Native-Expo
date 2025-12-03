@@ -127,11 +127,13 @@ export default function MainProduct() {
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.imgContainer}>
-          <BackButton style={{ top: 15, left: 15 }} />
-          <FavoriteButton
-            productId={instrumento.id_produto}
-            clienteId={clienteId}
-          />
+          <View style={{ position: "absolute", width: "100%", zIndex: 2 }}>
+            <BackButton style={{ top: 15, left: 15 }} />
+            <FavoriteButton
+              productId={instrumento.id_produto}
+              clienteId={clienteId}
+            />
+          </View>
           <Image
             style={styles.img}
             source={{
@@ -147,7 +149,14 @@ export default function MainProduct() {
               paddingBottom: 7,
             }}
           >
-            <Text style={{ color: colors.gray[400] }}>{instrumento.marca}</Text>
+            <Text
+              style={{
+                color: colors.gray[400],
+                flexGrow: 1,
+              }}
+            >
+              {instrumento.marca}
+            </Text>
             <RatingReadOnly value={4.5} />
           </View>
           <Text style={styles.title}>{instrumento.produto}</Text>
@@ -174,7 +183,9 @@ export default function MainProduct() {
             >
               {formatter.format(precoComDesconto)}
             </Text>
-            <Text style={{ fontSize: 16, color: colors.gray[400] }}>
+            <Text
+              style={{ fontSize: 16, color: colors.gray[400], flexGrow: 1 }}
+            >
               à vista
             </Text>
           </View>
