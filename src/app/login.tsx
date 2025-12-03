@@ -55,7 +55,7 @@ export default function Login() {
     if (biometric.success) {
       const savedToken = await AsyncStorage.getItem("token");
       if (savedToken) {
-        router.push("/(tabs)");
+        router.push("/(tabs)/main");
       }
     }
   };
@@ -80,7 +80,7 @@ export default function Login() {
       await AsyncStorage.setItem("token", data?.token || "TOKEN_FAKE");
       await AsyncStorage.setItem("biometriaAtivada", "true");
       if (data.status === "success") {
-        router.push("/(tabs)");
+        router.push("/(tabs)/main");
       }
     } catch (err) {
       Alert.alert("Erro", "Email ou senha incorretos.");
@@ -103,7 +103,7 @@ export default function Login() {
     if (biometric.success) {
       const savedToken = await AsyncStorage.getItem("token");
       if (savedToken) {
-        router.push("/(tabs)");
+        router.push("/(tabs)/main");
       } else {
         Alert.alert("Erro", "Nenhum login salvo. Use email e senha primeiro.");
       }

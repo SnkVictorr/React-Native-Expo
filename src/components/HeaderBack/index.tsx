@@ -15,8 +15,8 @@ export default class HeaderBack extends Component<HeaderBackProps> {
         style={{
           backgroundColor: colors.background,
           paddingHorizontal: 15,
-          paddingTop: 28,
-          paddingBottom: 14,
+          paddingTop: 8,
+          paddingBottom: 8,
           flexDirection: "row",
           alignItems: "center",
           borderBottomColor: "#c7a31516",
@@ -30,7 +30,8 @@ export default class HeaderBack extends Component<HeaderBackProps> {
             fontSize: 18,
             flex: 1,
             textAlign: "center",
-            marginRight: 32, // ← Compensa o espaço do BackButton
+
+            marginRight: 45, // ← Compensa o espaço do BackButton
           }}
         >
           {this.props.text}

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 import Login from "./login";
 import Dashboard from "./dashboard";
-import HomeScreen from "./main";
+import HomeScreen from "./(tabs)/main";
 import CartScreen from "./(tabs)/carrinho";
 
 export default function Index() {

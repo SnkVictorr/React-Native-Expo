@@ -2,14 +2,17 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   searchContainer: {
-    paddingHorizontal: 25,
-    paddingTop: 20,
-    paddingBottom: 20,
+    flexDirection: "row",
+
+    paddingRight: 20,
+    paddingLeft: 5,
+    paddingTop: 15,
+    paddingBottom: 15,
     borderBottomColor: "#c7a31516",
     borderBottomWidth: 1,
-    marginBottom: 15,
   },
   searchBar: {
+    flexGrow: 1,
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#333",

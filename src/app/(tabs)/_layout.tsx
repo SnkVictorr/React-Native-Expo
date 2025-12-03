@@ -14,22 +14,9 @@ import { useRouter } from "expo-router";
 import React from "react";
 import { useAuth } from "../context/AuthContext";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { OutfitText } from "@/src/components/OutfitText";
 
-function TabIcon({
-  src,
-  label,
-  focused,
-  color,
-  size,
-  onPress,
-}: {
-  src: any;
-  label: string;
-  focused: boolean;
-  color: string;
-  size: number;
-  onPress?: () => void;
-}) {
+function TabIcon({ src, label, focused, color, size, onPress }: any) {
   const underlineAnim = useRef(new Animated.Value(0)).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
@@ -61,7 +48,7 @@ function TabIcon({
         source={src}
         style={{ width: size, height: size, tintColor: color }}
       />
-      <Text style={[styles.label, { color }]}>{label}</Text>
+      <OutfitText style={[styles.label, { color }]}>{label}</OutfitText>
 
       <Animated.View
         style={[
@@ -87,16 +74,12 @@ export default function TabsLayout() {
   const [menuVisible, setMenuVisible] = useState(false);
   const router = useRouter();
   const { user, logout } = useAuth();
-  console.log("Usuário no layout de tabs:", user);
-  // // dados mockados (pode vir da API depois)
-  // const user = {
-  //   name: "Bruno Lobo",
-  //   email: "brunolobo@email.com",
-  // };
   const insets = useSafeAreaInsets();
+
   return (
     <>
       <Tabs
+        initialRouteName="main" // ❗ AQUI DEFINIMOS A TELA INICIAL
         screenOptions={{
           headerShown: false,
           tabBarShowLabel: false,
@@ -109,16 +92,16 @@ export default function TabsLayout() {
             paddingTop: 25,
             bottom: 0,
 
-            // height: 95,
-
             height: 65 + insets.bottom,
             paddingBottom: insets.bottom,
           },
         }}
       >
+        {/* --------- TELA INICIAL (main) --------- */}
         <Tabs.Screen
-          name="index"
+          name="main"
           options={{
+            title: "Início",
             tabBarIcon: ({ color, size, focused }) => (
               <TabIcon
                 src={require("@/assets/images/icones/icone-casa.png")}
@@ -126,12 +109,13 @@ export default function TabsLayout() {
                 color={color}
                 size={24}
                 focused={focused}
-                onPress={() => router.push("/(tabs)")}
+                onPress={() => router.push("/(tabs)/main")}
               />
             ),
           }}
         />
 
+        {/* --------- FAVORITOS --------- */}
         <Tabs.Screen
           name="favoritos"
           options={{
@@ -142,12 +126,13 @@ export default function TabsLayout() {
                 color={color}
                 size={24}
                 focused={focused}
-                onPress={() => router.push("/favoritos")}
+                onPress={() => router.push("/(tabs)/favoritos")}
               />
             ),
           }}
         />
 
+        {/* --------- CARRINHO --------- */}
         <Tabs.Screen
           name="carrinho"
           options={{
@@ -158,12 +143,13 @@ export default function TabsLayout() {
                 color={color}
                 size={24}
                 focused={focused}
-                onPress={() => router.push("/carrinho")}
+                onPress={() => router.push("/(tabs)/carrinho")}
               />
             ),
           }}
         />
 
+        {/* --------- PERFIL --------- */}
         <Tabs.Screen
           name="perfil"
           options={{
@@ -174,9 +160,22 @@ export default function TabsLayout() {
                 color={color}
                 size={24}
                 focused={focused}
-                onPress={() => router.push("/perfil")}
+                onPress={() => router.push("/(tabs)/perfil")}
               />
             ),
+          }}
+        />
+
+        <Tabs.Screen
+          name="ProdutosFiltradosPage"
+          options={{
+            href: null,
+          }}
+        />
+        <Tabs.Screen
+          name="productDetail/[id]"
+          options={{
+            href: null,
           }}
         />
 
@@ -197,11 +196,12 @@ export default function TabsLayout() {
         />
       </Tabs>
 
+      {/* --------- MODAL DO MENU --------- */}
       {/* Modal do Menu */}
       <Modal
         visible={menuVisible}
         animationType="slide"
-        transparent
+        transparent={true}
         onRequestClose={() => setMenuVisible(false)}
       >
         <View style={styles.overlay}>
@@ -227,7 +227,7 @@ export default function TabsLayout() {
             <TouchableOpacity
               onPress={() => {
                 setMenuVisible(false);
-                router.push("/(tabs)");
+                router.push("/(tabs)/main");
               }}
               style={styles.modalItem}
             >
@@ -273,14 +273,15 @@ export default function TabsLayout() {
 
             <TouchableOpacity
               onPress={() => {
-                setMenuVisible(false);
-                router.push("/dashboard");
+                if (user) {
+                  logout();
+                  setMenuVisible(false);
+                  router.push("/main");
+                }
               }}
               style={styles.modalItemLogout}
             >
-              <Text style={[styles.modalText, { color: "red" }]}>
-                🚪 Sair
-              </Text>
+              <Text style={[styles.modalText, { color: "red" }]}>🚪 Sair</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -288,7 +289,6 @@ export default function TabsLayout() {
     </>
   );
 }
-
 const styles = StyleSheet.create({
   item: {
     marginTop: -20,

@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  list: { paddingHorizontal: 12, paddingTop: 12 },
+  list: { paddingTop: 12 },
 });

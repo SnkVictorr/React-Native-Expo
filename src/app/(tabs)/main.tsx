@@ -1,13 +1,26 @@
 import React from "react";
-import { View, StyleSheet, ScrollView, StatusBar, Image, Text, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  StatusBar,
+  Image,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  Pressable,
+} from "react-native";
 import Swiper from "react-native-swiper";
-import ProductList1 from "../components/main/ProductList1";
-import MarcasList from "../components/main/MarcasList";
-import CategoryList from "../components/main/categoryList";
-import SearchBar from "../components/searchBar";
-import getProducts from "./services/products/get";
+import ProductList1 from "../../components/main/ProductList1";
+import MarcasList from "../../components/main/MarcasList";
+import CategoryList from "../../components/main/categoryList";
+
+import getProducts from "../services/products/get";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import stylesSearch from "../../components/searchBar/style";
+import { SafeAreaView } from "react-native-safe-area-context";
+import SearchBar from "@/src/components/searchBar";
 
 const HomeScreen = () => {
   const banners = [
@@ -22,6 +35,7 @@ const HomeScreen = () => {
     try {
       getProducts().then((data) => {
         setProdutos(data);
+        console.log("Produtos carregados:");
       });
     } catch (error) {
       console.error("Erro ao carregar produtos:", error);
@@ -29,17 +43,28 @@ const HomeScreen = () => {
   }, []);
 
   const handleCartPress = () => {
-    router.navigate("./(tabs)/carrinho")
+    router.navigate("./(tabs)/carrinho");
   };
 
   return (
-    <View style={styles.container}>
-      <View style={{ flexDirection: "row", alignItems: "center", gap: 8, justifyContent: "space-between" }}>
-      <Text style={styles.titleHarmonix}>HarmoniX</Text>
-      <TouchableOpacity onPress={handleCartPress}>
-
-      <Ionicons style={{paddingRight: 15}} name="cart" size={26} color="#FFFFFF" />
-      </TouchableOpacity>
+    <SafeAreaView edges={["top"]} style={styles.container}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          gap: 8,
+          justifyContent: "space-between",
+        }}
+      >
+        <Text style={styles.titleHarmonix}>HarmoniX</Text>
+        <TouchableOpacity onPress={handleCartPress}>
+          <Ionicons
+            style={{ paddingRight: 15 }}
+            name="cart"
+            size={26}
+            color="#FFFFFF"
+          />
+        </TouchableOpacity>
       </View>
       <StatusBar barStyle="light-content" backgroundColor="#1a1a1a" />
 
@@ -48,6 +73,27 @@ const HomeScreen = () => {
         contentContainerStyle={{ paddingBottom: 130 }}
       >
         <SearchBar />
+        {/* Search Bar */}
+        {/* <View
+          style={[
+            stylesSearch.searchContainer,
+            { paddingLeft: 20, marginBottom: 15 },
+          ]}
+        >
+          <Pressable
+            style={stylesSearch.searchBar}
+            onPress={() => router.push("/SearchScreen")}
+          >
+            <TextInput
+              placeholder="Buscar produtos..."
+              placeholderTextColor="#888"
+              style={stylesSearch.searchInput}
+              editable={false}
+              pointerEvents="none"
+            />
+            <Ionicons name="search" size={20} color="#888" />
+          </Pressable>
+        </View> */}
 
         {/* Carousel */}
         <View style={[styles.carousel]}>
@@ -110,63 +156,8 @@ const HomeScreen = () => {
         <ProductList1 produtosObj={produtos} />
 
         <CategoryList />
-
-        {/* Categorias Principais */}
-        {/* <View style={styles.categoriesSection}>
-          <Text style={styles.sectionTitle}>Categorias Principais</Text>
-          <View style={styles.categoriesGrid}>
-            <TouchableOpacity style={styles.categoryCard}>
-              <View style={styles.categoryIcon}>
-                <Text style={styles.categoryEmoji}>🎵</Text>
-              </View>
-              <Text style={styles.categoryTitle}>Instrumentos</Text>
-              <Text style={styles.categorySubtitle}>
-                Encontre os melhores instrumentos musicais, com o melhor preço e
-                as melhores recomendações
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.categoryCard}>
-              <View style={styles.categoryIcon}>
-                <Text style={styles.categoryEmoji}>🏷️</Text>
-              </View>
-              <Text style={styles.categoryTitle}>Marcas</Text>
-              <Text style={styles.categorySubtitle}>
-                Encontre as principais marcas fornecedoras de instrumentos
-                musicais do mercado
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View> */}
-        {/* Seção de Destaques */}
-        {/* <View style={styles.featuresSection}>
-          <Text style={styles.sectionTitle}>Destaques</Text>
-          <View style={styles.featuresGrid}>
-            <TouchableOpacity style={styles.featureCard}>
-              <Text style={styles.featureEmoji}>🎸</Text>
-              <Text style={styles.featureTitle}>Guitarras</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.featureCard}>
-              <Text style={styles.featureEmoji}>🥁</Text>
-              <Text style={styles.featureTitle}>Baterias</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.featureCard}>
-              <Text style={styles.featureEmoji}>🎹</Text>
-              <Text style={styles.featureTitle}>Teclados</Text>
-            </TouchableOpacity>r
-            <TouchableOpacity style={styles.featureCard}>
-              <Text style={styles.featureEmoji}>🎤</Text>
-              <Text style={styles.featureTitle}>Microfones</Text>
-            </TouchableOpacity>
-          </View>
-        </View> */}
-        {/* Footer Info */}
-        {/* <View style={styles.footerInfo}>
-          <Text style={styles.footerTitle}>Loja Virtual</Text>
-          <Text style={styles.footerSubtitle}>Telefones:</Text>
-        </View> */}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -174,6 +165,8 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#1a1a1a",
+    flex: 1,
+    paddingTop: 10,
   },
   // header: {
   //   flexDirection: "row",
@@ -376,6 +369,7 @@ const styles = StyleSheet.create({
   },
   wrapper: {},
   carousel: {
+    marginTop: 10,
     marginHorizontal: 10,
     marginBottom: 20,
   },
@@ -398,11 +392,11 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
   },
-  titleHarmonix:{
+  titleHarmonix: {
     color: "#f5c842",
     fontSize: 18,
     fontWeight: "bold",
-    paddingLeft: 20, 
+    paddingLeft: 20,
   },
 });
 

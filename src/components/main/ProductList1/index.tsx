@@ -3,9 +3,26 @@ import React from "react";
 import { styles } from "./style";
 import ProductItem1 from "../ProductItem1";
 import { produtos } from "../../ProductData/data";
+import getProducts from "@/src/app/services/products/get";
 
-
-export default function ProductList({ title, produtosObj }: { title?: string, produtosObj?: any }) {
+export default function ProductList({
+  title,
+  produtosObj,
+}: {
+  title?: string;
+  produtosObj?: any;
+}) {
+  const [produtos, setProdutos] = React.useState([]);
+  React.useEffect(() => {
+    try {
+      getProducts().then((data) => {
+        setProdutos(data);
+        console.log("Produtos carregados:");
+      });
+    } catch (error) {
+      console.error("Erro ao carregar produtos:", error);
+    }
+  }, []);
   
 
   return (

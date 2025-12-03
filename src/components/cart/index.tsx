@@ -12,7 +12,7 @@ export default function Cart() {
 
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{ flex: 1, marginBottom: 10 }}
+        style={{ flex: 1, paddingBottom: 20 }}
       >
         <CardCarrinho />
 

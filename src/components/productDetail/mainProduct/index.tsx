@@ -291,7 +291,9 @@ export default function MainProduct() {
                 />
                 <View style={styles.productDetails}>
                   <Text style={styles.productName}>{instrumento.produto}</Text>
-                  <Text style={styles.productBrand}>{instrumento.marca}</Text>
+                  <Text
+                    style={styles.productBrand}
+                  >{`${instrumento.marca}`}</Text>
                   <Text style={styles.productPrice}>
                     {formatter.format(precoComDesconto)}
                   </Text>

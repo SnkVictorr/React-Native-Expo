@@ -1,7 +1,8 @@
-import { SafeAreaView, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import React, { Component } from "react";
 import Cart from "@/src/components/cart";
 import colors from "../styles/colors";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function CartScreen() {
   return (
@@ -9,8 +10,8 @@ export default function CartScreen() {
       style={{
         backgroundColor: colors.background,
         height: "100%",
-        paddingTop: 30,
       }}
+      edges={["top"]}
     >
       {/* <Image source={require('@/assets/images/logo-gold.png')} style={styles.image}/> */}
       <Cart />

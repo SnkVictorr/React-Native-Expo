@@ -14,12 +14,14 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useAuth } from "../../app/context/AuthContext";
 import { BASE_URL, AUTH_TOKEN } from "../../app/config/api";
 import { Ionicons } from "@expo/vector-icons";
-import { TextInputMask } from 'react-native-masked-text';
+import { TextInputMask } from "react-native-masked-text";
 
 export default function Perfil() {
   const { user, setUser } = useAuth();
 
-  const [section, setSection] = useState<"menu" | "perfil" | "endereco">("menu");
+  const [section, setSection] = useState<"menu" | "perfil" | "endereco">(
+    "menu"
+  );
   const [loading, setLoading] = useState(false);
 
   // ------------ CAMPOS DO PERFIL ------------
@@ -78,15 +80,15 @@ export default function Perfil() {
       Alert.alert("Atenção", "Nome não pode ficar vazio.");
       return;
     }
-    if (!email.trim()){
+    if (!email.trim()) {
       Alert.alert("Atenção", "Email não pode ficar vazio.");
       return;
     }
-    if (!cpf.trim()){
+    if (!cpf.trim()) {
       Alert.alert("Atenção", "CPF não pode ficar vazio.");
       return;
     }
-    if (!telefone.trim()){
+    if (!telefone.trim()) {
       Alert.alert("Atenção", "Telefone não pode ficar vazio.");
       return;
     }
@@ -160,7 +162,10 @@ export default function Perfil() {
       // adaptado para enviar o objeto endereco
       const res = await fetch(`${BASE_URL}/clientes/`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${AUTH_TOKEN}`,
+        },
         body: JSON.stringify({
           id: user.cliente_id,
           endereco: {
@@ -208,31 +213,35 @@ export default function Perfil() {
   if (section === "menu") {
     return (
       <SafeAreaView style={localStyles.container}>
-
         {/* ----------- AVATAR ----------- */}
         <View style={localStyles.avatarContainer}>
           <Image
             source={
-            selectedImageUri
-            ? { uri: selectedImageUri }
-            : user?.imagem
-            ? { uri: `data:image/jpeg;base64,${user.imagem}` }
-            : require("../../../assets/images/default-avatar.png")
-          }
-          style={localStyles.avatar}
+              selectedImageUri
+                ? { uri: selectedImageUri }
+                : user?.imagem
+                ? { uri: `data:image/jpeg;base64,${user.imagem}` }
+                : require("../../../assets/images/default-avatar.png")
+            }
+            style={localStyles.avatar}
           />
-          <Text style={{color: "#ffffff", fontSize: 16, fontWeight: "bold", marginTop: 10}}>Olá, {user.nome}</Text>
+          <Text
+            style={{
+              color: "#ffffff",
+              fontSize: 16,
+              fontWeight: "bold",
+              marginTop: 10,
+            }}
+          >
+            Olá, {user.nome}
+          </Text>
 
           {uploading && (
-          <ActivityIndicator
-          color="#D4AF37"
-          style={{ marginTop: 6 }}
-          />
+            <ActivityIndicator color="#D4AF37" style={{ marginTop: 6 }} />
           )}
         </View>
         <Text style={localStyles.title}>Configurações</Text>
 
-        
         <TouchableOpacity
           style={localStyles.option}
           onPress={() => setSection("perfil")}
@@ -256,136 +265,135 @@ export default function Perfil() {
 
   // ---------------------- PERFIL ----------------------
   if (section === "perfil") {
-  // pegar inicial do usuário
-  const inicial = nome?.trim()?.charAt(0)?.toUpperCase() || "?";
+    // pegar inicial do usuário
+    const inicial = nome?.trim()?.charAt(0)?.toUpperCase() || "?";
 
-  return (
-    <SafeAreaView style={localStyles.container}>
-      <ScrollView>
+    return (
+      <SafeAreaView style={localStyles.container}>
+        <ScrollView>
+          <TouchableOpacity onPress={() => setSection("menu")}>
+            <Text style={localStyles.back}>
+              <Ionicons name="arrow-back" size={24} color="#D4AF37" />
+            </Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setSection("menu")}>
-          <Text style={localStyles.back}>
-            <Ionicons name="arrow-back" size={24} color="#D4AF37" />
-          </Text>
-        </TouchableOpacity>
-
-        {/* ----------- AVATAR ----------- */}
-<View style={localStyles.avatarContainer}>
-    <Image
-      source={
-        selectedImageUri
-        ? { uri: selectedImageUri }
-        : user?.imagem
-        ? { uri: `data:image/jpeg;base64,${user.imagem}` }
-        : require("../../../assets/images/default-avatar.png")
-      }
-      style={localStyles.avatar}
-      />
-
-  {uploading && (
-    <ActivityIndicator
-      color="#D4AF37"
-      style={{ marginTop: 6 }}
-    />
-  )}
-</View>
-        <Text style={localStyles.title}>Editar Perfil</Text>
-
-        <View style={localStyles.form}>
-          <Text style={localStyles.label}>Nome</Text>
-          <TextInput
-            style={localStyles.input}
-            value={nome}
-            onChangeText={setNome}
-            placeholder="Seu nome"
-            placeholderTextColor="#999"
-          />
-
-          <Text style={localStyles.label}>Email</Text>
-          <TextInput
-            style={localStyles.input}
-            value={email}
-            onChangeText={setEmail}
-            placeholder="email@exemplo.com"
-            keyboardType="email-address"
-            autoCapitalize="none"
-            placeholderTextColor="#999"
-          />
-
-          <Text style={localStyles.label}>Senha</Text>
-          <View style={localStyles.passwordContainer}>
-            <TextInput
-              style={localStyles.passwordInput}
-              value={senha}
-              onChangeText={setSenha}
-              placeholder="Deixe em branco para manter a atual"
-              placeholderTextColor="#999"
-              secureTextEntry={!showPassword}
-              autoCapitalize="none"
+          {/* ----------- AVATAR ----------- */}
+          <View style={localStyles.avatarContainer}>
+            <Image
+              source={
+                selectedImageUri
+                  ? { uri: selectedImageUri }
+                  : user?.imagem
+                  ? { uri: `data:image/jpeg;base64,${user.imagem}` }
+                  : require("../../../assets/images/default-avatar.png")
+              }
+              style={localStyles.avatar}
             />
-            <TouchableOpacity
-              onPress={() => setShowPassword(!showPassword)}
-              style={localStyles.eyeButton}
-              accessibilityLabel={showPassword ? "Ocultar senha" : "Mostrar senha"}
-            >
-              {showPassword ? (
-                <Ionicons name="eye-off" size={18} color="#fff" />
-              ) : (
-                <Ionicons name="eye" size={18} color="#fff" />
-              )}
-            </TouchableOpacity>
+
+            {uploading && (
+              <ActivityIndicator color="#D4AF37" style={{ marginTop: 6 }} />
+            )}
           </View>
+          <Text style={localStyles.title}>Editar Perfil</Text>
 
-          <Text style={localStyles.label}>CPF</Text>
-          <TextInputMask
-            type={'cpf'}
-            value={cpf}
-            onChangeText={text => setCpf(text)}
-            style={localStyles.input}
-            placeholder="000.000.000-00"
-            placeholderTextColor="#999"
-          />
+          <View style={localStyles.form}>
+            <Text style={localStyles.label}>Nome</Text>
+            <TextInput
+              style={localStyles.input}
+              value={nome}
+              onChangeText={setNome}
+              placeholder="Seu nome"
+              placeholderTextColor="#999"
+            />
 
-          <Text style={localStyles.label}>Telefone</Text>
-          <TextInputMask
-            type={'cel-phone'}
-            options={{
-            maskType: 'BRL',
-            withDDD: true,
-            dddMask: '(99) '
-            }}
+            <Text style={localStyles.label}>Email</Text>
+            <TextInput
+              style={localStyles.input}
+              value={email}
+              onChangeText={setEmail}
+              placeholder="email@exemplo.com"
+              keyboardType="email-address"
+              autoCapitalize="none"
+              placeholderTextColor="#999"
+            />
+
+            <Text style={localStyles.label}>Senha</Text>
+            <View style={localStyles.passwordContainer}>
+              <TextInput
+                style={localStyles.passwordInput}
+                value={senha}
+                onChangeText={setSenha}
+                placeholder="Deixe em branco para manter a atual"
+                placeholderTextColor="#999"
+                secureTextEntry={!showPassword}
+                autoCapitalize="none"
+              />
+              <TouchableOpacity
+                onPress={() => setShowPassword(!showPassword)}
+                style={localStyles.eyeButton}
+                accessibilityLabel={
+                  showPassword ? "Ocultar senha" : "Mostrar senha"
+                }
+              >
+                {showPassword ? (
+                  <Ionicons name="eye-off" size={18} color="#fff" />
+                ) : (
+                  <Ionicons name="eye" size={18} color="#fff" />
+                )}
+              </TouchableOpacity>
+            </View>
+
+            <Text style={localStyles.label}>CPF</Text>
+            <TextInputMask
+              type={"cpf"}
+              value={cpf}
+              onChangeText={(text) => setCpf(text)}
+              style={localStyles.input}
+              placeholder="000.000.000-00"
+              placeholderTextColor="#999"
+            />
+
+            <Text style={localStyles.label}>Telefone</Text>
+            <TextInputMask
+              type={"cel-phone"}
+              options={{
+                maskType: "BRL",
+                withDDD: true,
+                dddMask: "(99) ",
+              }}
               value={telefone}
-              onChangeText={text => setTelefone(text)}
+              onChangeText={(text) => setTelefone(text)}
               style={localStyles.input}
               placeholder="(00) 00000-0000"
               placeholderTextColor="#999"
-          />
+            />
 
-          <TouchableOpacity
-            style={localStyles.saveBtn}
-            onPress={handleSaveProfile}
-            disabled={loading}
-          >
-            {loading ? (
-              <ActivityIndicator color="#000" />
-            ) : (
-              <Text style={localStyles.saveText}>Salvar</Text>
-            )}
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
+            <TouchableOpacity
+              style={localStyles.saveBtn}
+              onPress={handleSaveProfile}
+              disabled={loading}
+            >
+              {loading ? (
+                <ActivityIndicator color="#000" />
+              ) : (
+                <Text style={localStyles.saveText}>Salvar</Text>
+              )}
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
 
   // ---------------------- ENDEREÇO ----------------------
   if (section === "endereco") {
     return (
       <SafeAreaView style={localStyles.container}>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <TouchableOpacity onPress={() => setSection("menu")}>
-            <Text style={localStyles.back}><Ionicons name="arrow-back" size={24} color="#D4AF37" /></Text>
+            <Text style={localStyles.back}>
+              <Ionicons name="arrow-back" size={24} color="#D4AF37" />
+            </Text>
           </TouchableOpacity>
 
           <Text style={localStyles.title}>Endereço</Text>
@@ -552,30 +560,29 @@ const localStyles = StyleSheet.create({
     padding: 6,
   },
   avatarContainer: {
-  alignItems: "center",
-  marginTop: 10,
-  marginBottom: 10,
-},
+    alignItems: "center",
+    marginTop: 10,
+    marginBottom: 10,
+  },
 
-avatarCircle: {
-  width: 90,
-  height: 90,
-  borderRadius: 45,
-  backgroundColor: "#D4AF37",
-  justifyContent: "center",
-  alignItems: "center",
-},
+  avatarCircle: {
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    backgroundColor: "#D4AF37",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 
-avatarText: {
-  color: "#000",
-  fontSize: 38,
-  fontWeight: "700",
-},
+  avatarText: {
+    color: "#000",
+    fontSize: 38,
+    fontWeight: "700",
+  },
 
-avatar: {
-  width: 90,
-  height: 90,
-  borderRadius: 45,
-},
-
+  avatar: {
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+  },
 });

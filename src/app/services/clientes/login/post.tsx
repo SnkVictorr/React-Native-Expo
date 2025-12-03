@@ -8,7 +8,7 @@ export async function makeLogin({
   password: string;
 }) {
   try {
-    const res = await fetch(`${BASE_URL}/login/`, {
+    const res = await fetch(`${BASE_URL}/login/index.php`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -21,7 +21,6 @@ export async function makeLogin({
     });
 
     const data = await res.json();
-
 
     if (!res.ok) {
       throw new Error(data?.error || data?.message || "Erro no login");

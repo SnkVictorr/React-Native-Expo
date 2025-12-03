@@ -3,13 +3,18 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Card } from "../../ui/card";
 import { QuicheMedium } from "../../Quiche/quiche-medium";
+import { useRouter } from "expo-router";
+
+type RootStackParamList = {
+  ProdutosFiltradosPage: { title: string; idPrincipal: number };
+};
 
 interface CategoryCardProps {
   name: string;
   icon: any; // pode ser um require ou { uri: 'url' }
   image: any; // pode ser um require ou { uri: 'url' }
   productCount: number;
-  onPress?: () => void;
+  id_principal?: number;
 }
 
 export const CategoryItem = ({
@@ -17,11 +22,20 @@ export const CategoryItem = ({
   icon,
   image,
   productCount,
-  onPress,
+  id_principal,
 }: CategoryCardProps) => {
+  const router = useRouter();
   return (
     <Card style={styles.card}>
-      <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={() =>
+          router.push({
+            pathname: "/ProdutosFiltradosPage",
+            params: { id_principal: id_principal || "", title: name || "" },
+          })
+        }
+      >
         <View style={styles.imageContainer}>
           {/* Background Image */}
           <Image source={image} style={styles.image} />

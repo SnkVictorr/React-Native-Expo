@@ -77,7 +77,9 @@ export default function Layout() {
             headerShown: false,
             contentStyle: { backgroundColor: "#1a1a1a", flex: 1 },
           }}
-        />
+        >
+          <Stack.Screen name="(tabs)/" options={{ headerShown: false }} />
+        </Stack>
       </AuthProvider>
     </SafeAreaProvider>
   );

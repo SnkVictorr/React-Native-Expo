@@ -2,8 +2,8 @@ import { FlatList, Text, View } from "react-native";
 import React, { Component, use, useCallback, useEffect } from "react";
 import colors from "../styles/colors";
 import HeaderBack from "@/src/components/HeaderBack";
-import ProductList from "@/src/components/main/ProductList1";
-import { styles } from "../products/style";
+
+import { styles } from "@/src/components/produtosFiltro/style";
 // import { produtos } from "@/src/components/ProductData/data";
 import ProductItem1 from "@/src/components/main/ProductItem1";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -22,61 +22,81 @@ export default function Favoritos({}) {
 
   // logado (exemplo estático)
   useFocusEffect(
-  useCallback(() => {
-    const fetchFavoritos = async () => {
-      try {
-        if (!clienteId) {
-          console.warn("Cliente não encontrado.");
-          return;
+    useCallback(() => {
+      const fetchFavoritos = async () => {
+        try {
+          if (!clienteId) {
+            console.warn("Cliente não encontrado.");
+            return;
+          }
+
+          const data = await _favoritosService.getByClienteId(clienteId);
+          setProdutos(data);
+          console.log("Favoritos carregados:", data);
+        } catch (error) {
+          console.error("Erro ao buscar favoritos:", error);
         }
+      };
 
-        const data = await _favoritosService.getByClienteId(clienteId);
-        setProdutos(data);
-        console.log("Favoritos carregados:", data);
-      } catch (error) {
-        console.error("Erro ao buscar favoritos:", error);
-      }
-    };
+      fetchFavoritos();
+    }, [clienteId])
+  );
 
-    fetchFavoritos();
-  }, [clienteId])
-);
-  console.log(produtos);
+  const formatData = (data: any, numColumns: number) => {
+    if (data.length === 0) return data;
+    const numberOfFullRows = Math.floor(data.length / numColumns);
+
+    let lastRowElements = data.length - numberOfFullRows * numColumns;
+
+    while (lastRowElements !== numColumns && lastRowElements !== 0) {
+      data.push({ id_produto: `blank-${lastRowElements}`, empty: true });
+      lastRowElements++;
+    }
+
+    return data;
+  };
+
   return (
-    <View
+    <SafeAreaView
+      edges={["top"]}
       style={{
         backgroundColor: colors.background,
         flex: 1,
-        paddingTop: 30,
       }}
     >
       <HeaderBack text="Favoritos" />
 
       <FlatList
         style={[styles.list]} // Estilo da lista
-        data={produtos} // Onde os dados são passados como array na props data
+        contentContainerStyle={{ paddingBottom: 20 }}
+        data={formatData(produtos, 2)} // Onde os dados são passados como array na props data
         showsHorizontalScrollIndicator={false} // para esconder a barra de rolagem
         keyExtractor={(item) => item.id_produto.toString()} // para extrair a chave de cada item
         numColumns={2}
-        renderItem={({ item }) => (
-          <ProductItem1
-            id={item.id_produto}
-            nome={item.produto}
-            preco={item.preco}
-            imagem={item.imagem}
-            precoComDesconto={item.preco - item.desconto}
-            newStyles={{
-              marginBottom: 10,
-              alignItems: "center",
-              flex: 1,
-            }}
-            productItemStyle={{
-              width: "95%",
-              marginRight: 0,
-            }}
-          />
-        )} // para renderizar cada item da lista
+        columnWrapperStyle={{ paddingHorizontal: 15 }}
+        renderItem={({ item }) =>
+          item.empty ? (
+            <View style={{ flex: 1, marginBottom: 10 }} />
+          ) : (
+            <ProductItem1
+              id={item.id_produto}
+              nome={item.produto}
+              preco={item.preco}
+              imagem={item.imagem}
+              precoComDesconto={item.preco - item.desconto}
+              newStyles={{
+                marginBottom: 10,
+                alignItems: "center",
+                flex: 1,
+              }}
+              productItemStyle={{
+                width: "95%",
+                marginRight: 0,
+              }}
+            />
+          )
+        } // para renderizar cada item da lista
       />
-    </View>
+    </SafeAreaView>
   );
 }
