@@ -424,7 +424,108 @@ export default function Perfil() {
 
   // ---------------------- ENDEREÇO ----------------------
   if (section === "endereco") {
-  
+    return (
+      <SafeAreaView edges={["top"]} style={localStyles.container}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <TouchableOpacity onPress={() => setSection("menu")}>
+            <Text style={localStyles.back}>
+              <Ionicons name="arrow-back" size={24} color="#D4AF37" />
+            </Text>
+          </TouchableOpacity>
+
+          <Text style={localStyles.title}>Endereço</Text>
+
+          <View style={localStyles.form}>
+            <Text style={localStyles.label}>CEP</Text>
+            <TextInputMask
+              type={"zip-code"}
+              style={localStyles.input}
+              value={cep}
+              onChangeText={(t) => {
+                setCep(t);
+                if (t.length === 9) {
+                  handleBuscarCep(t);
+                }
+              }}
+              placeholder="00000-000"
+              placeholderTextColor="#999"
+            />
+
+            <Text style={localStyles.label}>Endereço</Text>
+            <TextInput
+              style={localStyles.input}
+              value={endereco}
+              onChangeText={setEndereco}
+              placeholder="Rua / Avenida"
+              placeholderTextColor="#999"
+              maxLength={200}
+            />
+
+            <Text style={localStyles.label}>Número</Text>
+            <TextInput
+              style={localStyles.input}
+              value={numero}
+              onChangeText={setNumero}
+              placeholder="Número"
+              placeholderTextColor="#999"
+              maxLength={10}
+            />
+
+            <Text style={localStyles.label}>Complemento</Text>
+            <TextInput
+              style={localStyles.input}
+              value={complemento}
+              onChangeText={setComplemento}
+              placeholder="Apartamento, bloco..."
+              placeholderTextColor="#999"
+              maxLength={50}
+            />
+
+            <Text style={localStyles.label}>Bairro</Text>
+            <TextInput
+              style={localStyles.input}
+              value={bairro}
+              onChangeText={setBairro}
+              placeholder="Bairro"
+              placeholderTextColor="#999"
+              maxLength={150}
+            />
+
+            <Text style={localStyles.label}>Cidade</Text>
+            <TextInput
+              style={localStyles.input}
+              value={cidade}
+              onChangeText={setCidade}
+              placeholder="Cidade"
+              placeholderTextColor="#999"
+              maxLength={50}
+            />
+
+            <Text style={localStyles.label}>Estado</Text>
+            <TextInput
+              style={localStyles.input}
+              value={estado}
+              onChangeText={setEstado}
+              placeholder="UF"
+              placeholderTextColor="#999"
+              maxLength={50}
+            />
+
+            <TouchableOpacity
+              style={localStyles.saveBtn}
+              onPress={handleSaveAddress}
+              disabled={loading}
+            >
+              {loading ? (
+                <ActivityIndicator color="#000" />
+              ) : (
+                <Text style={localStyles.saveText}>Salvar Endereço</Text>
+              )}
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    );
   }
 
   return null;
