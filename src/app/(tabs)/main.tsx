@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   TextInput,
   Pressable,
+  BackHandler,
 } from "react-native";
 import Swiper from "react-native-swiper";
 import ProductList1 from "../../components/main/ProductList1";
@@ -46,6 +47,19 @@ const HomeScreen = () => {
     router.navigate("./(tabs)/carrinho");
   };
 
+  useEffect(() => {
+    const backAction = () => {
+      BackHandler.exitApp(); // Fecha o app ao pressionar o botão de voltar
+      return true; // Impede o comportamento padrão (voltar)
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
   return (
     <SafeAreaView edges={["top"]} style={styles.container}>
       <View
@@ -66,35 +80,13 @@ const HomeScreen = () => {
           />
         </TouchableOpacity>
       </View>
+      <SearchBar />
       <StatusBar barStyle="light-content" backgroundColor="#1a1a1a" />
 
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 130 }}
       >
-        <SearchBar />
-        {/* Search Bar */}
-        {/* <View
-          style={[
-            stylesSearch.searchContainer,
-            { paddingLeft: 20, marginBottom: 15 },
-          ]}
-        >
-          <Pressable
-            style={stylesSearch.searchBar}
-            onPress={() => router.push("/SearchScreen")}
-          >
-            <TextInput
-              placeholder="Buscar produtos..."
-              placeholderTextColor="#888"
-              style={stylesSearch.searchInput}
-              editable={false}
-              pointerEvents="none"
-            />
-            <Ionicons name="search" size={20} color="#888" />
-          </Pressable>
-        </View> */}
-
         {/* Carousel */}
         <View style={[styles.carousel]}>
           <Swiper

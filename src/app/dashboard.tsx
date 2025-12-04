@@ -60,10 +60,10 @@ const styles = StyleSheet.create({
   },
   botao: {
     backgroundColor: "#d4a017",
-    paddingHorizontal: 15,
-    paddingVertical: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 14,
     borderRadius: 8,
-    minWidth: 90, // tamanho mínimo
+    minWidth: 120, // <-- AQUI
     alignItems: "center",
   },
 });

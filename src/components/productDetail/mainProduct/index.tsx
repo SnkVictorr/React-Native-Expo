@@ -30,7 +30,7 @@ import Frete from "../../Frete";
 import { BASE_URL } from "@/src/app/config/api";
 import formatter from "@/src/app/utils/formatadorDeMoeda";
 import { addToCart } from "@/src/app/services/carrinho/post";
-import { getClienteId } from "@/src/app/services/clientes/get";
+import AddToCartProcessing from "@/src/components/addToCartProcessing";
 import { useAuth } from "@/src/app/context/AuthContext";
 
 export default function MainProduct() {
@@ -42,8 +42,8 @@ export default function MainProduct() {
   const clienteId = user?.cliente_id || null;
   const [quantidade, setQuantidade] = useState(1);
   const [modalVisible, setModalVisible] = useState(false); // Estado para controlar o modal de prévia
-  const router = useRouter();
 
+  const [processing, setProcessing] = useState(false);
   useEffect(() => {
     const loadProduct = async () => {
       try {
@@ -71,9 +71,13 @@ export default function MainProduct() {
       }
       const success = await addToCart(instrumento, clienteId, quantidade);
       if (success) {
-        alert("Produto adicionado ao carrinho!");
+        setProcessing(true);
+
         setModalVisible(false); // Fecha o modal após adicionar
         setQuantidade(1); // Reseta a quantidade
+        setTimeout(() => {
+          setProcessing(false);
+        }, 2000);
       } else {
         setError("Falha ao adicionar o produto ao carrinho.");
       }
@@ -354,20 +358,21 @@ export default function MainProduct() {
                   Adicionar ao Carrinho
                 </Text>
               </Pressable>
-              {/* Botão de continuar compra */}
+              {/* Botão de continuar compra
               <Pressable
                 style={styles.continueButton}
                 onPress={handleAddToCart}
               >
                 <ShoppingBag size={20} color={colors.principal} />
-                <Text style={styles.continueButtonText}>
+                <Text style={styles.continueButtonText} on>
                   Continuar Comprando
                 </Text>
-              </Pressable>
+              </Pressable> */}
             </View>
           </View>
         </View>
       </Modal>
+      <AddToCartProcessing visible={processing} />
     </View>
   );
 }

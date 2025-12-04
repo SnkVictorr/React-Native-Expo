@@ -18,8 +18,6 @@ export default function Cart() {
 
         <View
           style={{
-            borderBottomWidth: 1,
-            borderColor: colors.gray[600],
             marginTop: 10,
           }}
         />

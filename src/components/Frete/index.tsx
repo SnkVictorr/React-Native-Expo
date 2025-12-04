@@ -3,6 +3,7 @@ import React, { Component, useEffect, useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { TextInputMask } from "react-native-masked-text";
 import colors from "@/src/app/styles/colors";
+import { OutfitText } from "../OutfitText";
 
 export default function Frete() {
   const [cep, setCep] = useState<string>("");
@@ -28,18 +29,18 @@ export default function Frete() {
   console.log(freteData);
 
   return (
-    <View style={{ marginTop: 20 }}>
-      <Text
+    <View style={{ marginTop: 15 }}>
+      <OutfitText
         style={{
           fontSize: 16,
           fontWeight: "500",
           marginTop: 2,
-          color: colors.white,
+          color: colors.gray[300],
           marginLeft: 2,
         }}
       >
-        Consultar Frete
-      </Text>
+        Calcular Frete
+      </OutfitText>
       <View
         style={{
           flexDirection: "row",
@@ -49,12 +50,12 @@ export default function Frete() {
           borderRadius: 6,
           backgroundColor: "#363535",
           paddingHorizontal: 8,
-          marginTop: 12,
+          marginTop: 8,
         }}
       >
         <MaterialIcons
           name="location-pin"
-          size={24}
+          size={22}
           color={colors.principal}
           style={{ marginRight: 4 }}
         />
@@ -73,7 +74,7 @@ export default function Frete() {
           style={{
             flex: 1,
             color: "#fff",
-            paddingVertical: 10,
+            paddingVertical: 8,
           }}
         />
       </View>

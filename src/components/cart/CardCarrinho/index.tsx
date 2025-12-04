@@ -21,29 +21,29 @@ export default function CardCarrinho() {
 
   const [loading, setLoading] = useState<boolean>(true);
 
-useFocusEffect(
-  useCallback(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
+  useFocusEffect(
+    useCallback(() => {
+      const fetchData = async () => {
+        try {
+          setLoading(true);
 
-        if (clienteId) {
-          const carrinhoCarregado = await fetchCarrinho(clienteId);
-          setCarrinho(carrinhoCarregado || []);
-        } else {
+          if (clienteId) {
+            const carrinhoCarregado = await fetchCarrinho(clienteId);
+            setCarrinho(carrinhoCarregado || []);
+          } else {
+            setCarrinho([]);
+          }
+        } catch (err) {
+          console.error("Erro ao carregar dados:", err);
           setCarrinho([]);
+        } finally {
+          setLoading(false);
         }
-      } catch (err) {
-        console.error("Erro ao carregar dados:", err);
-        setCarrinho([]);
-      } finally {
-        setLoading(false);
-      }
-    };
+      };
 
-    fetchData();
-  }, [clienteId]) // <--- dependência correta
-);
+      fetchData();
+    }, [clienteId]) // <--- dependência correta
+  );
 
   const removerDoCarrinho = (
     index: number,
@@ -204,13 +204,25 @@ useFocusEffect(
               </View>
             </View>
           )}
-          contentContainerStyle={{ paddingBottom: 20 }}
+          contentContainerStyle={{ paddingBottom: 10 }}
           showsVerticalScrollIndicator={false}
         />
       </View>
-
+      <View
+        style={{
+          backgroundColor: "#111111",
+          paddingBottom: 15,
+          borderColor: "#333333",
+          borderWidth: 1,
+          marginBottom: 15,
+          borderRadius: 8,
+          paddingHorizontal: 20,
+        }}
+      >
+        <Frete />
+      </View>
       {/* 🔥 ENVIA O TOTAL PARA O FOOTER */}
-      <FooterCarrinho total={total} />
+      <FooterCarrinho total={total} carrinho={carrinho} clienteId={clienteId} />
     </>
   );
 }

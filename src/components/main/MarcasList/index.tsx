@@ -30,7 +30,7 @@ export default function MarcasList() {
         >
           Marcas de Qualidade
         </OutfitText>
-        <VerTudo text="Ver todas" />
+       
       </View>
 
       <FlatList

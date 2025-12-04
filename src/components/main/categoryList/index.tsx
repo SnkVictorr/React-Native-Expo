@@ -50,7 +50,6 @@ export default function CategoryList() {
       >
         {" "}
         <Title conteudo="Categorias"></Title>
-        <VerTudo text="Ver todas" />
       </View>
 
       <FlatList

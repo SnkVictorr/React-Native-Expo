@@ -5,57 +5,65 @@ import { OutfitText } from "../../OutfitText";
 import formatter from "@/src/app/utils/formatadorDeMoeda";
 import Frete from "../../Frete";
 import { router } from "expo-router";
+import { editCart } from "@/src/app/services/carrinho/put";
+import ItemCarrinho from "@/src/app/types/carrinho";
 
 interface FooterCarrinhoProps {
   total: number;
+  carrinho: ItemCarrinho[] | null;
+  clienteId: number | null;
 }
 
-export default class FooterCarrinho extends Component<FooterCarrinhoProps> {
-  render() {
-    const { total } = this.props;
-
-    return (
-      <SafeAreaView
+export default function FooterCarrinho(props: FooterCarrinhoProps) {
+  const { total, carrinho, clienteId } = props;
+  return (
+    <SafeAreaView
+      style={{
+        paddingHorizontal: 20,
+        borderWidth: 1,
+        borderColor: colors.gray[700],
+        borderRadius: 8,
+        backgroundColor: "#111111",
+        zIndex: 50,
+        paddingBottom: 15,
+        paddingTop: 15,
+      }}
+    >
+      <View
         style={{
-          padding: 20,
-          borderTopWidth: 1,
-          borderTopColor: colors.principal,
-          backgroundColor: colors.background,
-          zIndex: 50,
-          paddingBottom: 45,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          paddingBottom: 15,
+          paddingTop: 15,
         }}
       >
-        <View style={{ marginBottom: 20 }}>
-          <Frete />
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            paddingBottom: 20,
-          }}
-        >
-          <OutfitText style={{ fontSize: 16, color: colors.white }}>
-            Total
-          </OutfitText>
+        <OutfitText style={{ fontSize: 16, color: colors.white }}>
+          Total
+        </OutfitText>
 
-          <OutfitText style={{ fontSize: 16, color: colors.white }}>
-            {formatter.format(total)}
-          </OutfitText>
-        </View>
+        <OutfitText style={{ fontSize: 16, color: colors.white }}>
+          {formatter.format(total)}
+        </OutfitText>
+      </View>
 
-        <TouchableOpacity
-          onPress={() => router.push("/checkout")}
-          style={{
-            alignItems: "center",
-            backgroundColor: colors.principal,
-            padding: 13,
-            borderRadius: 15,
-          }}
-        >
-          <OutfitText style={{ color: colors.white }}>Continuar</OutfitText>
-        </TouchableOpacity>
-      </SafeAreaView>
-    );
-  }
+      <TouchableOpacity
+        onPress={() => {
+          if (Array.isArray(carrinho) && carrinho.length > 0) {
+            carrinho.forEach((item) =>
+              editCart(item.id_produto, clienteId as number, item.quantidade)
+            );
+          }
+          router.push("/checkout");
+        }}
+        style={{
+          alignItems: "center",
+          backgroundColor: colors.principal,
+          padding: 13,
+          borderRadius: 15,
+        }}
+      >
+        <OutfitText style={{ color: colors.white }}>Continuar</OutfitText>
+      </TouchableOpacity>
+    </SafeAreaView>
+  );
 }

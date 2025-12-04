@@ -7,6 +7,7 @@ import {
   Animated,
   Modal,
   TouchableOpacity,
+  Pressable,
 } from "react-native";
 import { useEffect, useRef, useState } from "react";
 import colors from "@/src/app/styles/colors";
@@ -210,7 +211,10 @@ export default function TabsLayout() {
 
             {/* Perfil do usuário */}
             {user ? (
-              <View style={styles.profileContainer}>
+              <Pressable
+                onPress={() => router.push("/(tabs)/perfil")}
+                style={styles.profileContainer}
+              >
                 <View style={styles.avatar}>
                   <Text style={styles.avatarText}>
                     {user.nome.charAt(0).toUpperCase()}
@@ -220,7 +224,7 @@ export default function TabsLayout() {
                   <Text style={styles.userName}>{user.nome}</Text>
                   <Text style={styles.userEmail}>{user.email}</Text>
                 </View>
-              </View>
+              </Pressable>
             ) : null}
 
             {/* Itens de navegação */}

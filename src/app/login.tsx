@@ -18,6 +18,7 @@ import { router } from "expo-router";
 import Input from "../components/input";
 import { makeLogin } from "./services/clientes/login/post";
 import { useAuth } from "./context/AuthContext";
+import SignGoogle from "./SignGoogle";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -80,7 +81,7 @@ export default function Login() {
       await AsyncStorage.setItem("token", data?.token || "TOKEN_FAKE");
       await AsyncStorage.setItem("biometriaAtivada", "true");
       if (data.status === "success") {
-        router.push("/(tabs)/main");
+        router.replace("/(tabs)/main");
       }
     } catch (err) {
       Alert.alert("Erro", "Email ou senha incorretos.");
@@ -103,7 +104,7 @@ export default function Login() {
     if (biometric.success) {
       const savedToken = await AsyncStorage.getItem("token");
       if (savedToken) {
-        router.push("/(tabs)/main");
+        router.replace("/(tabs)/main");
       } else {
         Alert.alert("Erro", "Nenhum login salvo. Use email e senha primeiro.");
       }
@@ -205,19 +206,7 @@ export default function Login() {
                 {/* Botões de redes sociais */}{" "}
                 <View style={styles.socialContainer}>
                   {" "}
-                  <TouchableOpacity
-                    style={styles.socialButton}
-                    onPress={handleGoogleLogin}
-                  >
-                    {" "}
-                    <View style={styles.googleIcon}>
-                      {" "}
-                      <Image
-                        source={require("../../assets/images/google.png")}
-                        style={styles.googleImage}
-                      />{" "}
-                    </View>{" "}
-                  </TouchableOpacity>{" "}
+                  <SignGoogle />{" "}
                   <TouchableOpacity
                     style={styles.socialButton}
                     onPress={handleFacebookLogin}
@@ -349,18 +338,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  googleIcon: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 100,
-  },
-  googleImage: {
-    width: 50,
-    height: 50,
-  },
+  // googleIcon: {
+  //   width: 50,
+  //   height: 50,
+  //   borderRadius: 25,
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   marginRight: 100,
+  // },
+  // googleImage: {
+  //   width: 50,
+  //   height: 50,
+  // },
   facebookIcon: {
     width: 50,
     height: 50,

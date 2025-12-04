@@ -13,14 +13,20 @@ import formatter from "@/src/app/utils/formatadorDeMoeda";
 import { BASE_URL } from "@/src/app/config/api";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import { Produto } from "./types/produto";
+import { SafeAreaView } from "react-native-safe-area-context";
+import PaymentProcessing from "@/src/components/PaymentProcessing";
+import colors from "./styles/colors";
+import { OutfitText } from "../components/OutfitText";
 
 export default function CheckoutScreen() {
   const { user } = useAuth();
   const clienteId = user?.cliente_id || null;
 
-  const [carrinho, setCarrinho] = useState([]);
+  const [carrinho, setCarrinho] = useState<Produto[]>([]);
   const [loading, setLoading] = useState(true);
   const frete = 19.9; // você pode trocar pelo componente <Frete />
+  const [processingPayment, setProcessingPayment] = useState(false);
 
   useEffect(() => {
     const carregar = async () => {
@@ -57,16 +63,23 @@ export default function CheckoutScreen() {
         }}
       >
         <ActivityIndicator color="#fff" size="large" />
-        <Text style={{ color: "#fff", marginTop: 12 }}>Carregando...</Text>
+        <OutfitText style={{ color: "#fff", marginTop: 12 }}>Carregando...</OutfitText>
       </View>
     );
   }
+  const finalizarPedido = () => {
+    setProcessingPayment(true);
 
+    setTimeout(() => {
+      setProcessingPayment(false);
+      router.replace("../pedido-finalizado");
+    }, 2500); // animação de 2.5 segundos
+  };
   return (
-    <View style={{ flex: 1, backgroundColor: "#0d0d0d" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#0d0d0d" }}>
       <ScrollView contentContainerStyle={{ padding: 16 }}>
         {/* 🔥 TÍTULO */}
-        <Text
+        <OutfitText
           style={{
             fontSize: 22,
             fontWeight: "bold",
@@ -75,7 +88,7 @@ export default function CheckoutScreen() {
           }}
         >
           Resumo da Compra
-        </Text>
+        </OutfitText>
 
         {/* 🔥 LISTA DE PRODUTOS */}
         {carrinho.map((item, index) => (
@@ -98,19 +111,19 @@ export default function CheckoutScreen() {
               style={{ width: 80, height: 80, borderRadius: 6 }}
             />
             <View style={{ flex: 1, marginLeft: 12 }}>
-              <Text style={{ color: "#fff", fontSize: 15 }} numberOfLines={2}>
+              <OutfitText style={{ color: "#fff", fontSize: 15 }} numberOfLines={2}>
                 {item.produto}
-              </Text>
+              </OutfitText>
 
-              <Text style={{ color: "#c7a315", marginTop: 6 }}>
+              <OutfitText style={{ color: "#c7a315", marginTop: 6 }}>
                 {formatter.format(
                   (item.preco - item.desconto) * item.quantidade
                 )}
-              </Text>
+              </OutfitText>
 
-              <Text style={{ color: "#666", fontSize: 12 }}>
+              <OutfitText style={{ color: "#666", fontSize: 12 }}>
                 Quantidade: {item.quantidade}
-              </Text>
+              </OutfitText>
             </View>
           </View>
         ))}
@@ -124,20 +137,20 @@ export default function CheckoutScreen() {
             marginTop: 20,
           }}
         >
-          <Text style={{ color: "#fff", fontSize: 16, marginBottom: 8 }}>
+          <OutfitText style={{ color: "#fff", fontSize: 16, marginBottom: 8 }}>
             Endereço de Entrega
-          </Text>
-          <Text style={{ color: "#888" }}>
+          </OutfitText>
+          <OutfitText style={{ color: "#888" }}>
             Rua Exemplo, 123 – Seu Bairro, SP
-          </Text>
+          </OutfitText>
 
           <TouchableOpacity
             style={{ marginTop: 8, flexDirection: "row", alignItems: "center" }}
           >
             <Ionicons name="pencil" color="#c7a315" size={16} />
-            <Text style={{ color: "#c7a315", marginLeft: 6 }}>
+            <OutfitText style={{ color: "#c7a315", marginLeft: 6 }}>
               Alterar endereço
-            </Text>
+            </OutfitText>
           </TouchableOpacity>
         </View>
 
@@ -150,9 +163,9 @@ export default function CheckoutScreen() {
             marginTop: 20,
           }}
         >
-          <Text style={{ color: "#fff", fontSize: 16, marginBottom: 12 }}>
+          <OutfitText style={{ color: "#fff", fontSize: 16, marginBottom: 12 }}>
             Método de Pagamento
-          </Text>
+          </OutfitText>
 
           <TouchableOpacity
             style={{
@@ -165,9 +178,9 @@ export default function CheckoutScreen() {
             }}
           >
             <Ionicons name="card" size={22} color="#c7a315" />
-            <Text style={{ color: "#fff", marginLeft: 10, fontSize: 15 }}>
+            <OutfitText style={{ color: "#fff", marginLeft: 10, fontSize: 15 }}>
               Cartão de Crédito
-            </Text>
+            </OutfitText>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -181,9 +194,9 @@ export default function CheckoutScreen() {
             }}
           >
             <Ionicons name="barcode" size={22} color="#c7a315" />
-            <Text style={{ color: "#fff", marginLeft: 10, fontSize: 15 }}>
+            <OutfitText style={{ color: "#fff", marginLeft: 10, fontSize: 15 }}>
               Boleto Bancário
-            </Text>
+            </OutfitText>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -196,9 +209,9 @@ export default function CheckoutScreen() {
             }}
           >
             <Ionicons name="logo-alipay" size={22} color="#00E676" />
-            <Text style={{ color: "#fff", marginLeft: 10, fontSize: 15 }}>
+            <OutfitText style={{ color: "#fff", marginLeft: 10, fontSize: 15 }}>
               Pix
-            </Text>
+            </OutfitText>
           </TouchableOpacity>
         </View>
 
@@ -212,15 +225,15 @@ export default function CheckoutScreen() {
             marginBottom: 20,
           }}
         >
-          <Text style={{ color: "#fff", marginBottom: 8 }}>
+          <OutfitText style={{ color: "#fff", marginBottom: 8 }}>
             Subtotal: {formatter.format(subtotal)}
-          </Text>
+          </OutfitText>
 
-          <Text style={{ color: "#fff", marginBottom: 8 }}>
+          <OutfitText style={{ color: "#fff", marginBottom: 8 }}>
             Frete: {formatter.format(frete)}
-          </Text>
+          </OutfitText>
 
-          <Text
+          <OutfitText
             style={{
               color: "#c7a315",
               fontSize: 18,
@@ -229,23 +242,25 @@ export default function CheckoutScreen() {
             }}
           >
             Total: {formatter.format(total)}
-          </Text>
+          </OutfitText>
         </View>
       </ScrollView>
 
       {/* 🔥 BOTÃO FINALIZAR */}
       <TouchableOpacity
-        onPress={() => router.push("/finalizado")}
+        onPress={finalizarPedido}
         style={{
           backgroundColor: "#c7a315",
           padding: 16,
           alignItems: "center",
         }}
       >
-        <Text style={{ fontSize: 16, fontWeight: "bold", color: "#000" }}>
+        <OutfitText style={{ fontSize: 16, fontWeight: "bold", color: colors.gray[100] }}>
           Finalizar Pedido
-        </Text>
+        </OutfitText>
       </TouchableOpacity>
-    </View>
+
+      <PaymentProcessing visible={processingPayment} />
+    </SafeAreaView>
   );
 }
